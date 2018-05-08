@@ -36,13 +36,37 @@ local function RotateEarth( event )
 
 end
 
+local function RiseText(  )
+    if (letterF.y == 650) then
+        if (logoText.y <= 950) then
+            logoText.y = 950
+        else
+            logoText.y = logoText.y - 10
+        end
+    end
+end
+
+local function SwordMove()
+    if (letterF.y == 650) then
+        if (sword.x <= 220) then
+            sword.x = 220
+        else
+            sword.x = sword.x - 13
+            sword:rotate(-10)
+        end
+    end
+    
+end
+ 
 local function RiseLetterF( event )
+    letterF:toFront()
     if (letterF.y <= 650) then
         letterF.y = 650
     else
         letterF.y = letterF.y - 15
     end
 end
+
 
 
 local function gotoMainMenu()
@@ -66,6 +90,9 @@ function scene:create( event )
     -- set the background color
     display.setDefault("background", 0.3, 0.3, 0.3)
 
+    sword = display.newImageRect("Images/sword.png", 200, 200)
+    sword.x = display.contentWidth*1.5
+    sword.y = display.contentHeight*11/16
 
     -- letterF image
     letterF = display.newImageRect("Images/F.png", 400, 400)
@@ -73,20 +100,15 @@ function scene:create( event )
     -- set the x and y position of the letterF
     letterF.x = display.contentWidth*1/3
     letterF.y = display.contentHeight*2
-   
 
     earth = display.newImageRect("Images/earth.png", 300, 300)
     --position
     earth.x = display.contentWidth*3/4
     earth.y = display.contentHeight/6
 
-    sword = display.newImageRect("Images/sword.png", 200, 200)
-    sword.x = display.contentWidth
-    sword.y = display.contentHeight*3/4
-
     logoText = display.newImageRect("Images/text.png", 700, 70)
     logoText.x = display.contentCenterX
-    logoText.y = display.contentHeight*9/10
+    logoText.y = display.contentHeight*1.5
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( letterF )
@@ -119,6 +141,8 @@ function scene:show( event )
 
     Runtime:addEventListener("enterFrame", RotateEarth)
     Runtime:addEventListener("enterFrame", RiseLetterF)
+    Runtime:addEventListener("enterFrame", RiseText)
+    Runtime:addEventListener("enterFrame", SwordMove)
         
     end
 
