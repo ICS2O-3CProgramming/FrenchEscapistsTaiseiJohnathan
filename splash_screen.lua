@@ -27,6 +27,9 @@ local earth
 local sword
 local logoText
 
+local inpact = audio.loadSound("Audio/box break.mp3")
+local throw = audio.loadSound("Audio/Sword Throw.mp3")
+local clash = audio.loadSound("Audio/Sword Clash.mp3")
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -46,14 +49,28 @@ local function RiseText(  )
     end
 end
 
+local function AudioQueue1()
+    audio.play(inpact)
+end
+
+local function AudioQueue2()
+    audio.play(throw)
+end
+
+local function AudioQueue3()
+    audio.play(clash)
+end
+
 local function SwordMove()
     if (letterF.y == 650) then
         if (sword.x <= 220) then
             sword.x = 220
+
         else
             sword.x = sword.x - 13
             sword:rotate(-10)
         end
+
     end
     
 end
@@ -70,7 +87,7 @@ end
 
 
 local function gotoMainMenu()
-    composer.gotoScene( "main_menu" )
+    composer.gotoScene( "main_menu", "crossFade", 1000 )
 end
 
 
@@ -143,6 +160,10 @@ function scene:show( event )
     Runtime:addEventListener("enterFrame", RiseLetterF)
     Runtime:addEventListener("enterFrame", RiseText)
     Runtime:addEventListener("enterFrame", SwordMove)
+    timer.performWithDelay(3500, gotoMainMenu)
+    timer.performWithDelay(2500, AudioQueue1)
+    timer.performWithDelay(1200, AudioQueue2)
+    timer.performWithDelay(2500, AudioQueue3)
         
     end
 
