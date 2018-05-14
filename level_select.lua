@@ -171,6 +171,11 @@ function scene:create( event )
 
     -----------------------------------------------------------------------------------------
 
+	sceneGroup:insert( level1Button )
+	sceneGroup:insert( level2Button )
+	sceneGroup:insert( level3Button )
+	sceneGroup:insert( level4Button )
+	sceneGroup:insert( level5Button )
 
 
 
