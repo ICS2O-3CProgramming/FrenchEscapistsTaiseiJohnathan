@@ -183,7 +183,10 @@ function scene:hide( event )
 
         
     elseif ( phase == "did") then
-
+        Runtime:removeEventListener("enterFrame", RotateEarth)
+        Runtime:removeEventListener("enterFrame", RiseLetterF)
+        Runtime:removeEventListener("enterFrame", RiseText)
+        Runtime:removeEventListener("enterFrame", SwordMove)
         
     end
 

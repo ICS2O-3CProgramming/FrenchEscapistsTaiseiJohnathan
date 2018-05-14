@@ -1,9 +1,8 @@
 -----------------------------------------------------------------------------------------
 --
--- main_menu.lua
+-- level-select.lua
 -- Created by: Johnathan Taisei
 -- Date: May 14 2018
--- Description: This is the main menu, displaying the credits, instructions & play buttons.
 -----------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------
@@ -21,7 +20,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "main_menu"
+sceneName = "level-select"
 
 -----------------------------------------------------------------------------------------
 
@@ -33,68 +32,33 @@ local scene = composer.newScene( sceneName )
 -----------------------------------------------------------------------------------------
 
 local bkg_image
-local playButton
-local creditsButton
-local controlsButton
-local optionsButton
-local achievementButton
-local Torch1
-local Torch2
-local TorchFire1
-local TorchFire2
-local emitterParams = {
-    startColorAlpha = 1,
-    startParticleSizeVariance = 53.47,
-    startColorGreen = 0.3031555,
-    yCoordFlipped = -1,
-    blendFuncSource = 770,
-    rotatePerSecondVariance = 153.95,
-    particleLifespan = 0.7237,
-    tangentialAcceleration = -144.74,
-    finishColorBlue = 0.3699196,
-    finishColorGreen = 0.5443883,
-    blendFuncDestination = 1,
-    startParticleSize = 50.95,
-    startColorRed = 0.8373094,
-    textureFileName = "Images/fire.png",
-    startColorVarianceAlpha = 1,
-    maxParticles = 150,
-    finishParticleSize = 64,
-    duration = -1,
-    finishColorRed = 1,
-    maxRadiusVariance = 72.63,
-    finishParticleSizeVariance = 64,
-    gravityy = -671.05,
-    speedVariance = 90.79,
-    tangentialAccelVariance = -92.11,
-    angleVariance = -142.62,
-    angle = -244.11
-}
-
-
------------------------------------------------------------------------------------------
--- LOCAL FUNCTIONS
------------------------------------------------------------------------------------------
-
--- Creating Transition Function to Credits Page
-local function CreditsTransition( )       
-    composer.gotoScene( "credits_screen", {effect = "flipFadeOutIn", time = 500})
-end 
-
------------------------------------------------------------------------------------------
 
 -- Creating Transition to Level1 Screen
-local function LevelSelectTransition( )
-    composer.gotoScene( "level_select", {effect = "zoomInOutFade", time = 1000})
-end    
+local function Level1Transition( )
+    composer.gotoScene( "level1", {effect = "crossFade", time = 1000})
+end  
 
------------------------------------------------------------------------------------------
+-- Creating Transition to Level2 Screen
+local function Level2Transition( )
+    composer.gotoScene( "level2", {effect = "crossFade", time = 1000})
+end  
 
--- Creating Transition to Instructions Screen
-local function InstructionsTransition( )
-    composer.gotoScene( "instruction_screen", {effect = "flipFadeOutIn", time = 500})
-end    
--- INSERT LOCAL FUNCTION DEFINITION THAT GOES TO INSTRUCTIONS SCREEN 
+-- Creating Transition to Level3 Screen
+local function Level3Transition( )
+    composer.gotoScene( "level3", {effect = "crossFade", time = 1000})
+end  
+
+-- Creating Transition to Level4 Screen
+local function Level4Transition( )
+    composer.gotoScene( "level4", {effect = "crossFade", time = 1000})
+end  
+
+-- Creating Transition to Level5 Screen
+local function Level5Transition( )
+    composer.gotoScene( "level5", {effect = "crossFade", time = 1000})
+end  
+
+
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
@@ -106,12 +70,9 @@ function scene:create( event )
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
 
-    -----------------------------------------------------------------------------------------
-    -- BACKGROUND IMAGE & STATIC OBJECTS
-    -----------------------------------------------------------------------------------------
 
     -- Insert the background image and set it to the center of the screen
-    bkg_image = display.newImage("Images/MainMenu@2x.png")
+    bkg_image = display.newImage("Images/LevelSelect@2x.png")
     bkg_image.x = display.contentCenterX
     bkg_image.y = display.contentCenterY
     bkg_image.width = display.contentWidth
@@ -124,133 +85,94 @@ function scene:create( event )
     -- Send the background image to the back layer so all other objects can be on top
     bkg_image:toBack()
 
-    -----------------------------------------------------------------------------------------
-    -- BUTTON WIDGETS
-    -----------------------------------------------------------------------------------------   
-
-    -- Creating Play Button
-    playButton = widget.newButton( 
-        {   
-            -- Set its position on the screen relative to the screen size
-            x = display.contentCenterX,
-            y = display.contentHeight*5/10,
-            width = 200,
-            height = 100,
-            -- Insert the images here
-            defaultFile = "Images/PlayButtonUnpressed@2x.png",
-            overFile = "Images/PlayButtonPressed@2x.png",
-
-            -- When the button is released, call the Level1 screen transition function
-            onRelease = LevelSelectTransition       
-        } )
-
-    -----------------------------------------------------------------------------------------
-  
-    -- Creating Options Button
-    optionsButton = widget.newButton( 
+----------------------------------------------------------------------------------------
+    -- Creating level1 Button
+ 	level1Button = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = display.contentCenterX,
-            y = display.contentHeight*6/10,
-            width = 200,
+            x = 97,
+            y = 319,
+            width = 100,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/OptionsButtonUnpressed@2x.png",
-            overFile = "Images/OptionsButtonPressed@2x.png",
+            defaultFile = "Images/Level1Button@2x.png",
 
-            -- When the button is released, call the Options transition function
-            --onRelease = OptionsTransition
-        } ) 
-    
-    -----------------------------------------------------------------------------------------
-
-    -- Creating Controls Button
-    controlsButton = widget.newButton( 
-        {
-            -- Set its position on the screen relative to the screen size
-            x = display.contentCenterX,
-            y = display.contentHeight*7/10,
-            width = 200,
-            height = 100,
-            -- Insert the images here
-            defaultFile = "Images/ControlsButtonUnpressed@2x.png",
-            overFile = "Images/ControlsButtonPressed@2x.png",
-
-            -- When the button is released, call the Controls transition function
-            --onRelease = ControlsTransition
-        } ) 
-   
-    -----------------------------------------------------------------------------------------
-
-    -- Creating Credits Button
-    creditsButton = widget.newButton( 
-        {
-            -- Set its position on the screen relative to the screen size
-            x = display.contentCenterX,
-            y = display.contentHeight*8/10,
-            width = 200,
-            height = 100,
-            -- Insert the images here
-            defaultFile = "Images/CreditsButtonUnpressed@2x.png",
-            overFile = "Images/CreditsButtonPressed@2x.png",
-
-            -- When the button is released, call the Credits transition function
-            --onRelease = CreditsTransition
-        } ) 
-
-    -----------------------------------------------------------------------------------------
-
-    -- Creating Achievements Button
-    achieventButton = widget.newButton( 
-        {
-            -- Set its position on the screen relative to the screen size
-            x = display.contentCenterX,
-            y = display.contentHeight*9/10,
-            width = 200,
-            height = 100,
-            -- Insert the images here
-            defaultFile = "Images/AchievementButtonUnpressed@2x.png",
-            overFile = "Images/AchievementButtonPressed@2x.png",
-
-            -- When the button is released, call the Achievements transition function
+            -- When the button is released, call the level transition function
             --onRelease = AchievementTransition
         } ) 
 
     -----------------------------------------------------------------------------------------
 
-    Torch1 = display.newImageRect("Images/Torch.png", 75, 150)
-    Torch1.x = 200
-    Torch1.y = 650
+    -- Creating level Button
+    level2Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 240,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level2Button@2x.png",
+
+            -- When the button is released, call the level transition function
+            --onRelease = AchievementTransition
+        } ) 
+
+    -----------------------------------------------------------------------------------------
+
+    -- Creating level Button
+    level3Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 384,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level3Button@2x.png",
+
+            -- When the button is released, call the level transition function
+            --onRelease = AchievementTransition
+        } ) 
+
+    -----------------------------------------------------------------------------------------
+
+    -- Creating level Button
+    level4Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 527,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level4Button@2x.png",
+
+            -- When the button is released, call the level transition function
+            --onRelease = AchievementTransition
+        } ) 
+
+    -----------------------------------------------------------------------------------------
+
+    -- Creating level Button
+    level5Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level5Button@2x.png",
+
+            -- When the button is released, call the level transition function
+            --onRelease = AchievementTransition
+        } ) 
+
+    -----------------------------------------------------------------------------------------
 
 
-    Torch2 = display.newImageRect("Images/Torch.png", 75, 150)
-    Torch2.x = 600
-    Torch2.y = 650
 
-
-    TorchFire1 = display.newEmitter(emitterParams)
-    TorchFire1.x = 200
-    TorchFire1.y = 570
-
-
-
-    TorchFire2 = display.newEmitter(emitterParams)
-    TorchFire2.x = 600
-    TorchFire2.y = 570
-
-
-    -- Associating button widgets with this scene
-    sceneGroup:insert( playButton )
-    sceneGroup:insert( creditsButton )
-    sceneGroup:insert( controlsButton )
-    sceneGroup:insert( optionsButton )
-    sceneGroup:insert( achieventButton )
-    sceneGroup:insert( Torch1 )
-    sceneGroup:insert( Torch2 )
-    sceneGroup:insert( TorchFire1 )
-    sceneGroup:insert( TorchFire2 )
-    
-    -- INSERT INSTRUCTIONS BUTTON INTO SCENE GROUP
 
 end -- function scene:create( event )   
 
