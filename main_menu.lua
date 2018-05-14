@@ -38,6 +38,39 @@ local creditsButton
 local controlsButton
 local optionsButton
 local achievementButton
+local Torch1
+local Torch2
+local TorchFire1
+local TorchFire2
+local emitterParams = {
+    startColorAlpha = 1,
+    startParticleSizeVariance = 53.47,
+    startColorGreen = 0.3031555,
+    yCoordFlipped = -1,
+    blendFuncSource = 770,
+    rotatePerSecondVariance = 153.95,
+    particleLifespan = 0.7237,
+    tangentialAcceleration = -144.74,
+    finishColorBlue = 0.3699196,
+    finishColorGreen = 0.5443883,
+    blendFuncDestination = 1,
+    startParticleSize = 50.95,
+    startColorRed = 0.8373094,
+    textureFileName = "Images/fire.png",
+    startColorVarianceAlpha = 1,
+    maxParticles = 150,
+    finishParticleSize = 64,
+    duration = -1,
+    finishColorRed = 1,
+    maxRadiusVariance = 72.63,
+    finishParticleSizeVariance = 64,
+    gravityy = -671.05,
+    speedVariance = 90.79,
+    tangentialAccelVariance = -92.11,
+    angleVariance = -142.62,
+    angle = -244.11
+}
+
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -185,12 +218,37 @@ function scene:create( event )
 
     -----------------------------------------------------------------------------------------
 
+    Torch1 = display.newImageRect("Images/Torch.png", 75, 150)
+    Torch1.x = 200
+    Torch1.y = 650
+
+
+    Torch2 = display.newImageRect("Images/Torch.png", 75, 150)
+    Torch2.x = 600
+    Torch2.y = 650
+
+
+    TorchFire1 = display.newEmitter(emitterParams)
+    TorchFire1.x = 200
+    TorchFire1.y = 570
+
+
+
+    TorchFire2 = display.newEmitter(emitterParams)
+    TorchFire2.x = 600
+    TorchFire2.y = 570
+
+
     -- Associating button widgets with this scene
     sceneGroup:insert( playButton )
     sceneGroup:insert( creditsButton )
     sceneGroup:insert( controlsButton )
     sceneGroup:insert( optionsButton )
     sceneGroup:insert( achieventButton )
+    sceneGroup:insert( Torch1 )
+    sceneGroup:insert( Torch2 )
+    sceneGroup:insert( TorchFire1 )
+    sceneGroup:insert( TorchFire2 )
     
     -- INSERT INSTRUCTIONS BUTTON INTO SCENE GROUP
 
