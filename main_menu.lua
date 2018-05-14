@@ -83,10 +83,10 @@ end
 
 -----------------------------------------------------------------------------------------
 
--- Creating Transition to Level1 Screen
+-- Creating Transition to Levelselect Screen
 local function LevelSelectTransition( )
     composer.gotoScene( "level_select", {effect = "zoomInOutFade", time = 1000})
-end    
+end      
 
 -----------------------------------------------------------------------------------------
 
@@ -306,6 +306,7 @@ function scene:hide( event )
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
+        
     end
 
 end -- function scene:hide( event )
