@@ -97,6 +97,20 @@ end
 -- INSERT LOCAL FUNCTION DEFINITION THAT GOES TO INSTRUCTIONS SCREEN 
 
 -----------------------------------------------------------------------------------------
+
+-- Creating Transition Function to Options Overlay
+local function OptionsTransition( )       
+    composer.gotoScene( "credits_screen", {effect = "flipFadeOutIn", time = 500})
+end 
+
+-----------------------------------------------------------------------------------------
+
+-- Creating Transition Function to Credits Page
+local function CreditsTransition( )       
+    composer.gotoScene( "credits_screen", {effect = "flipFadeOutIn", time = 500})
+end 
+
+-----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
 

@@ -33,7 +33,21 @@ local scene = composer.newScene( sceneName )
 
 local bkg_image
 
+--[[
+local character
 
+local function ReplaceCharacter()
+    character = display.newImageRect("Images/Gaurd.png")
+    character.width = 315
+    character.height = 395
+    character.x = 500
+    character.y = 500
+    character.myName = "Gaurd"
+
+    -- add back runtime listeners
+    -- AddRuntimeListeners()
+end
+]]--
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -44,7 +58,7 @@ function scene:create( event )
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
 
---[[
+
     -- Insert the background image and set it to the center of the screen
     bkg_image = display.newImage("Images/Level1.png")
     bkg_image.x = display.contentCenterX
@@ -58,9 +72,21 @@ function scene:create( event )
 
     -- Send the background image to the back layer so all other objects can be on top
     bkg_image:toBack()
-]]--
+
+    timer.performWithDelay (1000, ReplaceCharacter)
 ----------------------------------------------------------------------------------------
 
+    --sceneGroup:insert()
+    --sceneGroup:insert()
+    --sceneGroup:insert()
+    --sceneGroup:insert()
+    --sceneGroup:insert()
+    --sceneGroup:insert()
+    --sceneGroup:insert()
+    --sceneGroup:insert()
+    --sceneGroup:insert()
+    --sceneGroup:insert()
+    --sceneGroup:insert()
 
 
 end -- function scene:create( event )   
@@ -117,6 +143,14 @@ function scene:hide( event )
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
+        --RemoveCollisionListeners()
+        --RemovePhysicsBodies()
+
+        --physics.stop()
+        --RemoveArrowEventListeners()
+        --RemoveRuntimeListeners()
+        --display.remove(character)
+
     end
 
 end -- function scene:hide( event )

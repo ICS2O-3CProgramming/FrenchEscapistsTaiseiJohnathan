@@ -122,7 +122,7 @@ file = nil
             defaultFile = "Images/Level1Button@2x.png",
 
             -- When the button is released, call the level transition function
-            --onRelease = AchievementTransition
+            onRelease = Level1Transition
         } ) 
 
     -----------------------------------------------------------------------------------------
@@ -139,7 +139,7 @@ file = nil
             defaultFile = "Images/Level2Button@2x.png",
 
             -- When the button is released, call the level transition function
-            --onRelease = AchievementTransition
+            onRelease = Level2Transition
         } ) 
     if (SaveState == 1) then
     	level2Button.isVisible = false
@@ -158,7 +158,7 @@ file = nil
             defaultFile = "Images/Level3Button@2x.png",
 
             -- When the button is released, call the level transition function
-            --onRelease = AchievementTransition
+            onRelease = Level3Transition
         } ) 
     if (SaveState == 1) then
     	level3Button.isVisible = false
@@ -179,7 +179,7 @@ file = nil
             defaultFile = "Images/Level4Button@2x.png",
 
             -- When the button is released, call the level transition function
-            --onRelease = AchievementTransition
+            onRelease = Level4Transition
         } ) 
     if (SaveState == 1) then
     	level4Button.isVisible = false
@@ -202,7 +202,7 @@ file = nil
             defaultFile = "Images/Level5Button@2x.png",
 
             -- When the button is released, call the level transition function
-            --onRelease = AchievementTransition
+            onRelease = Level5Transition
         } ) 
     if (SaveState == 1) then
     	level5Button.isVisible = false
