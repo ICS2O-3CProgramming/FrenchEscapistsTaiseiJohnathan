@@ -58,6 +58,9 @@ local function Level5Transition( )
     composer.gotoScene( "level5", {effect = "crossFade", time = 1000})
 end  
 
+local path
+local file, errorString
+local SaveState
 
 
 -----------------------------------------------------------------------------------------
@@ -70,6 +73,27 @@ function scene:create( event )
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
 
+    -- Path for the file to read
+	path = system.pathForFile( "savestate.txt" )
+ 
+	-- Open the file handle
+	file, errorString = io.open( path, "r" )
+ 
+	if not file then
+   	 	-- Error occurred; output the cause
+    	print( "File error: " .. errorString )
+	else
+	    -- Read data from file
+    	local contents = file:read( "*n" )
+    	-- Output the file contents
+    	print( "Contents of " .. path .. "\n" .. contents )
+    	-- Sets SaveState to contents of read file
+    	SaveState = contents
+    	-- Close the file handle
+    	io.close( file )
+	end
+ 
+file = nil
 
     -- Insert the background image and set it to the center of the screen
     bkg_image = display.newImage("Images/LevelSelect@2x.png")
@@ -117,7 +141,9 @@ function scene:create( event )
             -- When the button is released, call the level transition function
             --onRelease = AchievementTransition
         } ) 
-
+    if (SaveState == 1) then
+    	level2Button.isVisible = false
+  	end
     -----------------------------------------------------------------------------------------
 
     -- Creating level Button
@@ -134,7 +160,11 @@ function scene:create( event )
             -- When the button is released, call the level transition function
             --onRelease = AchievementTransition
         } ) 
-
+    if (SaveState == 1) then
+    	level3Button.isVisible = false
+    elseif (SaveState == 2) then
+    	level3Button.isVisible = false
+  	end
     -----------------------------------------------------------------------------------------
 
     -- Creating level Button
@@ -151,7 +181,13 @@ function scene:create( event )
             -- When the button is released, call the level transition function
             --onRelease = AchievementTransition
         } ) 
-
+    if (SaveState == 1) then
+    	level4Button.isVisible = false
+    elseif (SaveState == 2) then
+    	level4Button.isVisible = false
+    elseif (SaveState == 3) then
+    	level4Button.isVisible = false
+  	end
     -----------------------------------------------------------------------------------------
 
     -- Creating level Button
@@ -168,7 +204,15 @@ function scene:create( event )
             -- When the button is released, call the level transition function
             --onRelease = AchievementTransition
         } ) 
-
+    if (SaveState == 1) then
+    	level5Button.isVisible = false
+    elseif (SaveState == 2) then
+    	level5Button.isVisible = false
+    elseif (SaveState == 3) then
+    	level5Button.isVisible = false
+    elseif (SaveState == 4) then
+    	level5Button.isVisible = false
+  	end
     -----------------------------------------------------------------------------------------
 
 	sceneGroup:insert( level1Button )
