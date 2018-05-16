@@ -48,6 +48,55 @@ local function ReplaceCharacter()
     -- AddRuntimeListeners()
 end
 ]]--
+
+local choice1
+local choice2
+local choice3
+local rightAnswer
+local wrongAnswer1
+local wrongAnswer2
+local character
+local platform1
+local platform2
+local platform3
+local basePlatform
+local question
+local rightAnswerDisplay
+local wrongAnswerDisplay1
+local wrongAnswerDisplay2
+local lives
+local bkgMusic
+local playbkgMusic
+local fallSound
+local playfallSound
+local platformBreakSound
+local playplatformBreakSound
+local climbSound
+local playclimbSound
+local bridgeDrawSound
+local playbridgeDrawSound
+local characterLandSound
+local playcharacterLandSound
+local characterJumpSound
+local playcharacterJumpSound
+
+
+-----------------------------------------------------------------------------------------
+-- FUNCTIONS BEFORE SCENE CREATE
+-----------------------------------------------------------------------------------------
+
+local function DisplayWrongAnswers()
+    choice1 = math.random ()
+
+
+
+
+
+
+
+
+
+
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -65,15 +114,39 @@ function scene:create( event )
     bkg_image.y = display.contentCenterY
     bkg_image.width = display.contentWidth
     bkg_image.height = display.contentHeight
-
-
     -- Associating display objects with this scene 
     sceneGroup:insert( bkg_image )
-
     -- Send the background image to the back layer so all other objects can be on top
     bkg_image:toBack()
 
-    timer.performWithDelay (1000, ReplaceCharacter)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    rightAnswerDisplay = display.newText ("")
+
+
+
+
 ----------------------------------------------------------------------------------------
 
     --sceneGroup:insert()
