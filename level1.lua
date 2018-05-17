@@ -37,12 +37,12 @@ local bkg_image
 local character
 
 local function ReplaceCharacter()
-    character = display.newImageRect("Images/Gaurd.png")
+    character = display.newImageRect("Images/Guard.png")
     character.width = 315
     character.height = 395
     character.x = 500
     character.y = 500
-    character.myName = "Gaurd"
+    character.myName = "Guard"
 
     -- add back runtime listeners
     -- AddRuntimeListeners()
