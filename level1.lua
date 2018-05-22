@@ -61,6 +61,7 @@ local platform2
 local platform3
 local basePlatform
 local question
+local displayQuestion
 local rightAnswerDisplay
 local wrongAnswerDisplay1
 local wrongAnswerDisplay2
@@ -85,12 +86,75 @@ local playcharacterJumpSound
 -- FUNCTIONS BEFORE SCENE CREATE
 -----------------------------------------------------------------------------------------
 
-local function DisplayWrongAnswers()
-    choice1 = math.random ()
+local function RandomChoices()
+    choice1 = math.random (1, 6)
+    choice2 = math.random (1, 6)
+    if (choice2 == choice1) then
+        choice2 = math.random (1, 6)
+    end
+    choice3 = math.random (1, 6)
+    if (choice3 == choice2) or (choice3 == choice1) then
+        choice3 = math.random (1, 6)
+    end
+end
 
+local function SetChoices()
+    if (choice1 == 1) then
+        rightAnswer = ai
+    elseif (choice1 == 2) then
+        rightAnswer = as
+    elseif (choice1 == 3) then
+        rightAnswer = a
+    elseif (choice1 == 4) then
+        rightAnswer = avons
+    elseif (choice1 == 5) then
+        rightAnswer = avez
+    elseif (choice1 == 6) then
+        rightAnswer = ont
+    end
+    if (choice2 == 1) then
+        wrongAnswer1 = ai
+    elseif (choice2 == 2) then
+        wrongAnswer1 = as
+    elseif (choice2 == 3) then
+        wrongAnswer1 = a
+    elseif (choice2 == 4) then
+        wrongAnswer1 = avons
+    elseif (choice2 == 5) then
+        wrongAnswer1 = avez
+    elseif (choice2 == 6) then
+        wrongAnswer1 = ont
+    end
+    if (choice3 == 1) then
+        wrongAnswer2 = ai
+    elseif (choice3 == 2) then
+        wrongAnswer2 = as
+    elseif (choice3 == 3) then
+        wrongAnswer2 = a
+    elseif (choice3 == 4) then
+        wrongAnswer2 = avons
+    elseif (choice3 == 5) then
+        wrongAnswer2 = avez
+    elseif (choice3 == 6) then
+        wrongAnswer2 = ont
+    end
+end
 
-
-
+local function SetQuestion()
+    if (choice1 == 1) then
+       question = "Je"
+    elseif (choice1 == 2) then
+        question = "Tu"
+    elseif (choice1 == 3) then
+        question = "Il/Elle"
+    elseif (choice1 == 4) then
+        question = "Nous"
+    elseif (choice1 == 5) then
+        question = "Vous"
+    elseif (choice1 == 6) then
+        question = "Ils/Elles"
+    end
+end
 
 
 
@@ -120,36 +184,29 @@ function scene:create( event )
     bkg_image:toBack()
 
 
+    local function DisplayQuestion()
+        displayQuestion = display.newText("" .. question, 400, 800, "Images/vinet.otf", 70)
+        displayQuestion:setFillColor(0, 1, 1)
+    end
+
+
+    timer.performWithDelay (100, RandomChoices)
+    timer.performWithDelay (200, SetChoices)
+    timer.performWithDelay (300, SetQuestion)
+    timer.performWithDelay (1000, DisplayQuestion)
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    rightAnswerDisplay = display.newText ("")
 
 
 
 
 ----------------------------------------------------------------------------------------
 
-    --sceneGroup:insert()
+    --sceneGroup:insert( displayQuestion )
     --sceneGroup:insert()
     --sceneGroup:insert()
     --sceneGroup:insert()
