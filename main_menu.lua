@@ -148,8 +148,8 @@ function scene:create( event )
             width = 200,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/PlayButtonUnpressed@2x.png",
-            overFile = "Images/PlayButtonPressed@2x.png",
+            defaultFile = "Images/PlayButtonUnpressed.png",
+            overFile = "Images/PlayButtonPressed.png",
 
             -- When the button is released, call the Level1 screen transition function
             onRelease = LevelSelectTransition       
@@ -166,8 +166,8 @@ function scene:create( event )
             width = 200,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/OptionsButtonUnpressed@2x.png",
-            overFile = "Images/OptionsButtonPressed@2x.png",
+            defaultFile = "Images/OptionsButtonUnpressed.png",
+            overFile = "Images/OptionsButtonPressed.png",
 
             -- When the button is released, call the Options transition function
             onRelease = OptionsTransition
@@ -184,8 +184,8 @@ function scene:create( event )
             width = 200,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/ControlsButtonUnpressed@2x.png",
-            overFile = "Images/ControlsButtonPressed@2x.png",
+            defaultFile = "Images/ControlsButtonUnpressed.png",
+            overFile = "Images/ControlsButtonPressed.png",
 
             -- When the button is released, call the Controls transition function
             --onRelease = ControlsTransition
@@ -202,8 +202,8 @@ function scene:create( event )
             width = 200,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/CreditsButtonUnpressed@2x.png",
-            overFile = "Images/CreditsButtonPressed@2x.png",
+            defaultFile = "Images/CreditsButtonUnpressed.png",
+            overFile = "Images/CreditsButtonPressed.png",
 
             -- When the button is released, call the Credits transition function
             onRelease = CreditsTransition
@@ -220,8 +220,8 @@ function scene:create( event )
             width = 200,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/AchievementButtonUnpressed@2x.png",
-            overFile = "Images/AchievementButtonPressed@2x.png",
+            defaultFile = "Images/AchievementButtonUnpressed.png",
+            overFile = "Images/AchievementButtonPressed.png",
 
             -- When the button is released, call the Achievements transition function
             --onRelease = AchievementTransition
