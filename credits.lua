@@ -74,8 +74,8 @@ function scene:create( event )
             width = 200,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/BackButtonUnpressed@2x.png",
-            overFile = "Images/BackButtonPressed@2x.png",
+            defaultFile = "Images/BackButtonUnpressed.png",
+            overFile = "Images/BackButtonPressed.png",
             -- When the button is released, call the level transition function
             onRelease = BackToMainMenu
         } ) 
