@@ -42,35 +42,7 @@ local Torch1
 local Torch2
 local TorchFire1
 local TorchFire2
-local emitterParams = {
-    startColorAlpha = 1,
-    startParticleSizeVariance = 53.47,
-    startColorGreen = 0.3031555,
-    yCoordFlipped = -1,
-    blendFuncSource = 770,
-    rotatePerSecondVariance = 153.95,
-    particleLifespan = 0.7237,
-    tangentialAcceleration = -144.74,
-    finishColorBlue = 0.3699196,
-    finishColorGreen = 0.5443883,
-    blendFuncDestination = 1,
-    startParticleSize = 50.95,
-    startColorRed = 0.8373094,
-    textureFileName = "Images/fire.png",
-    startColorVarianceAlpha = 1,
-    maxParticles = 150,
-    finishParticleSize = 64,
-    duration = -1,
-    finishColorRed = 1,
-    maxRadiusVariance = 72.63,
-    finishParticleSizeVariance = 64,
-    gravityy = -671.05,
-    speedVariance = 90.79,
-    tangentialAccelVariance = -92.11,
-    angleVariance = -142.62,
-    angle = -244.11
-}
-
+local emitterParams
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -127,18 +99,41 @@ function scene:create( event )
     -----------------------------------------------------------------------------------------
 
     -- Insert the background image and set it to the center of the screen
-    bkg_image = display.newImage("Images/MainMenu@2x.png")
+    bkg_image = display.newImage("Images/MainMenu.png")
     bkg_image.x = display.contentCenterX
     bkg_image.y = display.contentCenterY
     bkg_image.width = display.contentWidth
     bkg_image.height = display.contentHeight
 
 
-    -- Associating display objects with this scene 
-    sceneGroup:insert( bkg_image )
-
-    -- Send the background image to the back layer so all other objects can be on top
-    bkg_image:toBack()
+    emitterParams = {
+    startColorAlpha = 1,
+    startParticleSizeVariance = 53.47,
+    startColorGreen = 0.3031555,
+    yCoordFlipped = -1,
+    blendFuncSource = 770,
+    rotatePerSecondVariance = 153.95,
+    particleLifespan = 0.7237,
+    tangentialAcceleration = -144.74,
+    finishColorBlue = 0.3699196,
+    finishColorGreen = 0.5443883,
+    blendFuncDestination = 1,
+    startParticleSize = 50.95,
+    startColorRed = 0.8373094,
+    textureFileName = "Images/fire.png",
+    startColorVarianceAlpha = 1,
+    maxParticles = 150,
+    finishParticleSize = 64,
+    duration = -1,
+    finishColorRed = 1,
+    maxRadiusVariance = 72.63,
+    finishParticleSizeVariance = 64,
+    gravityy = -671.05,
+    speedVariance = 90.79,
+    tangentialAccelVariance = -92.11,
+    angleVariance = -142.62,
+    angle = -244.11
+    }
 
     -----------------------------------------------------------------------------------------
     -- BUTTON WIDGETS
@@ -256,6 +251,7 @@ function scene:create( event )
 
 
     -- Associating button widgets with this scene
+    sceneGroup:insert( bkg_image )
     sceneGroup:insert( playButton )
     sceneGroup:insert( creditsButton )
     sceneGroup:insert( controlsButton )
