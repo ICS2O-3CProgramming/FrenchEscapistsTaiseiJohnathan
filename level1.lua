@@ -153,13 +153,15 @@ end
 local function RandomChoices()
     choice1 = math.random (1, 6)
     choice2 = math.random (1, 6)
+    choice3 = math.random (1, 6)
     do
         choice2 = math.random (1, 6)
     while (choice2 == choice1)
-
+    
     do
         choice3 = math.random (1, 6)
-    while (choice3 == choice2) or (choice3 == choice1) 
+    while (choice3 == choice2) or (choice3 == choice1)
+    
 end
 
 local function DisplayQuestion()
@@ -217,7 +219,7 @@ function scene:create( event )
     platform3.y = 650
 
 
-    basePlatform = display.newImageRect("Images/MainPlatform.png", 280, 250)
+    basePlatform = display.newImageRect("Images/MainPlatform@2x.png", 280, 250)
     basePlatform.x = 400
     basePlatform.y = 900
 
