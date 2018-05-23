@@ -101,7 +101,7 @@ function scene:create( event )
 file = nil
 
     -- Insert the background image and set it to the center of the screen
-    bkg_image = display.newImage("Images/LevelSelect@2x.png")
+    bkg_image = display.newImage("Images/LevelSelect.png")
     bkg_image.x = display.contentCenterX
     bkg_image.y = display.contentCenterY
     bkg_image.width = display.contentWidth
@@ -123,8 +123,8 @@ file = nil
             width = 200,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/BackButtonUnpressed@2x.png",
-            overFile = "Images/BackButtonPressed@2x.png",
+            defaultFile = "Images/BackButtonUnpressed.png",
+            overFile = "Images/BackButtonPressed.png",
             -- When the button is released, call the level transition function
             onRelease = BackToMainMenu
         } ) 
@@ -139,7 +139,7 @@ file = nil
             width = 100,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/Level1Button@2x.png",
+            defaultFile = "Images/Level1Button.png",
 
             -- When the button is released, call the level transition function
             onRelease = Level1Transition
@@ -156,7 +156,7 @@ file = nil
             width = 100,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/Level2Button@2x.png",
+            defaultFile = "Images/Level2Button.png",
 
             -- When the button is released, call the level transition function
             onRelease = Level2Transition
@@ -175,7 +175,7 @@ file = nil
             width = 100,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/Level3Button@2x.png",
+            defaultFile = "Images/Level3Button.png",
 
             -- When the button is released, call the level transition function
             onRelease = Level3Transition
@@ -196,7 +196,7 @@ file = nil
             width = 100,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/Level4Button@2x.png",
+            defaultFile = "Images/Level4Button.png",
 
             -- When the button is released, call the level transition function
             onRelease = Level4Transition
@@ -219,7 +219,7 @@ file = nil
             width = 100,
             height = 100,
             -- Insert the images here
-            defaultFile = "Images/Level5Button@2x.png",
+            defaultFile = "Images/Level5Button.png",
 
             -- When the button is released, call the level transition function
             onRelease = Level5Transition
