@@ -33,6 +33,11 @@ local scene = composer.newScene( sceneName )
 
 local bkg_image
 
+-- Creating Transition to MainMenu Screen
+local function BackToMainMenu( )
+    composer.gotoScene( "main_menu", {effect = "crossFade", time = 1000})
+end  
+
 -- Creating Transition to Level1 Screen
 local function Level1Transition( )
     composer.gotoScene( "level1", {effect = "crossFade", time = 1000})
@@ -108,6 +113,21 @@ file = nil
 
     -- Send the background image to the back layer so all other objects can be on top
     bkg_image:toBack()
+
+    -- Creating Back Button
+    backButton = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = display.contentCenterX/4,
+            y = display.contentHeight*9/10,
+            width = 200,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/BackButtonUnpressed@2x.png",
+            overFile = "Images/BackButtonPressed@2x.png",
+            -- When the button is released, call the level transition function
+            onRelease = BackToMainMenu
+        } ) 
 
 ----------------------------------------------------------------------------------------
     -- Creating level1 Button
@@ -214,7 +234,7 @@ file = nil
     	level5Button.isVisible = false
   	end
     -----------------------------------------------------------------------------------------
-
+    sceneGroup:insert( backButton )
 	sceneGroup:insert( level1Button )
 	sceneGroup:insert( level2Button )
 	sceneGroup:insert( level3Button )

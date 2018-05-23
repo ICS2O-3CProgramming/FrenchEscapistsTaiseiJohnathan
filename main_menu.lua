@@ -76,23 +76,18 @@ local emitterParams = {
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
--- Creating Transition Function to Credits Page
-local function CreditsTransition( )       
-    composer.gotoScene( "credits_screen", {effect = "flipFadeOutIn", time = 500})
-end 
-
 -----------------------------------------------------------------------------------------
 
 -- Creating Transition to Levelselect Screen
 local function LevelSelectTransition( )
-    composer.gotoScene( "level_select", {effect = "zoomInOutFade", time = 1000})
+    composer.gotoScene( "level_select", {effect = "crossFade", time = 1000})
 end      
 
 -----------------------------------------------------------------------------------------
 
 -- Creating Transition to Instructions Screen
 local function InstructionsTransition( )
-    composer.gotoScene( "instruction_screen", {effect = "flipFadeOutIn", time = 500})
+    composer.gotoScene( "instruction_screen", {effect = "crossFade", time = 1000})
 end    
 -- INSERT LOCAL FUNCTION DEFINITION THAT GOES TO INSTRUCTIONS SCREEN 
 
@@ -100,14 +95,21 @@ end
 
 -- Creating Transition Function to Options Overlay
 local function OptionsTransition( )       
-    composer.gotoScene( "credits_screen", {effect = "flipFadeOutIn", time = 500})
+    composer.gotoScene( "options_overlay", {effect = "crossFade", time = 1000})
 end 
 
 -----------------------------------------------------------------------------------------
 
 -- Creating Transition Function to Credits Page
 local function CreditsTransition( )       
-    composer.gotoScene( "credits_screen", {effect = "flipFadeOutIn", time = 500})
+    composer.gotoScene( "credits", {effect = "crossFade", time = 1000})
+end 
+
+-----------------------------------------------------------------------------------------
+
+-- Creating Transition Function to Credits Page
+local function AchievementTransition( )       
+    composer.gotoScene( "credits_screen", {effect = "crossFade", time = 1000})
 end 
 
 -----------------------------------------------------------------------------------------
@@ -173,7 +175,7 @@ function scene:create( event )
             overFile = "Images/OptionsButtonPressed@2x.png",
 
             -- When the button is released, call the Options transition function
-            --onRelease = OptionsTransition
+            onRelease = OptionsTransition
         } ) 
     
     -----------------------------------------------------------------------------------------
@@ -209,7 +211,7 @@ function scene:create( event )
             overFile = "Images/CreditsButtonPressed@2x.png",
 
             -- When the button is released, call the Credits transition function
-            --onRelease = CreditsTransition
+            onRelease = CreditsTransition
         } ) 
 
     -----------------------------------------------------------------------------------------
