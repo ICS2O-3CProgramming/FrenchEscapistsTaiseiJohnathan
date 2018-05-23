@@ -156,7 +156,6 @@ local function RandomChoices()
     do
         choice2 = math.random (1, 6)
     while (choice2 == choice1)
-        
 
     do
         choice3 = math.random (1, 6)
