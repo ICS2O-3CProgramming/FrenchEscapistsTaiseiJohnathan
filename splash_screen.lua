@@ -17,6 +17,13 @@ sceneName = "splash_screen"
 local scene = composer.newScene( sceneName )
 
 -----------------------------------------------------------------------------------------
+-- SOUNDS
+-----------------------------------------------------------------------------------------
+
+local inpact = audio.loadSound("Audio/box break.mp3")
+local throw = audio.loadSound("Audio/Sword Throw.mp3")
+local clash = audio.loadSound("Audio/Sword Clash.mp3")
+
 
 -----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
@@ -27,9 +34,7 @@ local earth
 local sword
 local logoText
 
-local inpact = audio.loadSound("Audio/box break.mp3")
-local throw = audio.loadSound("Audio/Sword Throw.mp3")
-local clash = audio.loadSound("Audio/Sword Clash.mp3")
+
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
