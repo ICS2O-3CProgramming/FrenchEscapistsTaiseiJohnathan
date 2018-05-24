@@ -67,7 +67,14 @@ end
 
 -- Creating Transition Function to Options Overlay
 local function OptionsTransition( )       
-    composer.gotoScene( "options_overlay", {effect = "crossFade", time = 1000})
+    -- Pause scene variables
+    local options = {
+            isModal = true,
+            effect = "fromBottom",
+            time = 400
+    }
+
+    composer.showOverlay( "options_overlay", options )
 end 
 
 -----------------------------------------------------------------------------------------
@@ -188,7 +195,7 @@ function scene:create( event )
             overFile = "Images/ControlsButtonPressed.png",
 
             -- When the button is released, call the Controls transition function
-            --onRelease = ControlsTransition
+            --onRelease = OptionsTransition
         } ) 
    
     -----------------------------------------------------------------------------------------

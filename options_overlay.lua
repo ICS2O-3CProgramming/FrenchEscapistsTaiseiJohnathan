@@ -30,7 +30,7 @@ local scene = composer.newScene( sceneName )
 -----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
-
+local bkg
 
 
 
@@ -46,6 +46,10 @@ local scene = composer.newScene( sceneName )
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
+function ReturnToMainMenu( )
+    composer.hideOverlay( "fade", 100 )    
+    
+end
 
 -- The function called when the screen doesn't exist
 function scene:create( event )
@@ -53,23 +57,38 @@ function scene:create( event )
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
 
---[[
+
     -- Insert the background image and set it to the center of the screen
-    bkg_image = display.newImage("Images/.png")
-    bkg_image.x = display.contentCenterX
-    bkg_image.y = display.contentCenterY
-    bkg_image.width = display.contentWidth
-    bkg_image.height = display.contentHeight
+    bkg = display.newImage("Images/PauseScreen.png")
+    bkg.x = display.contentCenterX
+    bkg.y = display.contentCenterY
+    bkg.width = 600
+    bkg.height = 600
 
 
     -- Associating display objects with this scene 
-    sceneGroup:insert( bkg_image )
+    sceneGroup:insert( bkg )
 
     -- Send the background image to the back layer so all other objects can be on top
-    bkg_image:toBack()
-]]--
+    bkg:toBack()
+
 ----------------------------------------------------------------------------------------
 
+backButton = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = display.contentCenterX,
+            y = display.contentCenterY*1.3,
+            width = 200,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/BackButtonUnpressed.png",
+            overFile = "Images/BackButtonPressed.png",
+            -- When the button is released, call the level transition function
+            onRelease = ReturnToMainMenu
+        } ) 
+
+sceneGroup:insert( backButton )
 
 
 end -- function scene:create( event )   
