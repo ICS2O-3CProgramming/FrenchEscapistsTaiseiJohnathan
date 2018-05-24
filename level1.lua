@@ -150,6 +150,14 @@ local function DisplayQuestion()
         displayQuestion.size = 50
     elseif (choice1 == 6) then
         displayQuestion.size = 45
+    elseif (choice1 == 1) then
+        displayQuestion.size = 70
+    elseif (choice1 == 2) then
+        displayQuestion.size = 70
+    elseif (choice1 == 4) then
+        displayQuestion.size = 70
+    elseif (choice1 == 5) then
+        displayQuestion.size = 70
     end
     DisplayRightAnswer()
 end
@@ -229,6 +237,55 @@ local function RandomChoices()
     SetChoices()
 end
 
+
+local function TouchPlatform3(touch)
+    if (touch.phase == "ended") then
+        if (rightAnswerPostition == 3) then
+            --correct
+            RandomChoices()
+        elseif (rightAnswerPostition == 2) then
+            --incorrect
+            RandomChoices()
+        elseif (rightAnswerPostition == 1) then
+            --incorrect
+            RandomChoices()
+        end
+    end
+end
+
+
+local function TouchPlatform2(touch)
+    if (touch.phase == "ended") then
+        if (rightAnswerPostition == 2) then
+            --correct
+            RandomChoices()
+        elseif (rightAnswerPostition == 1) then
+            --incorrect
+            RandomChoices()
+        elseif (rightAnswerPostition == 3) then
+            --incorrect
+            RandomChoices()
+        end
+    end
+end
+
+
+local function TouchPlatform1(touch)
+    if (touch.phase == "ended") then
+        if (rightAnswerPostition == 1) then
+            --correct
+            RandomChoices()
+        elseif (rightAnswerPostition == 2) then
+            --incorrect
+            RandomChoices()
+        elseif (rightAnswerPostition == 3) then
+            --incorrect
+            RandomChoices()
+        end
+    end
+end
+
+
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -261,17 +318,17 @@ function scene:create( event )
     wrongAnswerDisplay2 = display.newText("", 1, 1, "Images/vinet.otf", 70)
     wrongAnswerDisplay2:setFillColor(58/255, 81/255, 252/255)
 
-    platform1 = display.newImageRect("Images/ChoicePlatform.png", 170, 200)
+    platform1 = display.newImageRect("Images/ChoicePlatform.png", 185, 200)
     platform1.x = 200
     platform1.y = 590
 
 
-    platform2 = display.newImageRect("Images/ChoicePlatform.png", 170, 200)
+    platform2 = display.newImageRect("Images/ChoicePlatform.png", 185, 200)
     platform2.x = 600
     platform2.y = 590
 
 
-    platform3 = display.newImageRect("Images/ChoicePlatform.png", 170, 200)
+    platform3 = display.newImageRect("Images/ChoicePlatform.png", 185, 200)
     platform3.x = 400
     platform3.y = 690
 
@@ -281,6 +338,10 @@ function scene:create( event )
     basePlatform.y = 920
 
     timer.performWithDelay(100, RandomChoices)
+
+    platform1:addEventListener("touch", TouchPlatform1)
+    platform2:addEventListener("touch", TouchPlatform2)
+    platform3:addEventListener("touch", TouchPlatform3)
 
 
 
