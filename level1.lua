@@ -71,9 +71,6 @@ local rightAnswerDisplay
 local wrongAnswerDisplay1
 local wrongAnswerDisplay2
 local rightAnswerPostition
-
-local lives
-
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
@@ -97,6 +94,28 @@ local playcharacterJumpSound
 -----------------------------------------------------------------------------------------
 -- FUNCTIONS BEFORE SCENE CREATE
 -----------------------------------------------------------------------------------------
+local function platform1Fade()
+    transition.scaleBy(platform1Broken, { xScale=1.2, yScale=1.2, time=1000 })
+    transition.fadeOut(platform1Broken, { time=1000 })
+end
+
+
+local function platform1Break()
+    transition.dissolve( platform1, platform1Broken, 1000, 500 )
+    timer.performWithDelay(1000, platform1Fade)
+end
+
+local function ReplaceCharacter()
+    character = display.newImageRect("Images/Guard.png")
+    character.width = 315
+    character.height = 395
+    character.x = 500
+    character.y = 500
+    character.myName = "Guard"
+
+    -- add back runtime listeners
+    -- AddRuntimeListeners()
+end
 
 local function DisplayWrongAnswer2()
     wrongAnswerDisplay2.text = "" .. wrongAnswer2
@@ -160,6 +179,7 @@ local function DisplayQuestion()
         displayQuestion.size = 70
     end
     DisplayRightAnswer()
+   -- ReplaceCharacter()
 end
 
 local function SetQuestion()
@@ -322,6 +342,11 @@ function scene:create( event )
     platform1.x = 200
     platform1.y = 590
 
+    platform1Broken = display.newImageRect("Images/ChoicePlatformBroken.png", 185, 200)
+    platform1Broken.x = 200
+    platform1Broken.y = 590
+    platform1Broken.alpha = 0
+
 
     platform2 = display.newImageRect("Images/ChoicePlatform.png", 185, 200)
     platform2.x = 600
@@ -343,11 +368,11 @@ function scene:create( event )
     platform2:addEventListener("touch", TouchPlatform2)
     platform3:addEventListener("touch", TouchPlatform3)
 
-
-
+    timer.performWithDelay(1000, platform1Break)
 ----------------------------------------------------------------------------------------
 
     sceneGroup:insert( platform1 )
+    sceneGroup:insert( platform1Broken )
     sceneGroup:insert( platform2 )
     sceneGroup:insert( platform3 )
     sceneGroup:insert( basePlatform )
