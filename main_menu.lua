@@ -29,6 +29,12 @@ sceneName = "main_menu"
 local scene = composer.newScene( sceneName )
 
 -----------------------------------------------------------------------------------------
+-- SOUDNS
+-----------------------------------------------------------------------------------------
+
+local bkm
+local transitionSound
+-----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 
@@ -48,18 +54,18 @@ local emitterParams
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
------------------------------------------------------------------------------------------
-
 -- Creating Transition to Levelselect Screen
 local function LevelSelectTransition( )
+    audio.play(transitionSound)
     composer.gotoScene( "level_select", {effect = "crossFade", time = 1000})
 end      
 
 -----------------------------------------------------------------------------------------
 
 -- Creating Transition to Instructions Screen
-local function InstructionsTransition( )
-    composer.gotoScene( "instruction_screen", {effect = "crossFade", time = 1000})
+local function ControlsTransition( )
+    audio.play(transitionSound)
+    composer.gotoScene( "controls", {effect = "crossFade", time = 1000})
 end    
 -- INSERT LOCAL FUNCTION DEFINITION THAT GOES TO INSTRUCTIONS SCREEN 
 
@@ -80,14 +86,16 @@ end
 -----------------------------------------------------------------------------------------
 
 -- Creating Transition Function to Credits Page
-local function CreditsTransition( )       
+local function CreditsTransition( )   
+    audio.play(transitionSound)    
     composer.gotoScene( "credits", {effect = "crossFade", time = 1000})
 end 
 
 -----------------------------------------------------------------------------------------
 
 -- Creating Transition Function to Credits Page
-local function AchievementTransition( )       
+local function AchievementTransition( )
+    audio.play(transitionSound)
     composer.gotoScene( "credits_screen", {effect = "crossFade", time = 1000})
 end 
 
@@ -195,7 +203,7 @@ function scene:create( event )
             overFile = "Images/ControlsButtonPressed.png",
 
             -- When the button is released, call the Controls transition function
-            --onRelease = OptionsTransition
+            onRelease = ControlsTransition
         } ) 
    
     -----------------------------------------------------------------------------------------
@@ -256,6 +264,12 @@ function scene:create( event )
     TorchFire2.x = 600
     TorchFire2.y = 570
 
+
+    bkm = audio.loadStream("Audio/Phantom's Castle.mp3")
+    audio.setVolume(0.6, {channel=1})
+    audio.play(bkm, {Channel=1, loops=-1})
+
+    transitionSound = audio.loadSound("Audio/Sword Sound.mp3")
 
     -- Associating button widgets with this scene
     sceneGroup:insert( bkg_image )

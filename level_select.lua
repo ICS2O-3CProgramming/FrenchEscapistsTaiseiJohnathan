@@ -41,6 +41,7 @@ end
 -- Creating Transition to Level1 Screen
 local function Level1Transition( )
     composer.gotoScene( "level1", {effect = "crossFade", time = 1000})
+    audio.stop()
 end  
 
 -- Creating Transition to Level2 Screen
