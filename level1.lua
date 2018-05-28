@@ -70,7 +70,7 @@ local displayQuestion
 local rightAnswerDisplay
 local wrongAnswerDisplay1
 local wrongAnswerDisplay2
-local rightAnswerPostition
+local rightAnswerPosition
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
@@ -90,28 +90,49 @@ local playcharacterLandSound
 local characterJumpSound
 local playcharacterJumpSound
 
-
+--local square = display.newRect( 0, 0, 100, 100 )
+ 
+--transition.moveTo( square, { x=200, y=400, time=2000 } )
 -----------------------------------------------------------------------------------------
 -- FUNCTIONS BEFORE SCENE CREATE
 -----------------------------------------------------------------------------------------
 local function platform1Fade()
-    transition.scaleBy(platform1Broken, { xScale=1.2, yScale=1.2, time=1000 })
-    transition.fadeOut(platform1Broken, { time=1000 })
+    transition.scaleBy(platform1Broken, { xScale=1.2, yScale=1.2, time=800 })
+    transition.fadeOut(platform1Broken, { time=800 })
+    transition.fadeOut(platform1, { time=400 })
+end
+
+local function platform2Fade()
+    transition.scaleBy(platform2Broken, { xScale=1.2, yScale=1.2, time=800 })
+    transition.fadeOut(platform2Broken, { time=800 })
+    transition.fadeOut(platform2, { time=400 })
+end
+
+local function platform3Fade()
+    transition.scaleBy(platform3Broken, { xScale=1.2, yScale=1.2, time=800 })
+    transition.fadeOut(platform3Broken, { time=800 })
+    transition.fadeOut(platform3, { time=400 })
 end
 
 
 local function platform1Break()
-    transition.dissolve( platform1, platform1Broken, 1000, 500 )
-    timer.performWithDelay(1000, platform1Fade)
+    timer.performWithDelay(1500, platform1Fade)
+    transition.moveTo( character, { x=200, y=400, time=1000 } )
+end
+
+local function platform2Break()
+    timer.performWithDelay(1500, platform2Fade)
+    transition.moveTo( character, { x=200, y=400, time=1000 } )
+end
+
+local function platform3Break()
+    timer.performWithDelay(3500, platform3Fade)
+    transition.moveTo( character, { x=200, y=400, time=1000 } )
 end
 
 local function ReplaceCharacter()
-    character = display.newImageRect("Images/Guard.png")
-    character.width = 315
-    character.height = 395
-    character.x = 500
-    character.y = 500
-    character.myName = "Guard"
+    character.x = 400
+    character.y = 750
 
     -- add back runtime listeners
     -- AddRuntimeListeners()
@@ -119,13 +140,13 @@ end
 
 local function DisplayWrongAnswer2()
     wrongAnswerDisplay2.text = "" .. wrongAnswer2
-    if (rightAnswerPostition == 1) then
+    if (rightAnswerPosition == 1) then
         wrongAnswerDisplay2.x = 400
         wrongAnswerDisplay2.y = 620
-    elseif (rightAnswerPostition == 2) then
+    elseif (rightAnswerPosition == 2) then
         wrongAnswerDisplay2.x = 200
         wrongAnswerDisplay2.y = 530
-    elseif (rightAnswerPostition == 3) then
+    elseif (rightAnswerPosition == 3) then
         wrongAnswerDisplay2.x = 600
         wrongAnswerDisplay2.y = 530
     end
@@ -133,13 +154,13 @@ end
 
 local function DisplayWrongAnswer1()
     wrongAnswerDisplay1.text = "" .. wrongAnswer1
-    if (rightAnswerPostition == 1) then
+    if (rightAnswerPosition == 1) then
         wrongAnswerDisplay1.x = 600
         wrongAnswerDisplay1.y = 530
-    elseif (rightAnswerPostition == 2) then
+    elseif (rightAnswerPosition == 2) then
         wrongAnswerDisplay1.x = 400
         wrongAnswerDisplay1.y = 620
-    elseif (rightAnswerPostition == 3) then
+    elseif (rightAnswerPosition == 3) then
         wrongAnswerDisplay1.x = 200
         wrongAnswerDisplay1.y = 530
     end
@@ -148,14 +169,14 @@ end
 
 local function DisplayRightAnswer()
     rightAnswerDisplay.text = "" .. rightAnswer
-    rightAnswerPostition = math.random(1, 3)
-    if (rightAnswerPostition == 1) then
+    rightAnswerPosition = math.random(1, 3)
+    if (rightAnswerPosition == 1) then
         rightAnswerDisplay.x = 200
         rightAnswerDisplay.y = 530
-    elseif (rightAnswerPostition == 2) then
+    elseif (rightAnswerPosition == 2) then
         rightAnswerDisplay.x = 600
         rightAnswerDisplay.y = 530
-    elseif (rightAnswerPostition == 3) then
+    elseif (rightAnswerPosition == 3) then
         rightAnswerDisplay.x = 400
         rightAnswerDisplay.y = 620
     end
@@ -255,20 +276,25 @@ local function RandomChoices()
         choice3 = math.random (1, 6)
     end
     SetChoices()
+    ReplaceCharacter()
 end
 
 
 local function TouchPlatform3(touch)
     if (touch.phase == "ended") then
-        if (rightAnswerPostition == 3) then
+        if (rightAnswerPosition == 3) then
             --correct
-            RandomChoices()
-        elseif (rightAnswerPostition == 2) then
-            --incorrect
-            RandomChoices()
-        elseif (rightAnswerPostition == 1) then
-            --incorrect
-            RandomChoices()
+            timer.performWithDelay(1000, RandomChoices)
+        elseif (rightAnswerPosition == 2) then
+            platform3Break()
+            rightAnswerDisplay.isVisible = false
+            wrongAnswerDisplay1.isVisible = false
+            wrongAnswerDisplay2.isVisible = false
+        elseif (rightAnswerPosition == 1) then
+            platform3Break()
+            rightAnswerDisplay.isVisible = false
+            wrongAnswerDisplay1.isVisible = false
+            wrongAnswerDisplay2.isVisible = false
         end
     end
 end
@@ -276,15 +302,19 @@ end
 
 local function TouchPlatform2(touch)
     if (touch.phase == "ended") then
-        if (rightAnswerPostition == 2) then
+        if (rightAnswerPosition == 2) then
             --correct
-            RandomChoices()
-        elseif (rightAnswerPostition == 1) then
-            --incorrect
-            RandomChoices()
-        elseif (rightAnswerPostition == 3) then
-            --incorrect
-            RandomChoices()
+            timer.performWithDelay(1000, RandomChoices)
+        elseif (rightAnswerPosition == 1) then
+            platform2Break()
+            rightAnswerDisplay.isVisible = false
+            wrongAnswerDisplay1.isVisible = false
+            wrongAnswerDisplay2.isVisible = false
+        elseif (rightAnswerPosition == 3) then
+            platform2Break()
+            rightAnswerDisplay.isVisible = false
+            wrongAnswerDisplay1.isVisible = false
+            wrongAnswerDisplay2.isVisible = false
         end
     end
 end
@@ -292,15 +322,19 @@ end
 
 local function TouchPlatform1(touch)
     if (touch.phase == "ended") then
-        if (rightAnswerPostition == 1) then
+        if (rightAnswerPosition == 1) then
             --correct
-            RandomChoices()
-        elseif (rightAnswerPostition == 2) then
-            --incorrect
-            RandomChoices()
-        elseif (rightAnswerPostition == 3) then
-            --incorrect
-            RandomChoices()
+            timer.performWithDelay(1000, RandomChoices)
+        elseif (rightAnswerPosition == 2) then
+            platform1Break()
+            rightAnswerDisplay.isVisible = false
+            wrongAnswerDisplay1.isVisible = false
+            wrongAnswerDisplay2.isVisible = false
+        elseif (rightAnswerPosition == 3) then
+            platform1Break()
+            rightAnswerDisplay.isVisible = false
+            wrongAnswerDisplay1.isVisible = false
+            wrongAnswerDisplay2.isVisible = false
         end
     end
 end
@@ -338,6 +372,8 @@ function scene:create( event )
     wrongAnswerDisplay2 = display.newText("", 1, 1, "Images/vinet.otf", 70)
     wrongAnswerDisplay2:setFillColor(58/255, 81/255, 252/255)
 
+    ---------
+
     platform1 = display.newImageRect("Images/ChoicePlatform.png", 185, 200)
     platform1.x = 200
     platform1.y = 590
@@ -345,22 +381,37 @@ function scene:create( event )
     platform1Broken = display.newImageRect("Images/ChoicePlatformBroken.png", 185, 200)
     platform1Broken.x = 200
     platform1Broken.y = 590
-    platform1Broken.alpha = 0
+    platform1Broken.alpha = 1
 
+    ---------
 
     platform2 = display.newImageRect("Images/ChoicePlatform.png", 185, 200)
     platform2.x = 600
     platform2.y = 590
 
+    platform2Broken = display.newImageRect("Images/ChoicePlatformBroken.png", 185, 200)
+    platform2Broken.x = 600
+    platform2Broken.y = 590
+    platform2Broken.alpha = 1
+
+    ---------
 
     platform3 = display.newImageRect("Images/ChoicePlatform.png", 185, 200)
     platform3.x = 400
     platform3.y = 690
 
+    platform3Broken = display.newImageRect("Images/ChoicePlatformBroken.png", 185, 200)
+    platform3Broken.x = 400
+    platform3Broken.y = 690
+    platform3Broken.alpha = 1
+
+    ---------
 
     basePlatform = display.newImageRect("Images/MainPlatform@2x.png", 280, 250)
     basePlatform.x = 400
     basePlatform.y = 920
+
+    character = display.newImageRect("Images/Guard.png", 100, 130)
 
     timer.performWithDelay(100, RandomChoices)
 
@@ -368,19 +419,19 @@ function scene:create( event )
     platform2:addEventListener("touch", TouchPlatform2)
     platform3:addEventListener("touch", TouchPlatform3)
 
-    timer.performWithDelay(1000, platform1Break)
 ----------------------------------------------------------------------------------------
-
-    sceneGroup:insert( platform1 )
     sceneGroup:insert( platform1Broken )
+    sceneGroup:insert( platform1 )
+    sceneGroup:insert( platform2Broken )
     sceneGroup:insert( platform2 )
+    sceneGroup:insert( platform3Broken )
     sceneGroup:insert( platform3 )
     sceneGroup:insert( basePlatform )
     sceneGroup:insert( displayQuestion )
     sceneGroup:insert( rightAnswerDisplay )
     sceneGroup:insert( wrongAnswerDisplay1 )
     sceneGroup:insert( wrongAnswerDisplay2 )
-    --sceneGroup:insert(  )
+    sceneGroup:insert( character )
     --sceneGroup:insert(  )
 
 
