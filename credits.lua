@@ -28,6 +28,12 @@ sceneName = "credits"
 local scene = composer.newScene( sceneName )
 
 -----------------------------------------------------------------------------------------
+-- SOUNDS
+-----------------------------------------------------------------------------------------
+
+local drum
+
+-----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 
@@ -36,6 +42,7 @@ local backButton
 
 -- Creating Transition to MainMenu Screen
 local function BackToMainMenu( )
+    audio.play(drum)
     composer.gotoScene( "main_menu", {effect = "crossFade", time = 1000})
 end  
 
@@ -83,6 +90,8 @@ function scene:create( event )
     -----------------------------------------------------------------------------------------
 
     -----------------------------------------------------------------------------------------
+
+    drum = audio.loadSound("Audio/Drum.mp3")
 
 	sceneGroup:insert( backButton )
 

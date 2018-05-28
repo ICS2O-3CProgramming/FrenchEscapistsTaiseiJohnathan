@@ -28,6 +28,12 @@ sceneName = "level_select"
 local scene = composer.newScene( sceneName )
 
 -----------------------------------------------------------------------------------------
+-- SOUNDS
+-----------------------------------------------------------------------------------------
+
+local drum
+
+-----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 
@@ -35,6 +41,7 @@ local bkg_image
 
 -- Creating Transition to MainMenu Screen
 local function BackToMainMenu( )
+    audio.play(drum)
     composer.gotoScene( "main_menu", {effect = "crossFade", time = 1000})
 end  
 
@@ -235,6 +242,9 @@ file = nil
     	level5Button.isVisible = false
   	end
     -----------------------------------------------------------------------------------------
+
+    drum = audio.loadSound("Audio/Drum.mp3")
+
     sceneGroup:insert( backButton )
 	sceneGroup:insert( level1Button )
 	sceneGroup:insert( level2Button )
