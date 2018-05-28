@@ -31,10 +31,13 @@ local scene = composer.newScene( sceneName )
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 local bkg
+local backButton
+local volUpButton
+local volDownButton
 
-
-
-
+local MINVOL = 0
+local MAXVOL = 10
+local userVolume
 
 
 
@@ -88,8 +91,37 @@ backButton = widget.newButton(
             onRelease = ReturnToMainMenu
         } ) 
 
-sceneGroup:insert( backButton )
+volDownButton = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = display.contentCenterX*1/2,
+            y = display.contentCenterY,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/VolumeDownUnpressed.png",
+            --overFile = "Images/BackButtonPressed.png",
+            -- When the button is released, call the level transition function
+            --onRelease = ReturnToMainMenu
+        } ) 
 
+volUpButton = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = display.contentCenterX*1.5,
+            y = display.contentCenterY,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/VolumeUpUnpressed.png",
+            --overFile = "Images/BackButtonPressed.png",
+            -- When the button is released, call the level transition function
+            --onRelease = ReturnToMainMenu
+        } ) 
+
+sceneGroup:insert( backButton )
+sceneGroup:insert( volDownButton )
+sceneGroup:insert( volUpButton )
 
 end -- function scene:create( event )   
 
