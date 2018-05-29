@@ -39,26 +39,95 @@ local MINVOL = 0
 local MAXVOL = 10
 local userVolume
 
+local path
+local file, errorString
 
 
 
 
+-----------------------------------------------------------------------------------------
+-- LOCAL SCENE FUNCTIONS
+-----------------------------------------------------------------------------------------
 
-
+local function ReturnToMainMenu( )
+    composer.hideOverlay( "fade", 100 )    
+    
+end
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
-function ReturnToMainMenu( )
-    composer.hideOverlay( "fade", 100 )    
-    
+
+function SetVolume( )
+    -- Data (string) to write
+    local saveData = userVolume
+
+    -- Path for the file to write
+    path = system.pathForFile( "volume.txt" )
+     
+    -- Open the file handle
+    file, errorString = io.open( path, "w" )
+     
+    if not file then
+        -- Error occurred; output the cause
+        print( "File error: " .. errorString )
+    else
+        -- Write data to file
+        file:write( saveData )
+        -- Close the file handle
+        io.close( file )
+    end
+file = nil
+print(userVolume)
 end
+
+function VolDown( )
+    
+    if (userVolume == MINVOL) then
+        userVolume = MINVOL
+    else
+        userVolume = userVolume - 1
+    end
+    SetVolume()
+end
+
+function VolUp( )
+    if (userVolume == MAXVOL) then
+        userVolume = MAXVOL
+    else
+        userVolume = userVolume + 1
+    end
+    SetVolume()
+end
+
 
 -- The function called when the screen doesn't exist
 function scene:create( event )
 
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
+
+    -- Path for the file to read
+    path = system.pathForFile( "volume.txt" )
+ 
+    -- Open the file handle
+    file, errorString = io.open( path, "r" )
+ 
+    if not file then
+        -- Error occurred; output the cause
+        print( "File error: " .. errorString )
+    else
+        -- Read data from file
+        local contents = file:read( "*n" )
+        -- Output the file contents
+        print( "Contents of " .. path .. "\n" .. contents )
+        -- Sets SetVolume to contents of read file
+        userVolume = contents
+        -- Close the file handle
+        io.close( file )
+    end
+ 
+    file = nil
 
 
     -- Insert the background image and set it to the center of the screen
@@ -102,7 +171,7 @@ volDownButton = widget.newButton(
             defaultFile = "Images/VolumeDownUnpressed.png",
             --overFile = "Images/BackButtonPressed.png",
             -- When the button is released, call the level transition function
-            --onRelease = ReturnToMainMenu
+            onRelease = VolDown
         } ) 
 
 volUpButton = widget.newButton( 
@@ -116,7 +185,7 @@ volUpButton = widget.newButton(
             defaultFile = "Images/VolumeUpUnpressed.png",
             --overFile = "Images/BackButtonPressed.png",
             -- When the button is released, call the level transition function
-            --onRelease = ReturnToMainMenu
+            onRelease = VolUp
         } ) 
 
 sceneGroup:insert( backButton )
