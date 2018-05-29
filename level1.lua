@@ -63,6 +63,12 @@ local platform1
 local platform2
 local platform3
 local basePlatform
+local platform1BridgeImage
+local platform2BridgeImage
+local platform3BridgeImage
+local platform1Broken
+local platform2Broken
+local platform3Broken
 
 local question
 
@@ -96,60 +102,9 @@ local playcharacterJumpSound
 -----------------------------------------------------------------------------------------
 -- FUNCTIONS BEFORE SCENE CREATE
 -----------------------------------------------------------------------------------------
-local function platform1Fade()
-    transition.scaleBy(platform1Broken, { xScale=1.2, yScale=1.2, time=800 })
-    transition.fadeOut(platform1Broken, { time=800 })
-    transition.fadeOut(platform1, { time=400 })
-end
-
-local function platform2Fade()
-    transition.scaleBy(platform2Broken, { xScale=1.2, yScale=1.2, time=800 })
-    transition.fadeOut(platform2Broken, { time=800 })
-    transition.fadeOut(platform2, { time=400 })
-end
-
-local function platform3Fade()
-    transition.scaleBy(platform3Broken, { xScale=1.2, yScale=1.2, time=800 })
-    transition.fadeOut(platform3Broken, { time=800 })
-    transition.fadeOut(platform3, { time=400 })
-end
-
-local function platform1Bridge()
-    timer.performWithDelay(3500, platform1Fade)
-    transition.moveTo( character, { x=200, y=400, time=1000 } )
-end
-
-local function platform2Bridge()
-    timer.performWithDelay(3500, platform2Fade)
-    transition.moveTo( character, { x=600, y=450, time=1000 } )
-end
-
-local function platform3Bridge()
-    timer.performWithDelay(3500, platform3Fade)
-    transition.moveTo( character, { x=400, y=570, time=1000 } )
-end
-
-local function platform1Break()
-    timer.performWithDelay(1500, platform1Fade)
-    transition.moveTo( character, { x=200, y=450, time=1000 } )
-end
-
-local function platform2Break()
-    timer.performWithDelay(1500, platform2Fade)
-    transition.moveTo( character, { x=600, y=450, time=1000 } )
-end
-
-local function platform3Break()
-    timer.performWithDelay(3500, platform3Fade)
-    transition.moveTo( character, { x=400, y=570, time=1000 } )
-end
-
 local function ReplaceCharacter()
     character.x = 400
     character.y = 750
-
-    -- add back runtime listeners
-    -- AddRuntimeListeners()
 end
 
 local function DisplayWrongAnswer2()
@@ -293,13 +248,97 @@ local function RandomChoices()
     ReplaceCharacter()
 end
 
+local function platform1NextQuestion()
+    transition.moveTo ( character, { x=400, y=320, time=1000})
+    timer.performWithDelay(1200, ReplaceCharacter)
+    timer.performWithDelay(1200, RandomChoices)
+    platform1BridgeImage.isVisible = false
+end
+
+local function platform2NextQuestion()
+    transition.moveTo ( character, { x=400, y=320, time=1000})
+    timer.performWithDelay(1200, ReplaceCharacter)
+    timer.performWithDelay(1200, RandomChoices)
+    platform2BridgeImage.isVisible = false
+end
+
+local function platform3NextQuestion()
+    timer.performWithDelay(200, ReplaceCharacter)
+    timer.performWithDelay(200, RandomChoices)
+    platform3BridgeImage.isVisible = false
+end
+
+local function platform1Fade()
+    transition.scaleBy(platform1Broken, { xScale=1.2, yScale=1.2, time=800 })
+    transition.fadeOut(platform1Broken, { time=800 })
+    transition.fadeOut(platform1, { time=400 })
+end
+
+local function platform2Fade()
+    transition.scaleBy(platform2Broken, { xScale=1.2, yScale=1.2, time=800 })
+    transition.fadeOut(platform2Broken, { time=800 })
+    transition.fadeOut(platform2, { time=400 })
+end
+
+local function platform3Fade()
+    transition.scaleBy(platform3Broken, { xScale=1.2, yScale=1.2, time=800 })
+    transition.fadeOut(platform3Broken, { time=800 })
+    transition.fadeOut(platform3, { time=400 })
+end
+
+local function platform1BridgeExtend()
+    platform1BridgeImage.isVisible = true
+    transition.moveTo( character, { x=200, y=320, time=1000 } )
+    timer.performWithDelay(1000, platform1NextQuestion)
+end
+
+local function platform2BridgeExtend()
+    platform2BridgeImage.isVisible = true
+    transition.moveTo( character, { x=600, y=320, time=1000 } )
+    timer.performWithDelay(1000, platform2NextQuestion)
+end
+
+local function platform3BridgeExtend()
+    platform3BridgeImage.isVisible = true
+    transition.moveTo( character, { x=400, y=320, time=1000 } )
+    timer.performWithDelay(1000, platform3NextQuestion)
+end
+
+local function platform1Bridge()
+    timer.performWithDelay(1500, platform1BridgeExtend)
+    transition.moveTo( character, { x=200, y=470, time=1000 } )
+end
+
+local function platform2Bridge()
+    timer.performWithDelay(1500, platform2BridgeExtend)
+    transition.moveTo( character, { x=600, y=470, time=1000 } )
+end
+
+local function platform3Bridge()
+    timer.performWithDelay(1500, platform3BridgeExtend)
+    transition.moveTo( character, { x=400, y=570, time=1000 } )
+end
+
+local function platform1Break()
+    timer.performWithDelay(1000, platform1Fade)
+    transition.moveTo( character, { x=200, y=450, time=1000 } )
+end
+
+local function platform2Break()
+    timer.performWithDelay(1000, platform2Fade)
+    transition.moveTo( character, { x=600, y=450, time=1000 } )
+end
+
+local function platform3Break()
+    timer.performWithDelay(1000, platform3Fade)
+    transition.moveTo( character, { x=400, y=570, time=1000 } )
+end
 
 local function TouchPlatform3(touch)
     if (touch.phase == "ended") then
         if (rightAnswerPosition == 3) then
             --correct
             platform3Bridge()
-            timer.performWithDelay(1000, RandomChoices)
         elseif (rightAnswerPosition == 2) then
             platform3Break()
             rightAnswerDisplay.isVisible = false
@@ -320,7 +359,6 @@ local function TouchPlatform2(touch)
         if (rightAnswerPosition == 2) then
             --correct
             platform2Bridge()
-            timer.performWithDelay(1000, RandomChoices)
         elseif (rightAnswerPosition == 1) then
             platform2Break()
             rightAnswerDisplay.isVisible = false
@@ -341,7 +379,6 @@ local function TouchPlatform1(touch)
         if (rightAnswerPosition == 1) then
             --correct
             platform1Bridge()
-            timer.performWithDelay(1000, RandomChoices)
         elseif (rightAnswerPosition == 2) then
             platform1Break()
             rightAnswerDisplay.isVisible = false
@@ -399,6 +436,11 @@ function scene:create( event )
     platform1Broken.y = 590
     platform1Broken.alpha = 1
 
+    platform1BridgeImage = display.newImageRect("Images/bridge2.png", 100, 150)
+    platform1BridgeImage.x = 200
+    platform1BridgeImage.y = 470
+    platform1BridgeImage.isVisible = false
+
     ---------
 
     platform2 = display.newImageRect("Images/ChoicePlatform.png", 185, 200)
@@ -410,6 +452,11 @@ function scene:create( event )
     platform2Broken.y = 590
     platform2Broken.alpha = 1
 
+    platform2BridgeImage = display.newImageRect("Images/bridge2.png", 100, 150)
+    platform2BridgeImage.x = 600
+    platform2BridgeImage.y = 470
+    platform2BridgeImage.isVisible = false
+
     ---------
 
     platform3 = display.newImageRect("Images/ChoicePlatform.png", 185, 200)
@@ -420,6 +467,11 @@ function scene:create( event )
     platform3Broken.x = 400
     platform3Broken.y = 690
     platform3Broken.alpha = 1
+
+    platform3BridgeImage = display.newImageRect("Images/bridge.png", 100, 200)
+    platform3BridgeImage.x = 400
+    platform3BridgeImage.y = 500
+    platform3BridgeImage.isVisible = false
 
     ---------
 
@@ -436,6 +488,9 @@ function scene:create( event )
     platform3:addEventListener("touch", TouchPlatform3)
 
 ----------------------------------------------------------------------------------------
+    sceneGroup:insert( platform1BridgeImage )
+    sceneGroup:insert( platform2BridgeImage )
+    sceneGroup:insert( platform3BridgeImage )
     sceneGroup:insert( platform1Broken )
     sceneGroup:insert( platform1 )
     sceneGroup:insert( platform2Broken )
