@@ -114,20 +114,34 @@ local function platform3Fade()
     transition.fadeOut(platform3, { time=400 })
 end
 
+local function platform1Bridge()
+    timer.performWithDelay(3500, platform1Fade)
+    transition.moveTo( character, { x=200, y=400, time=1000 } )
+end
+
+local function platform2Bridge()
+    timer.performWithDelay(3500, platform2Fade)
+    transition.moveTo( character, { x=600, y=450, time=1000 } )
+end
+
+local function platform3Bridge()
+    timer.performWithDelay(3500, platform3Fade)
+    transition.moveTo( character, { x=400, y=570, time=1000 } )
+end
 
 local function platform1Break()
     timer.performWithDelay(1500, platform1Fade)
-    transition.moveTo( character, { x=200, y=400, time=1000 } )
+    transition.moveTo( character, { x=200, y=450, time=1000 } )
 end
 
 local function platform2Break()
     timer.performWithDelay(1500, platform2Fade)
-    transition.moveTo( character, { x=200, y=400, time=1000 } )
+    transition.moveTo( character, { x=600, y=450, time=1000 } )
 end
 
 local function platform3Break()
     timer.performWithDelay(3500, platform3Fade)
-    transition.moveTo( character, { x=200, y=400, time=1000 } )
+    transition.moveTo( character, { x=400, y=570, time=1000 } )
 end
 
 local function ReplaceCharacter()
@@ -284,6 +298,7 @@ local function TouchPlatform3(touch)
     if (touch.phase == "ended") then
         if (rightAnswerPosition == 3) then
             --correct
+            platform3Bridge()
             timer.performWithDelay(1000, RandomChoices)
         elseif (rightAnswerPosition == 2) then
             platform3Break()
@@ -304,6 +319,7 @@ local function TouchPlatform2(touch)
     if (touch.phase == "ended") then
         if (rightAnswerPosition == 2) then
             --correct
+            platform2Bridge()
             timer.performWithDelay(1000, RandomChoices)
         elseif (rightAnswerPosition == 1) then
             platform2Break()
@@ -324,6 +340,7 @@ local function TouchPlatform1(touch)
     if (touch.phase == "ended") then
         if (rightAnswerPosition == 1) then
             --correct
+            platform1Bridge()
             timer.performWithDelay(1000, RandomChoices)
         elseif (rightAnswerPosition == 2) then
             platform1Break()
@@ -349,7 +366,6 @@ function scene:create( event )
 
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
-
 
     -- Insert the background image and set it to the center of the screen
     bkg_image = display.newImage("Images/Level1.png")
