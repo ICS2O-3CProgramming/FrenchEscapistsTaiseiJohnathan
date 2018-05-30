@@ -72,6 +72,7 @@ local platform3Broken
 
 local question
 local score = 0
+local showScore
 
 local displayQuestion
 local rightAnswerDisplay
@@ -459,6 +460,11 @@ local function TouchPlatform1(touch)
     end
 end
 
+local function RestartLevel1()
+    RandomChoices()
+    
+end
+
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
@@ -482,8 +488,8 @@ function scene:create( event )
     bkg_image.y = display.contentCenterY
     bkg_image.width = display.contentWidth
     bkg_image.height = display.contentHeight
-    -- Associating display objects with this scene 
-    sceneGroup:insert( bkg_image )
+
+    
 
     displayQuestion = display.newText("", 400, 840, "Images/vinet.otf", 70)
     displayQuestion:setFillColor(216/255, 119/255, 0/255)
@@ -547,13 +553,14 @@ function scene:create( event )
 
     ---------
 
+    --showScore = display.newText ("Score: " .. score)
+
     basePlatform = display.newImageRect("Images/MainPlatform@2x.png", 280, 250)
     basePlatform.x = 400
     basePlatform.y = 920
 
     character = display.newImageRect("Images/Guard.png", 150, 150)
-
-    timer.performWithDelay(100, RandomChoices)
+    
 
     platform1:addEventListener("touch", TouchPlatform1)
     platform2:addEventListener("touch", TouchPlatform2)
@@ -561,6 +568,7 @@ function scene:create( event )
 
 ----------------------------------------------------------------------------------------
     -- Associating display objects with this scene 
+    sceneGroup:insert( bkg_image )
     sceneGroup:insert( platform1BridgeImage )
     sceneGroup:insert( platform2BridgeImage )
     sceneGroup:insert( platform3BridgeImage )
@@ -604,7 +612,7 @@ function scene:show( event )
     -- Insert code here to make the scene come alive.
     -- Example: start timers, begin animation, play audio, etc.
     elseif ( phase == "did" ) then       
-        
+        timer.performWithDelay(100, RandomChoices)
 
     end
 
