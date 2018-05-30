@@ -57,7 +57,7 @@ local emitterParams
 -- Creating Transition to Levelselect Screen
 local function LevelSelectTransition( )
     audio.play(transitionSound)
-    composer.gotoScene( "level_select", {effect = "crossFade", time = 1000})
+    composer.gotoScene( "level_select", {effect = "crossFade", time = 700})
 end      
 
 -----------------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ end
 -- Creating Transition to Instructions Screen
 local function ControlsTransition( )
     audio.play(transitionSound)
-    composer.gotoScene( "controls", {effect = "crossFade", time = 1000})
+    composer.gotoScene( "controls", {effect = "crossFade", time = 700})
 end    
 -- INSERT LOCAL FUNCTION DEFINITION THAT GOES TO INSTRUCTIONS SCREEN 
 
@@ -88,7 +88,7 @@ end
 -- Creating Transition Function to Credits Page
 local function CreditsTransition( )   
     audio.play(transitionSound)    
-    composer.gotoScene( "credits", {effect = "crossFade", time = 1000})
+    composer.gotoScene( "credits", {effect = "crossFade", time = 700})
 end 
 
 -----------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ end
 -- Creating Transition Function to Credits Page
 local function AchievementTransition( )
     audio.play(transitionSound)
-    composer.gotoScene( "credits_screen", {effect = "crossFade", time = 1000})
+    composer.gotoScene( "credits_screen", {effect = "crossFade", time = 700})
 end 
 
 -----------------------------------------------------------------------------------------

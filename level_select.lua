@@ -31,50 +31,141 @@ local scene = composer.newScene( sceneName )
 -- SOUNDS
 -----------------------------------------------------------------------------------------
 
-local drum
+local drum = audio.loadSound("Audio/Drum.mp3")   
+local drumChannel 
 
 -----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 
 local bkg_image
+local ResetButton
+local backButton
+local level1Button
+local level2Button
+local level3Button
+local level4Button
+local level5Button
+
+local path2
+local file, errorString
+local path
+local file2, errorString2
+local SaveState
+
+
+-----------------------------------------------------------------------------------------
+-- LOCAL FUNCTIONS
+-----------------------------------------------------------------------------------------
 
 -- Creating Transition to MainMenu Screen
 local function BackToMainMenu( )
-    audio.play(drum)
-    composer.gotoScene( "main_menu", {effect = "crossFade", time = 1000})
-end  
+    drumChannel = audio.play(drum)
+    composer.gotoScene( "main_menu", {effect = "crossFade", time = 700})
+end
+
+local function ReadState()
+    -- Open the file handle
+    file, errorString = io.open( path, "r" )
+ 
+    if not file then
+        -- Error occurred; output the cause
+        print( "File error: " .. errorString )
+    else
+        -- Read data from file
+        local contents = file:read( "*n" )
+        -- Output the file contents
+        print( "Contents of " .. path .. "\n" .. contents )
+        -- Sets SaveState to contents of read file
+        SaveState = contents
+        -- Close the file handle
+        io.close( file )
+    end
+ 
+    file = nil
+end
+
+local function ResetProgress()
+
+    -- Open the file handle
+    file2, errorString2 = io.open( path, "w" )
+
+ 
+    if not file2 then
+        -- Error occurred; output the cause
+        print( "File error: " .. errorString2 )
+    else
+        -- Read data from file
+        local contents = file2:write( "1" )
+        -- Close the file handle
+        io.close( file2 )
+    end
+    
+    BackToMainMenu( )
+end
+
+  
 
 -- Creating Transition to Level1 Screen
 local function Level1Transition( )
-    composer.gotoScene( "level1", {effect = "crossFade", time = 1000})
+    composer.gotoScene( "level1", {effect = "crossFade", time = 700})
     audio.stop()
 end  
 
 -- Creating Transition to Level2 Screen
 local function Level2Transition( )
-    composer.gotoScene( "level2", {effect = "crossFade", time = 1000})
+    composer.gotoScene( "level2", {effect = "crossFade", time = 700})
 end  
 
 -- Creating Transition to Level3 Screen
 local function Level3Transition( )
-    composer.gotoScene( "level3", {effect = "crossFade", time = 1000})
+    composer.gotoScene( "level3", {effect = "crossFade", time = 700})
 end  
 
 -- Creating Transition to Level4 Screen
 local function Level4Transition( )
-    composer.gotoScene( "level4", {effect = "crossFade", time = 1000})
+    composer.gotoScene( "level4", {effect = "crossFade", time = 700})
 end  
 
 -- Creating Transition to Level5 Screen
 local function Level5Transition( )
-    composer.gotoScene( "level5", {effect = "crossFade", time = 1000})
+    composer.gotoScene( "level5", {effect = "crossFade", time = 700})
 end  
 
-local path
-local file, errorString
-local SaveState
+local function LevelUnlock()
 
+    if (SaveState == 1) then
+        level1Button.isVisible = true
+        level2Button.isVisible = false
+        level3Button.isVisible = false
+        level4Button.isVisible = false
+        level5Button.isVisible = false
+    elseif (SaveState == 2) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = false
+        level4Button.isVisible = false
+        level5Button.isVisible = false
+    elseif (SaveState == 3) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = false
+        level5Button.isVisible = false
+    elseif (SaveState == 4) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = false
+    elseif (SaveState == 5) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+    end
+end
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
@@ -88,25 +179,10 @@ function scene:create( event )
 
     -- Path for the file to read
 	path = system.pathForFile( "savestate.txt" )
- 
-	-- Open the file handle
-	file, errorString = io.open( path, "r" )
- 
-	if not file then
-   	 	-- Error occurred; output the cause
-    	print( "File error: " .. errorString )
-	else
-	    -- Read data from file
-    	local contents = file:read( "*n" )
-    	-- Output the file contents
-    	print( "Contents of " .. path .. "\n" .. contents )
-    	-- Sets SaveState to contents of read file
-    	SaveState = contents
-    	-- Close the file handle
-    	io.close( file )
-	end
- 
-file = nil
+
+    -- Path for the file to read
+    path2 = system.pathForFile( "savestate.txt" )
+
 
     -- Insert the background image and set it to the center of the screen
     bkg_image = display.newImage("Images/LevelSelect.png")
@@ -116,25 +192,39 @@ file = nil
     bkg_image.height = display.contentHeight
 
 
-    -- Associating display objects with this scene 
-    sceneGroup:insert( bkg_image )
-
-    -- Send the background image to the back layer so all other objects can be on top
-    bkg_image:toBack()
-
     -- Creating Back Button
     backButton = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = display.contentCenterX/4,
+            x = display.contentWidth/6,
             y = display.contentHeight*9/10,
             width = 200,
             height = 100,
+
             -- Insert the images here
             defaultFile = "Images/BackButtonUnpressed.png",
             overFile = "Images/BackButtonPressed.png",
+
             -- When the button is released, call the level transition function
             onRelease = BackToMainMenu
+        } ) 
+
+----------------------------------------------------------------------------------------
+
+-- Creating Reset Button
+    ResetButton = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth * 5/6,
+            y = display.contentHeight*9/10,
+            width = 200,
+            height = 100,
+
+            -- Insert the images here
+            defaultFile = "Images/ResetButton.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = ResetProgress
         } ) 
 
 ----------------------------------------------------------------------------------------
@@ -142,8 +232,8 @@ file = nil
  	level1Button = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = 97,
-            y = 319,
+            x = display.contentWidth/8,
+            y = display.contentHeight*2.5/8,
             width = 100,
             height = 100,
             -- Insert the images here
@@ -169,9 +259,8 @@ file = nil
             -- When the button is released, call the level transition function
             onRelease = Level2Transition
         } ) 
-    if (SaveState == 1) then
-    	level2Button.isVisible = false
-  	end
+
+    
     -----------------------------------------------------------------------------------------
 
     -- Creating level Button
@@ -188,11 +277,7 @@ file = nil
             -- When the button is released, call the level transition function
             onRelease = Level3Transition
         } ) 
-    if (SaveState == 1) then
-    	level3Button.isVisible = false
-    elseif (SaveState == 2) then
-    	level3Button.isVisible = false
-  	end
+
     -----------------------------------------------------------------------------------------
 
     -- Creating level Button
@@ -209,13 +294,8 @@ file = nil
             -- When the button is released, call the level transition function
             onRelease = Level4Transition
         } ) 
-    if (SaveState == 1) then
-    	level4Button.isVisible = false
-    elseif (SaveState == 2) then
-    	level4Button.isVisible = false
-    elseif (SaveState == 3) then
-    	level4Button.isVisible = false
-  	end
+
+
     -----------------------------------------------------------------------------------------
 
     -- Creating level Button
@@ -232,25 +312,21 @@ file = nil
             -- When the button is released, call the level transition function
             onRelease = Level5Transition
         } ) 
-    if (SaveState == 1) then
-    	level5Button.isVisible = false
-    elseif (SaveState == 2) then
-    	level5Button.isVisible = false
-    elseif (SaveState == 3) then
-    	level5Button.isVisible = false
-    elseif (SaveState == 4) then
-    	level5Button.isVisible = false
-  	end
+
+
     -----------------------------------------------------------------------------------------
 
-    drum = audio.loadSound("Audio/Drum.mp3")
+    
 
+    -- Associating display objects with this scene 
+    sceneGroup:insert( bkg_image )
     sceneGroup:insert( backButton )
 	sceneGroup:insert( level1Button )
 	sceneGroup:insert( level2Button )
 	sceneGroup:insert( level3Button )
 	sceneGroup:insert( level4Button )
 	sceneGroup:insert( level5Button )
+    sceneGroup:insert( ResetButton )
 
 
 
@@ -272,14 +348,17 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).   
     if ( phase == "will" ) then
+        ReadState()
+        LevelUnlock()
        
     -----------------------------------------------------------------------------------------
+
 
     -- Called when the scene is now on screen.
     -- Insert code here to make the scene come alive.
     -- Example: start timers, begin animation, play audio, etc.
-    elseif ( phase == "did" ) then       
-        
+    elseif ( phase == "did" ) then   
+
 
     end
 
@@ -307,7 +386,7 @@ function scene:hide( event )
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then
-        -- Called immediately after scene goes off screen.
+        -- Called immediately after scene goes off screen.        
     end
 
 end -- function scene:hide( event )

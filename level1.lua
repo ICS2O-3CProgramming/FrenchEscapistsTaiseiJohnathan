@@ -71,12 +71,16 @@ local platform2Broken
 local platform3Broken
 
 local question
+local score = 0
 
 local displayQuestion
 local rightAnswerDisplay
 local wrongAnswerDisplay1
 local wrongAnswerDisplay2
 local rightAnswerPosition
+
+local path
+local file, errorString
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
@@ -102,6 +106,35 @@ local playcharacterJumpSound
 -----------------------------------------------------------------------------------------
 -- FUNCTIONS BEFORE SCENE CREATE
 -----------------------------------------------------------------------------------------
+
+local function LevelSelect()
+    composer.gotoScene( "level_select", {effect = "crossFade", time = 1000})
+end
+
+local function Level2()
+        -- Open the file handle
+    file, errorString = io.open( path, "w" )
+ 
+    if not file then
+        -- Error occurred; output the cause
+        print( "File error: " .. errorString )
+    else
+        -- Read data from file
+        local contents = file:write( 2 )
+        -- Close the file handle
+        io.close( file )
+    end
+    LevelSelect()
+end
+
+local function LoseScreen()
+    composer.gotoScene( "lose", {effect = "crossFade", time = 500})
+end
+
+local function HideCharacter()
+    character.isVisible = false
+end
+
 local function ReplaceCharacter()
     character.x = 400
     character.y = 750
@@ -249,23 +282,35 @@ local function RandomChoices()
 end
 
 local function platform1NextQuestion()
-    transition.moveTo ( character, { x=400, y=320, time=1000})
-    timer.performWithDelay(1200, ReplaceCharacter)
-    timer.performWithDelay(1200, RandomChoices)
-    platform1BridgeImage.isVisible = false
+    if (score == 3) then
+        Level2()
+    else
+        transition.moveTo ( character, { x=400, y=320, time=1000})
+        timer.performWithDelay(1200, ReplaceCharacter)
+        timer.performWithDelay(1200, RandomChoices)
+        platform1BridgeImage.isVisible = false
+    end
 end
 
 local function platform2NextQuestion()
-    transition.moveTo ( character, { x=400, y=320, time=1000})
-    timer.performWithDelay(1200, ReplaceCharacter)
-    timer.performWithDelay(1200, RandomChoices)
-    platform2BridgeImage.isVisible = false
+    if (score == 3) then
+        Level2()
+    else
+        transition.moveTo ( character, { x=400, y=320, time=1000})
+        timer.performWithDelay(1200, ReplaceCharacter)
+        timer.performWithDelay(1200, RandomChoices)
+        platform2BridgeImage.isVisible = false
+    end
 end
 
 local function platform3NextQuestion()
-    timer.performWithDelay(200, ReplaceCharacter)
-    timer.performWithDelay(200, RandomChoices)
-    platform3BridgeImage.isVisible = false
+    if (score == 3) then
+        Level2()
+    else
+        timer.performWithDelay(200, ReplaceCharacter)
+        timer.performWithDelay(200, RandomChoices)
+        platform3BridgeImage.isVisible = false
+    end
 end
 
 local function platform1Fade()
@@ -320,17 +365,17 @@ local function platform3Bridge()
 end
 
 local function platform1Break()
-    timer.performWithDelay(1000, platform1Fade)
+    timer.performWithDelay(1200, platform1Fade)
     transition.moveTo( character, { x=200, y=450, time=1000 } )
 end
 
 local function platform2Break()
-    timer.performWithDelay(1000, platform2Fade)
+    timer.performWithDelay(1200, platform2Fade)
     transition.moveTo( character, { x=600, y=450, time=1000 } )
 end
 
 local function platform3Break()
-    timer.performWithDelay(1000, platform3Fade)
+    timer.performWithDelay(1200, platform3Fade)
     transition.moveTo( character, { x=400, y=570, time=1000 } )
 end
 
@@ -339,16 +384,23 @@ local function TouchPlatform3(touch)
         if (rightAnswerPosition == 3) then
             --correct
             platform3Bridge()
+            score = score + 1
         elseif (rightAnswerPosition == 2) then
             platform3Break()
             rightAnswerDisplay.isVisible = false
             wrongAnswerDisplay1.isVisible = false
             wrongAnswerDisplay2.isVisible = false
+            score = 0
+            timer.performWithDelay (1200, HideCharacter)
+            timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 1) then
             platform3Break()
             rightAnswerDisplay.isVisible = false
             wrongAnswerDisplay1.isVisible = false
             wrongAnswerDisplay2.isVisible = false
+            score = 0
+            timer.performWithDelay (1200, HideCharacter)
+            timer.performWithDelay (1500, LoseScreen)
         end
     end
 end
@@ -359,16 +411,23 @@ local function TouchPlatform2(touch)
         if (rightAnswerPosition == 2) then
             --correct
             platform2Bridge()
+            score = score + 1
         elseif (rightAnswerPosition == 1) then
             platform2Break()
             rightAnswerDisplay.isVisible = false
             wrongAnswerDisplay1.isVisible = false
             wrongAnswerDisplay2.isVisible = false
+            score = 0
+            timer.performWithDelay (1200, HideCharacter)
+            timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 3) then
             platform2Break()
             rightAnswerDisplay.isVisible = false
             wrongAnswerDisplay1.isVisible = false
             wrongAnswerDisplay2.isVisible = false
+            score = 0
+            timer.performWithDelay (1200, HideCharacter)
+            timer.performWithDelay (1500, LoseScreen)
         end
     end
 end
@@ -379,16 +438,23 @@ local function TouchPlatform1(touch)
         if (rightAnswerPosition == 1) then
             --correct
             platform1Bridge()
+            score = score + 1
         elseif (rightAnswerPosition == 2) then
             platform1Break()
             rightAnswerDisplay.isVisible = false
             wrongAnswerDisplay1.isVisible = false
             wrongAnswerDisplay2.isVisible = false
+            score = 0
+            timer.performWithDelay (1200, HideCharacter)
+            timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 3) then
             platform1Break()
             rightAnswerDisplay.isVisible = false
             wrongAnswerDisplay1.isVisible = false
             wrongAnswerDisplay2.isVisible = false
+            score = 0
+            timer.performWithDelay (1200, HideCharacter)
+            timer.performWithDelay (1500, LoseScreen)
         end
     end
 end
@@ -403,6 +469,12 @@ function scene:create( event )
 
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
+
+    -- Path for the file to read
+    path = system.pathForFile( "savestate.txt" )
+ 
+    file = nil
+
 
     -- Insert the background image and set it to the center of the screen
     bkg_image = display.newImage("Images/Level1.png")
@@ -479,7 +551,7 @@ function scene:create( event )
     basePlatform.x = 400
     basePlatform.y = 920
 
-    character = display.newImageRect("Images/Guard.png", 100, 130)
+    character = display.newImageRect("Images/Guard.png", 150, 150)
 
     timer.performWithDelay(100, RandomChoices)
 
@@ -488,6 +560,7 @@ function scene:create( event )
     platform3:addEventListener("touch", TouchPlatform3)
 
 ----------------------------------------------------------------------------------------
+    -- Associating display objects with this scene 
     sceneGroup:insert( platform1BridgeImage )
     sceneGroup:insert( platform2BridgeImage )
     sceneGroup:insert( platform3BridgeImage )
