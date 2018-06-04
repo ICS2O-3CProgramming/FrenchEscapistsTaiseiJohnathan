@@ -112,7 +112,7 @@ local function LevelSelect()
     composer.gotoScene( "level_select", {effect = "crossFade", time = 1000})
 end
 
-local function Level2()
+local function UnlockLevel2()
         -- Open the file handle
     file, errorString = io.open( path, "w" )
  
@@ -139,6 +139,7 @@ end
 local function ReplaceCharacter()
     character.x = 400
     character.y = 750
+    character.isVisible = true
 end
 
 local function DisplayWrongAnswer2()
@@ -167,26 +168,27 @@ local function DisplayWrongAnswer1()
         wrongAnswerDisplay1.x = 200
         wrongAnswerDisplay1.y = 530
     end
-    DisplayWrongAnswer2()
 end
 
 local function DisplayRightAnswer()
     rightAnswerDisplay.text = "" .. rightAnswer
     rightAnswerPosition = math.random(1, 3)
+
     if (rightAnswerPosition == 1) then
         rightAnswerDisplay.x = 200
         rightAnswerDisplay.y = 530
+
     elseif (rightAnswerPosition == 2) then
         rightAnswerDisplay.x = 600
         rightAnswerDisplay.y = 530
+
     elseif (rightAnswerPosition == 3) then
         rightAnswerDisplay.x = 400
         rightAnswerDisplay.y = 620
     end
-    DisplayWrongAnswer1()
 end
 
-local function DisplayQuestion()
+local function DisplayNextQuestion()
     displayQuestion.text = "" .. question
     
     if (choice1 == 3) then
@@ -202,7 +204,6 @@ local function DisplayQuestion()
     elseif (choice1 == 5) then
         displayQuestion.size = 70
     end
-    DisplayRightAnswer()
    -- ReplaceCharacter()
 end
 
@@ -220,7 +221,6 @@ local function SetQuestion()
     elseif (choice1 == 6) then
         question = "Ils/Elles"
     end
-    DisplayQuestion()
 end
 
 local function SetChoices()
@@ -265,52 +265,47 @@ local function SetChoices()
     elseif (choice3 == 6) then
         wrongAnswer2 = "ont"
     end
-    SetQuestion()
 end
 
 local function RandomChoices()
     choice1 = math.random (1, 6)
     choice2 = math.random (1, 6)
     choice3 = math.random (1, 6)
+
     while (choice2 == choice1) do
         choice2 = math.random (1, 6)
     end
     while (choice3 == choice2) or (choice3 == choice1) do
         choice3 = math.random (1, 6)
     end
-    SetChoices()
-    ReplaceCharacter()
 end
 
 local function platform1NextQuestion()
     if (score == 3) then
-        Level2()
+        UnlockLevel2()
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
-        timer.performWithDelay(1200, ReplaceCharacter)
-        timer.performWithDelay(1200, RandomChoices)
         platform1BridgeImage.isVisible = false
+        timer.performWithDelay(1200, RestartLevel1)
     end
 end
 
 local function platform2NextQuestion()
     if (score == 3) then
-        Level2()
+        UnlockLevel2()
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
-        timer.performWithDelay(1200, ReplaceCharacter)
-        timer.performWithDelay(1200, RandomChoices)
         platform2BridgeImage.isVisible = false
+        timer.performWithDelay(1200, RestartLevel1)
     end
 end
 
 local function platform3NextQuestion()
     if (score == 3) then
-        Level2()
+        UnlockLevel2()
     else
-        timer.performWithDelay(200, ReplaceCharacter)
-        timer.performWithDelay(200, RandomChoices)
         platform3BridgeImage.isVisible = false
+        RestartLevel1()
     end
 end
 
@@ -365,6 +360,18 @@ local function platform3Bridge()
     transition.moveTo( character, { x=400, y=570, time=1000 } )
 end
 
+local function HideAnswers()
+    rightAnswerDisplay.isVisible = false
+    wrongAnswerDisplay1.isVisible = false
+    wrongAnswerDisplay2.isVisible = false
+end
+
+local function ShowAnswers()
+    rightAnswerDisplay.isVisible = true
+    wrongAnswerDisplay1.isVisible = true
+    wrongAnswerDisplay2.isVisible = true
+end
+
 local function platform1Break()
     timer.performWithDelay(1200, platform1Fade)
     transition.moveTo( character, { x=200, y=450, time=1000 } )
@@ -375,7 +382,7 @@ local function platform2Break()
     transition.moveTo( character, { x=600, y=450, time=1000 } )
 end
 
-local function platform3Break()
+local function platform3Break()    
     timer.performWithDelay(1200, platform3Fade)
     transition.moveTo( character, { x=400, y=570, time=1000 } )
 end
@@ -387,18 +394,14 @@ local function TouchPlatform3(touch)
             platform3Bridge()
             score = score + 1
         elseif (rightAnswerPosition == 2) then
-            platform3Break()
-            rightAnswerDisplay.isVisible = false
-            wrongAnswerDisplay1.isVisible = false
-            wrongAnswerDisplay2.isVisible = false
+            HideAnswers()
+            platform3Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 1) then
-            platform3Break()
-            rightAnswerDisplay.isVisible = false
-            wrongAnswerDisplay1.isVisible = false
-            wrongAnswerDisplay2.isVisible = false
+            HideAnswers()
+            platform3Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
@@ -414,18 +417,14 @@ local function TouchPlatform2(touch)
             platform2Bridge()
             score = score + 1
         elseif (rightAnswerPosition == 1) then
-            platform2Break()
-            rightAnswerDisplay.isVisible = false
-            wrongAnswerDisplay1.isVisible = false
-            wrongAnswerDisplay2.isVisible = false
+            HideAnswers()
+            platform2Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 3) then
-            platform2Break()
-            rightAnswerDisplay.isVisible = false
-            wrongAnswerDisplay1.isVisible = false
-            wrongAnswerDisplay2.isVisible = false
+            HideAnswers()
+            platform2Break()           
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
@@ -441,18 +440,14 @@ local function TouchPlatform1(touch)
             platform1Bridge()
             score = score + 1
         elseif (rightAnswerPosition == 2) then
-            platform1Break()
-            rightAnswerDisplay.isVisible = false
-            wrongAnswerDisplay1.isVisible = false
-            wrongAnswerDisplay2.isVisible = false
+            HideAnswers()
+            platform1Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 3) then
-            platform1Break()
-            rightAnswerDisplay.isVisible = false
-            wrongAnswerDisplay1.isVisible = false
-            wrongAnswerDisplay2.isVisible = false
+            HideAnswers()
+            platform1Break()          
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
@@ -460,11 +455,59 @@ local function TouchPlatform1(touch)
     end
 end
 
-local function RestartLevel1()
-    RandomChoices()
-    
+local function HideBridge()
+    platform1BridgeImage.isVisible = false
+    platform2BridgeImage.isVisible = false
+    platform3BridgeImage.isVisible = false
 end
 
+local function RemoveListeners()
+    platform1:removeEventListener("touch", TouchPlatform1)
+    platform2:removeEventListener("touch", TouchPlatform2)
+    platform3:removeEventListener("touch", TouchPlatform3)
+end
+
+local function AddListeners()
+    platform1:addEventListener("touch", TouchPlatform1)
+    platform2:addEventListener("touch", TouchPlatform2)
+    platform3:addEventListener("touch", TouchPlatform3)
+end
+
+local function ShowPlatforms()
+    platform1Broken.alpha = 1
+    platform1Broken.xScale = 1
+    platform1Broken.yScale = 1
+    platform1.alpha = 1
+    platform2Broken.alpha = 1
+    platform2Broken.xScale = 1
+    platform2Broken.yScale = 1
+    platform2.alpha = 1
+    platform3Broken.alpha = 1
+    platform3Broken.xScale = 1
+    platform3Broken.yScale = 1
+    platform3.alpha = 1
+
+end
+
+-----------------------------------------------------------------------------------------
+-- GLOBAL FUNCTIONS
+-----------------------------------------------------------------------------------------
+
+function RestartLevel1()
+    print ("***score = " .. score)
+    ReplaceCharacter()
+    RandomChoices()
+    SetChoices()
+    SetQuestion()
+    DisplayNextQuestion()
+    DisplayRightAnswer()
+    DisplayWrongAnswer1()
+    DisplayWrongAnswer2()
+    ShowPlatforms()
+    HideBridge()
+    ShowAnswers()
+    
+end
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
@@ -562,9 +605,7 @@ function scene:create( event )
     character = display.newImageRect("Images/Guard.png", 150, 150)
     
 
-    platform1:addEventListener("touch", TouchPlatform1)
-    platform2:addEventListener("touch", TouchPlatform2)
-    platform3:addEventListener("touch", TouchPlatform3)
+    
 
 ----------------------------------------------------------------------------------------
     -- Associating display objects with this scene 
@@ -584,7 +625,6 @@ function scene:create( event )
     sceneGroup:insert( wrongAnswerDisplay1 )
     sceneGroup:insert( wrongAnswerDisplay2 )
     sceneGroup:insert( character )
-    --sceneGroup:insert(  )
 
 
 end -- function scene:create( event )   
@@ -611,8 +651,10 @@ function scene:show( event )
     -- Called when the scene is now on screen.
     -- Insert code here to make the scene come alive.
     -- Example: start timers, begin animation, play audio, etc.
-    elseif ( phase == "did" ) then       
-        timer.performWithDelay(100, RandomChoices)
+    elseif ( phase == "did" ) then      
+        score = 0 
+        RestartLevel1()
+        AddListeners()
 
     end
 
@@ -648,6 +690,7 @@ function scene:hide( event )
         --RemoveArrowEventListeners()
         --RemoveRuntimeListeners()
         --display.remove(character)
+        RemoveListeners()
 
     end
 
