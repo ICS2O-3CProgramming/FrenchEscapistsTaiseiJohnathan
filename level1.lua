@@ -330,19 +330,19 @@ end
 local function platform1BridgeExtend()
     platform1BridgeImage.isVisible = true
     transition.moveTo( character, { x=200, y=320, time=1000 } )
-    timer.performWithDelay(1000, platform1NextQuestion)
+    timer.performWithDelay(1200, platform1NextQuestion)
 end
 
 local function platform2BridgeExtend()
     platform2BridgeImage.isVisible = true
     transition.moveTo( character, { x=600, y=320, time=1000 } )
-    timer.performWithDelay(1000, platform2NextQuestion)
+    timer.performWithDelay(1200, platform2NextQuestion)
 end
 
 local function platform3BridgeExtend()
     platform3BridgeImage.isVisible = true
     transition.moveTo( character, { x=400, y=320, time=1000 } )
-    timer.performWithDelay(1000, platform3NextQuestion)
+    timer.performWithDelay(1200, platform3NextQuestion)
 end
 
 local function platform1Bridge()
