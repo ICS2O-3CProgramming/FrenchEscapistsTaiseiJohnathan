@@ -75,8 +75,9 @@ function SetVolume( )
         -- Write data to file
         file:write( saveData )
         -- Close the file handle
-        io.close( file )
+        
     end
+io.close( file )
 file = nil
 print(userVolume)
 end
@@ -124,9 +125,9 @@ function scene:create( event )
         -- Sets SetVolume to contents of read file
         userVolume = contents
         -- Close the file handle
-        io.close( file )
+        
     end
- 
+    io.close( file )
     file = nil
 
 
