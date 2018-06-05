@@ -64,27 +64,6 @@ local function BackToMainMenu( )
     composer.gotoScene( "main_menu", {effect = "crossFade", time = 700})
 end
 
-local function ReadState()
-    -- Open the file handle
-    file, errorString = io.open( path, "r" )
- 
-    if not file then
-        -- Error occurred; output the cause
-        print( "File error: " .. errorString )
-    else
-        -- Read data from file
-        local contents = file:read( "*n" )
-        -- Output the file contents
-        print( "Contents of " .. path .. "\n" .. contents )
-        -- Sets SaveState to contents of read file
-        SaveState = contents
-        -- Close the file handle
-        io.close( file )
-    end
- 
-    file = nil
-end
-
 local function ResetProgress()
 
     -- Open the file handle
@@ -97,9 +76,11 @@ local function ResetProgress()
     else
         -- Read data from file
         local contents = file2:write( "1" )
-        -- Close the file handle
-        io.close( file2 )
+        -- Close the file handle        
     end
+    io.close( file2 )
+
+    file2 = nil
     
     BackToMainMenu( )
 end
@@ -177,11 +158,13 @@ function scene:create( event )
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
 
-    -- Path for the file to read
-	path = system.pathForFile( "savestate.txt" )
+    --print ("***system.DocumentsDirectory = " .. system.DocumentsDirectory)
 
     -- Path for the file to read
-    path2 = system.pathForFile( "savestate.txt" )
+	path = system.pathForFile( "savestate.txt", system.DocumentsDirectory )
+
+    -- Path for the file to read
+    path2 = system.pathForFile( "savestate.txt", system.DocumentsDirectory )
 
 
     -- Insert the background image and set it to the center of the screen
@@ -348,7 +331,29 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).   
     if ( phase == "will" ) then
-        ReadState()
+        -- Open the file handle
+        file, errorString = io.open( path, "r" )
+
+        if file then
+            -- Read data from file
+            SaveState = file:read( "*n" )
+            -- Output the file contents
+            print( "Contents of " .. path .. "\n" .. SaveState )
+            -- Sets SaveState to contents of read file   
+            io.close( file )
+    
+        else
+
+            errorString = print ("File error: " .. errorString)
+
+            file = io.open( path, "r" )
+
+            file:write( "1" )
+
+            io.close( file )
+
+            file = nil
+        end
         LevelUnlock()
        
     -----------------------------------------------------------------------------------------
