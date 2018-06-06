@@ -113,6 +113,14 @@ local function LevelSelect()
 end
 
 local function UnlockLevel2()
+    if (SaveState == 1) then
+        SaveState = SaveState + 1
+    end
+    LevelSelect()
+end
+
+--[[
+local function UnlockLevel2()
         -- Open the file handle
     file, errorString = io.open( path, "w" )
  
@@ -127,6 +135,7 @@ local function UnlockLevel2()
     end
     LevelSelect()
 end
+]]--
 
 local function LoseScreen()
     composer.gotoScene( "lose", {effect = "crossFade", time = 500})
@@ -282,7 +291,8 @@ end
 
 local function platform1NextQuestion()
     if (score == 3) then
-        UnlockLevel2()
+        transition.moveTo ( character, { x=400, y=320, time=1000})
+        timer.performWithDelay( 1200, UnlockLevel2)
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform1BridgeImage.isVisible = false
@@ -292,7 +302,8 @@ end
 
 local function platform2NextQuestion()
     if (score == 3) then
-        UnlockLevel2()
+        transition.moveTo ( character, { x=400, y=320, time=1000})
+        timer.performWithDelay( 1200, UnlockLevel2)
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform2BridgeImage.isVisible = false
@@ -520,7 +531,8 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -- Path for the file to read
-    path = system.pathForFile( "savestate.txt" )
+    path = system.pathForFile( "savestate.txt", system.DocumentsDirectory )
+
  
     file = nil
 

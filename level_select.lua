@@ -51,7 +51,6 @@ local path2
 local file, errorString
 local path
 local file2, errorString2
-local SaveState
 
 
 -----------------------------------------------------------------------------------------
@@ -337,6 +336,7 @@ function scene:show( event )
         if file then
             -- Read data from file
             SaveState = file:read( "*n" )
+
             -- Output the file contents
             print( "Contents of " .. path .. "\n" .. SaveState )
             -- Sets SaveState to contents of read file   

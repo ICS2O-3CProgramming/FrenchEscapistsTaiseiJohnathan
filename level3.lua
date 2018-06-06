@@ -97,6 +97,14 @@ local function LevelSelect()
 end
 
 local function UnlockLevel4()
+    if (SaveState == 3) then
+        SaveState = SaveState + 1
+    end
+    LevelSelect()
+end
+
+--[[
+local function UnlockLevel4()
         -- Open the file handle
     file, errorString = io.open( path, "w" )
  
@@ -111,6 +119,7 @@ local function UnlockLevel4()
     end
     LevelSelect()
 end
+]]--
 
 local function LoseScreen()
     composer.gotoScene( "lose", {effect = "crossFade", time = 500})
@@ -209,45 +218,45 @@ end
 
 local function SetChoices()
     if (choice1 == 1) then
-        rightAnswer = "ai"
+        rightAnswer = "vais"
     elseif (choice1 == 2) then
-        rightAnswer = "as"
+        rightAnswer = "vas"
     elseif (choice1 == 3) then
-        rightAnswer = "a"
+        rightAnswer = "va"
     elseif (choice1 == 4) then
-        rightAnswer = "avons"
+        rightAnswer = "allons"
     elseif (choice1 == 5) then
-        rightAnswer = "avez"
+        rightAnswer = "allez"
     elseif (choice1 == 6) then
-        rightAnswer = "ont"
+        rightAnswer = "vont"
     end
 
     if (choice2 == 1) then
-        wrongAnswer1 = "ai"
+        wrongAnswer1 = "vais"
     elseif (choice2 == 2) then
-        wrongAnswer1 = "as"
+        wrongAnswer1 = "vas"
     elseif (choice2 == 3) then
-        wrongAnswer1 = "a"
+        wrongAnswer1 = "va"
     elseif (choice2 == 4) then
-        wrongAnswer1 = "avons"
+        wrongAnswer1 = "allons"
     elseif (choice2 == 5) then
-        wrongAnswer1 = "avez"
+        wrongAnswer1 = "allez"
     elseif (choice2 == 6) then
-        wrongAnswer1 = "ont"
+        wrongAnswer1 = "vont"
     end
 
     if (choice3 == 1) then
-        wrongAnswer2 = "ai"
+        wrongAnswer2 = "vais"
     elseif (choice3 == 2) then
-        wrongAnswer2 = "as"
+        wrongAnswer2 = "vas"
     elseif (choice3 == 3) then
-        wrongAnswer2 = "a"
+        wrongAnswer2 = "va"
     elseif (choice3 == 4) then
-        wrongAnswer2 = "avons"
+        wrongAnswer2 = "allons"
     elseif (choice3 == 5) then
-        wrongAnswer2 = "avez"
+        wrongAnswer2 = "allez"
     elseif (choice3 == 6) then
-        wrongAnswer2 = "ont"
+        wrongAnswer2 = "vont"
     end
 end
 
