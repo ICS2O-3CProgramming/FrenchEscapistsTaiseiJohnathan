@@ -38,6 +38,7 @@ local volDownButton
 local MINVOL = 0
 local MAXVOL = 10
 local userVolume
+local displayVolume
 
 local path
 local file, errorString
@@ -63,7 +64,7 @@ function SetVolume( )
     local saveData = userVolume
 
     -- Path for the file to write
-    path = system.pathForFile( "volume.txt" )
+    path = system.pathForFile( "volume.txt", system.DocumentsDirectory )
      
     -- Open the file handle
     file, errorString = io.open( path, "w" )
@@ -80,6 +81,9 @@ function SetVolume( )
 io.close( file )
 file = nil
 print(userVolume)
+
+displayVolume.text = 
+
 end
 
 function VolDown( )
@@ -109,7 +113,7 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -- Path for the file to read
-    path = system.pathForFile( "volume.txt" )
+    path = system.pathForFile( "volume.txt", system.DocumentsDirectory )
  
     -- Open the file handle
     file, errorString = io.open( path, "r" )
@@ -117,6 +121,12 @@ function scene:create( event )
     if not file then
         -- Error occurred; output the cause
         print( "File error: " .. errorString )
+
+        file = io.open( path, "w" )
+
+        file:write( "6" )
+
+        io.close( file )
     else
         -- Read data from file
         local contents = file:read( "*n" )
@@ -125,9 +135,9 @@ function scene:create( event )
         -- Sets SetVolume to contents of read file
         userVolume = contents
         -- Close the file handle
-        
+        io.close( file )
     end
-    io.close( file )
+    
     file = nil
 
 
@@ -144,6 +154,8 @@ function scene:create( event )
 
     -- Send the background image to the back layer so all other objects can be on top
     bkg:toBack()
+
+    displayVolume = display.newText("", display.contentCenterX, display.contentCenterY, "Images/vinet.otf", 50)
 
 ----------------------------------------------------------------------------------------
 
