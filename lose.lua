@@ -39,7 +39,7 @@ local backButton
 -----------------------------------------------------------------------------------------
 
 local function ReturnToMainMenu( )
-    composer.gotoScene( "level1", {effect = "crossFade", time = 1000}) 
+    composer.gotoScene( "level_select", {effect = "crossFade", time = 1000}) 
 end
 
 -----------------------------------------------------------------------------------------

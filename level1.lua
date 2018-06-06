@@ -606,7 +606,7 @@ function scene:create( event )
 
     bkgMusic = audio.loadStream("Audio/Dungeon Quest.mp3")
     fallSound = audio.loadSound("Audio/Falling.mp3")
-    platformBreakSound = audio.loadSound("Audio")
+    platformBreakSound = audio.loadSound("Audio/Stone Break.mp3")
 
     
 
