@@ -113,6 +113,28 @@ local function LevelSelect()
 end
 
 local function UnlockLevel2()
+    print ("***savestate = " .. SaveState)
+    if (SaveState == 1) then
+        SaveState = SaveState + 1
+                -- Open the file handle
+        file, errorString = io.open( path, "w" )
+ 
+        if not file then
+            -- Error occurred; output the cause
+            print( "File error: " .. errorString )
+        else
+            -- Read data from file
+            local contents = file:write( 2 )
+            -- Close the file handle
+            io.close( file )
+        end
+    end
+    LevelSelect()
+end
+
+
+--[[
+local function UnlockLevel2()
         -- Open the file handle
     file, errorString = io.open( path, "w" )
  
@@ -127,6 +149,7 @@ local function UnlockLevel2()
     end
     LevelSelect()
 end
+]]--
 
 local function LoseScreen()
     composer.gotoScene( "lose", {effect = "crossFade", time = 500})

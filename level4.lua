@@ -99,6 +99,18 @@ end
 local function UnlockLevel5()
     if (SaveState == 4) then
         SaveState = SaveState + 1
+                -- Open the file handle
+        file, errorString = io.open( path, "w" )
+ 
+        if not file then
+            -- Error occurred; output the cause
+            print( "File error: " .. errorString )
+        else
+            -- Read data from file
+            local contents = file:write( 5 )
+            -- Close the file handle
+            io.close( file )
+        end
     end
     LevelSelect()
 end
@@ -279,7 +291,7 @@ local function platform1NextQuestion()
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform1BridgeImage.isVisible = false
-        timer.performWithDelay(1200, RestartLevel1)
+        timer.performWithDelay(1200, RestartLevel4)
     end
 end
 
@@ -289,7 +301,7 @@ local function platform2NextQuestion()
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform2BridgeImage.isVisible = false
-        timer.performWithDelay(1200, RestartLevel1)
+        timer.performWithDelay(1200, RestartLevel4)
     end
 end
 
@@ -298,7 +310,7 @@ local function platform3NextQuestion()
         UnlockLevel5()
     else
         platform3BridgeImage.isVisible = false
-        RestartLevel1()
+        RestartLevel4()
     end
 end
 
@@ -486,7 +498,7 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
-function RestartLevel1()
+function RestartLevel4()
     print ("***score = " .. score)
     ReplaceCharacter()
     RandomChoices()
@@ -647,7 +659,7 @@ function scene:show( event )
     -- Example: start timers, begin animation, play audio, etc.
     elseif ( phase == "did" ) then      
         score = 0 
-        RestartLevel1()
+        RestartLevel4()
         AddListeners()
 
     end

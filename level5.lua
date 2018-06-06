@@ -279,7 +279,7 @@ local function platform1NextQuestion()
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform1BridgeImage.isVisible = false
-        timer.performWithDelay(1200, RestartLevel1)
+        timer.performWithDelay(1200, RestartLevel5)
     end
 end
 
@@ -289,7 +289,7 @@ local function platform2NextQuestion()
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform2BridgeImage.isVisible = false
-        timer.performWithDelay(1200, RestartLevel1)
+        timer.performWithDelay(1200, RestartLevel5)
     end
 end
 
@@ -298,7 +298,7 @@ local function platform3NextQuestion()
         UnlockLevel5()
     else
         platform3BridgeImage.isVisible = false
-        RestartLevel1()
+        RestartLevel5()
     end
 end
 
@@ -486,7 +486,7 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
-function RestartLevel1()
+function RestartLevel5()
     print ("***score = " .. score)
     ReplaceCharacter()
     RandomChoices()
@@ -647,7 +647,7 @@ function scene:show( event )
     -- Example: start timers, begin animation, play audio, etc.
     elseif ( phase == "did" ) then      
         score = 0 
-        RestartLevel1()
+        RestartLevel5()
         AddListeners()
 
     end
