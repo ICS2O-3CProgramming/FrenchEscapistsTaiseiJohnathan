@@ -59,6 +59,10 @@ end
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
 
+function UpdateVolume( )
+    displayVolume.text = userVolume
+end
+
 function SetVolume( )
     -- Data (string) to write
     local saveData = userVolume
@@ -78,11 +82,11 @@ function SetVolume( )
         -- Close the file handle
         
     end
-io.close( file )
-file = nil
-print(userVolume)
-
-displayVolume.text = 
+    io.close( file )
+    file = nil
+    print(userVolume)
+ 
+UpdateVolume() 
 
 end
 
@@ -122,10 +126,11 @@ function scene:create( event )
         -- Error occurred; output the cause
         print( "File error: " .. errorString )
 
-        file = io.open( path, "w" )
+        file = io.open( path, "w+" )
 
         file:write( "6" )
-
+        local contents = file:read( "*n" )
+        userVolume = contents
         io.close( file )
     else
         -- Read data from file
@@ -155,7 +160,7 @@ function scene:create( event )
     -- Send the background image to the back layer so all other objects can be on top
     bkg:toBack()
 
-    displayVolume = display.newText("", display.contentCenterX, display.contentCenterY, "Images/vinet.otf", 50)
+    displayVolume = display.newText(userVolume, display.contentCenterX, display.contentCenterY, "Images/vinet.otf", 150)
 
 ----------------------------------------------------------------------------------------
 
@@ -204,6 +209,7 @@ volUpButton = widget.newButton(
 sceneGroup:insert( backButton )
 sceneGroup:insert( volDownButton )
 sceneGroup:insert( volUpButton )
+sceneGroup:insert( displayVolume )
 
 end -- function scene:create( event )   
 
