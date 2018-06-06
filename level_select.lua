@@ -346,7 +346,7 @@ function scene:show( event )
 
             errorString = print ("File error: " .. errorString)
 
-            file = io.open( path, "r" )
+            file = io.open( path, "w" )
 
             file:write( "1" )
 

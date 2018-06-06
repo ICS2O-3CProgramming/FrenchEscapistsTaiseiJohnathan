@@ -603,7 +603,10 @@ function scene:create( event )
     basePlatform.y = 920
 
     character = display.newImageRect("Images/Guard.png", 150, 150)
-    
+
+    bkgMusic = audio.loadStream("Audio/Dungeon Quest.mp3")
+    fallSound = audio.loadSound("Audio/Falling.mp3")
+    platformBreakSound = audio.loadSound("Audio")
 
     
 
