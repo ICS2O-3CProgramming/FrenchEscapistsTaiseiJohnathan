@@ -520,7 +520,7 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -- Path for the file to read
-    path = system.pathForFile( "savestate.txt" )
+    path = system.pathForFile( "savestate.txt", system.DocumentsDirectory )
  
     file = nil
 
