@@ -694,7 +694,7 @@ function scene:show( event )
         score = 0 
         RestartLevel1()
         AddListeners()
-
+        audio.play(bkgMusic, {channel=1, loops=-1})
     end
 
 end -- function scene:show( event )
