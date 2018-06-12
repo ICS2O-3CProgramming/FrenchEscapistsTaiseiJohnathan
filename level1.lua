@@ -416,18 +416,14 @@ local function TouchPlatform3(touch)
             --correct
             platform3Bridge()
             score = score + 1
-            HideAnswers()
-            RemoveListenersLevel1()
         elseif (rightAnswerPosition == 2) then
             HideAnswers()
-            RemoveListenersLevel1()
             platform3Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 1) then
             HideAnswers()
-            RemoveListenersLevel1()
             platform3Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
@@ -443,18 +439,14 @@ local function TouchPlatform2(touch)
             --correct
             platform2Bridge()
             score = score + 1
-            HideAnswers()
-            RemoveListenersLevel1()
         elseif (rightAnswerPosition == 1) then
             HideAnswers()
-            RemoveListenersLevel1()
             platform2Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 3) then
             HideAnswers()
-            RemoveListenersLevel1()
             platform2Break()           
             score = 0
             timer.performWithDelay (1200, HideCharacter)
@@ -470,18 +462,14 @@ local function TouchPlatform1(touch)
             --correct
             platform1Bridge()
             score = score + 1
-            HideAnswers()
-            RemoveListenersLevel1()
         elseif (rightAnswerPosition == 2) then
             HideAnswers()
-            RemoveListenersLevel1()
             platform1Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 3) then
             HideAnswers()
-            RemoveListenersLevel1()
             platform1Break()          
             score = 0
             timer.performWithDelay (1200, HideCharacter)
@@ -494,6 +482,12 @@ local function HideBridge()
     platform1BridgeImage.isVisible = false
     platform2BridgeImage.isVisible = false
     platform3BridgeImage.isVisible = false
+end
+
+local function RemoveListeners()
+    platform1:removeEventListener("touch", TouchPlatform1)
+    platform2:removeEventListener("touch", TouchPlatform2)
+    platform3:removeEventListener("touch", TouchPlatform3)
 end
 
 local function AddListeners()
@@ -536,12 +530,6 @@ function RestartLevel1()
     HideBridge()
     ShowAnswers()
     
-end
-
-function RemoveListenersLevel1()
-    platform1:removeEventListener("touch", TouchPlatform1)
-    platform2:removeEventListener("touch", TouchPlatform2)
-    platform3:removeEventListener("touch", TouchPlatform3)
 end
 
 -----------------------------------------------------------------------------------------
@@ -728,7 +716,7 @@ function scene:hide( event )
         --RemoveArrowEventListeners()
         --RemoveRuntimeListeners()
         --display.remove(character)
-        RemoveListenersLevel1()
+        RemoveListeners()
 
     end
 
