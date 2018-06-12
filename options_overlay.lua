@@ -37,7 +37,6 @@ local volDownButton
 
 local MINVOL = 0
 local MAXVOL = 10
-local userVolume
 local displayVolume
 
 local path
