@@ -42,7 +42,7 @@ local backButton
 
 -- Creating Transition to MainMenu Screen
 local function BackToMainMenu( )
-    audio.play(drum)
+    audio.play(drum,{channel=1})
     composer.gotoScene( "main_menu", {effect = "crossFade", time = 1000})
 end  
 

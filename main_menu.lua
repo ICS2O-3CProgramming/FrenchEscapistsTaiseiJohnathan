@@ -266,8 +266,8 @@ function scene:create( event )
 
 
     bkm = audio.loadStream("Audio/Phantom's Castle.mp3")
-    audio.setVolume(0.6, {channel=1})
     
+    audio.play(bkm, {Channel=1, loops=-1})
 
     transitionSound = audio.loadSound("Audio/Sword Sound.mp3")
 
@@ -303,14 +303,14 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).   
     if ( phase == "will" ) then
-       
+       audio.setVolume(0.6, {channel=1})
     -----------------------------------------------------------------------------------------
 
     -- Called when the scene is now on screen.
     -- Insert code here to make the scene come alive.
     -- Example: start timers, begin animation, play audio, etc.
     elseif ( phase == "did" ) then       
-        audio.play(bkm, {Channel=1, loops=-1})
+        
 
     end
 
