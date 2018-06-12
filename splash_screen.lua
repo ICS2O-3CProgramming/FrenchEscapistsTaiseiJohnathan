@@ -55,15 +55,15 @@ local function RiseText(  )
 end
 
 local function AudioQueue1()
-    audio.play(inpact)
+    audio.play(inpact, {channel = 1})
 end
 
 local function AudioQueue2()
-    audio.play(throw)
+    audio.play(throw, {channel = 1})
 end
 
 local function AudioQueue3()
-    audio.play(clash)
+    audio.play(clash, {channel = 1})
 end
 
 local function SwordMove()
@@ -156,6 +156,7 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).
     if ( phase == "will" ) then
+        audio.setVolume( userVolume/10, { channel=1 } )  
        
     -----------------------------------------------------------------------------------------
 

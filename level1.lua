@@ -88,16 +88,10 @@ local file, errorString
 
 local bkgMusic
 local playbkgMusic
-local fallSound
-local playfallSound
 local platformBreakSound
 local playplatformBreakSound
-local climbSound
-local playclimbSound
 local bridgeDrawSound
 local playbridgeDrawSound
-local characterLandSound
-local playcharacterLandSound
 local characterJumpSound
 local playcharacterJumpSound
 
@@ -640,7 +634,6 @@ function scene:create( event )
     character = display.newImageRect("Images/Guard.png", 150, 150)
 
     bkgMusic = audio.loadStream("Audio/Dungeon Quest.mp3")
-    fallSound = audio.loadSound("Audio/Falling.mp3")
     platformBreakSound = audio.loadSound("Audio/Stone Break.mp3")
 
     
