@@ -131,6 +131,7 @@ function scene:hide( event )
     -----------------------------------------------------------------------------------------
 
     if ( phase == "will" ) then
+        audio.setVolume( userVolume/10, { channel=1 } )
         -- Called when the scene is on screen (but is about to go off screen).
         -- Insert code here to "pause" the scene.
         -- Example: stop timers, stop animation, stop audio, etc.
