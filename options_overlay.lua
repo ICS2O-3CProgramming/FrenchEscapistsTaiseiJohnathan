@@ -39,6 +39,7 @@ local MINVOL = 0
 local MAXVOL = 10
 local userVolume
 local displayVolume
+local volumeText
 
 local path
 local file, errorString
@@ -161,6 +162,7 @@ function scene:create( event )
     bkg:toBack()
 
     displayVolume = display.newText(userVolume, display.contentCenterX, display.contentCenterY, "Images/vinet.otf", 150)
+    volumeText = display.newText("Volume", display.contentCenterX, display.contentCenterY-175, "Images/vinet.otf", 100)
 
 ----------------------------------------------------------------------------------------
 
@@ -206,10 +208,15 @@ volUpButton = widget.newButton(
             onRelease = VolUp
         } ) 
 
+
+
+
+
 sceneGroup:insert( backButton )
 sceneGroup:insert( volDownButton )
 sceneGroup:insert( volUpButton )
 sceneGroup:insert( displayVolume )
+sceneGroup:insert( volumeText )
 
 end -- function scene:create( event )   
 
