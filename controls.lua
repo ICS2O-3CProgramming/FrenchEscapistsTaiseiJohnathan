@@ -42,7 +42,7 @@ local backButton
 
 -- Creating Transition to MainMenu Screen
 local function BackToMainMenu( )
-    audio.play(drum)
+    audio.play(drum, {channel = 1})
     composer.gotoScene( "main_menu", {effect = "crossFade", time = 1000})
 end  
 
@@ -115,7 +115,7 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).   
     if ( phase == "will" ) then
-       
+        audio.setVolume( userVolume/10, { channel=1 } )   
     -----------------------------------------------------------------------------------------
 
     -- Called when the scene is now on screen.
