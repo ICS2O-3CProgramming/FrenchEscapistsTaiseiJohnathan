@@ -90,8 +90,8 @@ local bkgMusic
 local playbkgMusic
 local platformBreakSound
 local playplatformBreakSound
-local bridgeDrawSound
-local playbridgeDrawSound
+local bridgeWalkSound
+local playbridgeWalkSound
 local characterJumpSound
 local playcharacterJumpSound
 
@@ -327,18 +327,21 @@ local function platform3NextQuestion()
 end
 
 local function platform1Fade()
+    audio.play(platformBreakSound, {channel=1})
     transition.scaleBy(platform1Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform1Broken, { time=800 })
     transition.fadeOut(platform1, { time=400 })
 end
 
 local function platform2Fade()
+    audio.play(platformBreakSound, {channel=1})
     transition.scaleBy(platform2Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform2Broken, { time=800 })
     transition.fadeOut(platform2, { time=400 })
 end
 
 local function platform3Fade()
+    audio.play(platformBreakSound, {channel=1}) 
     transition.scaleBy(platform3Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform3Broken, { time=800 })
     transition.fadeOut(platform3, { time=400 })
@@ -346,18 +349,21 @@ end
 
 local function platform1BridgeExtend()
     platform1BridgeImage.isVisible = true
+    audio.play(bridgeWalkSound, {channel=1})
     transition.moveTo( character, { x=200, y=320, time=1000 } )
     timer.performWithDelay(1200, platform1NextQuestion)
 end
 
 local function platform2BridgeExtend()
     platform2BridgeImage.isVisible = true
+    audio.play(bridgeWalkSound, {channel=1})
     transition.moveTo( character, { x=600, y=320, time=1000 } )
     timer.performWithDelay(1200, platform2NextQuestion)
 end
 
 local function platform3BridgeExtend()
     platform3BridgeImage.isVisible = true
+    audio.play(bridgeWalkSound, {channel=1})
     transition.moveTo( character, { x=400, y=320, time=1000 } )
     timer.performWithDelay(1200, platform3NextQuestion)
 end
@@ -406,6 +412,7 @@ end
 
 local function TouchPlatform3(touch)
     if (touch.phase == "ended") then
+    audio.play(characterJumpSound, {channel=1})
         if (rightAnswerPosition == 3) then
             --correct
             platform3Bridge()
@@ -433,6 +440,7 @@ end
 
 local function TouchPlatform2(touch)
     if (touch.phase == "ended") then
+    audio.play(characterJumpSound, {channel=1})
         if (rightAnswerPosition == 2) then
             --correct
             platform2Bridge()
@@ -460,6 +468,7 @@ end
 
 local function TouchPlatform1(touch)
     if (touch.phase == "ended") then
+    audio.play(characterJumpSound, {channel=1})
         if (rightAnswerPosition == 1) then
             --correct
             platform1Bridge()
@@ -635,8 +644,8 @@ function scene:create( event )
 
     bkgMusic = audio.loadStream("Audio/Dungeon Quest.mp3")
     platformBreakSound = audio.loadSound("Audio/Stone Break.mp3")
-
-    
+    bridgeWalkSound = audio.loadSound("Bridge Walk.mp3")
+    characterJumpSound = audio.loadSound("Jump.mp3")
 
 ----------------------------------------------------------------------------------------
     -- Associating display objects with this scene 
