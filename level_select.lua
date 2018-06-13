@@ -577,8 +577,8 @@ function scene:create( event )
     level6Button = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = 671,
-            y = 319,
+            x = display.contentWidth/8,
+            y = 462,
             width = 100,
             height = 100,
             -- Insert the images here
@@ -595,8 +595,8 @@ function scene:create( event )
     level7Button = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = 671,
-            y = 319,
+            x = 240,
+            y = 462,
             width = 100,
             height = 100,
             -- Insert the images here
@@ -613,8 +613,8 @@ function scene:create( event )
     level8Button = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = 671,
-            y = 319,
+            x = 384,
+            y = 462,
             width = 100,
             height = 100,
             -- Insert the images here
@@ -631,8 +631,8 @@ function scene:create( event )
     level9Button = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = 671,
-            y = 319,
+            x = 527,
+            y = 462,
             width = 100,
             height = 100,
             -- Insert the images here
@@ -650,7 +650,7 @@ function scene:create( event )
         {
             -- Set its position on the screen relative to the screen size
             x = 671,
-            y = 319,
+            y = 462,
             width = 100,
             height = 100,
             -- Insert the images here
@@ -667,8 +667,8 @@ function scene:create( event )
     level11Button = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = 671,
-            y = 319,
+            x = display.contentWidth/8,
+            y = 605,
             width = 100,
             height = 100,
             -- Insert the images here
@@ -685,8 +685,8 @@ function scene:create( event )
     level12Button = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = 671,
-            y = 319,
+            x = 240,
+            y = 605,
             width = 100,
             height = 100,
             -- Insert the images here
@@ -703,8 +703,8 @@ function scene:create( event )
     level13Button = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = 671,
-            y = 319,
+            x = 384,
+            y = 605,
             width = 100,
             height = 100,
             -- Insert the images here
@@ -721,8 +721,8 @@ function scene:create( event )
     level14Button = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = 671,
-            y = 319,
+            x = 527,
+            y = 605,
             width = 100,
             height = 100,
             -- Insert the images here
@@ -740,7 +740,7 @@ function scene:create( event )
         {
             -- Set its position on the screen relative to the screen size
             x = 671,
-            y = 319,
+            y = 605,
             width = 100,
             height = 100,
             -- Insert the images here
