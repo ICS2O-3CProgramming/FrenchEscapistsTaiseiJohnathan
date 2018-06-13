@@ -819,6 +819,12 @@ function scene:show( event )
 
             io.close( file )
 
+            file = io.open( path, "r")
+            
+            SaveState = file:read( "*n")
+
+            io.close( file )
+
             file = nil
         end
         LevelUnlock()

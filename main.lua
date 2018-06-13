@@ -24,11 +24,14 @@ local composer = require( "composer" )
  
     if not file then
         -- Error occurred; output the cause
+
         print( "File error: " .. errorString )
 
         file = io.open( path, "w+" )
 
-        file:write( "6" )
+        file:write( "5" )
+        io.close( file )
+        file = io.open( path, "r")
         local contents = file:read( "*n" )
         userVolume = contents
         io.close( file )
@@ -42,7 +45,7 @@ local composer = require( "composer" )
         -- Close the file handle
         io.close( file )
     end
-    
+    print ("***userVolume= " .. userVolume)
     file = nil
 
 
