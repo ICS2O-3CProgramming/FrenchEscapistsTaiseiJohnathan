@@ -84,6 +84,7 @@ local path
 local file, errorString
 
 local backButton
+local WinText
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
@@ -128,24 +129,9 @@ local function UnlockLevel2()
     LevelSelect()
 end
 
-
---[[
-local function UnlockLevel2()
-        -- Open the file handle
-    file, errorString = io.open( path, "w" )
- 
-    if not file then
-        -- Error occurred; output the cause
-        print( "File error: " .. errorString )
-    else
-        -- Read data from file
-        local contents = file:write( 2 )
-        -- Close the file handle
-        io.close( file )
-    end
-    LevelSelect()
+local function Win()
+    WinText.isVisible = true
 end
-]]--
 
 local function LoseScreen()
     composer.gotoScene( "lose", {effect = "crossFade", time = 500})
@@ -302,6 +288,7 @@ end
 local function platform1NextQuestion()
     if (score == 3) then
         UnlockLevel2()
+        Win()
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform1BridgeImage.isVisible = false
@@ -311,6 +298,7 @@ end
 
 local function platform2NextQuestion()
     if (score == 3) then
+        Win()
         UnlockLevel2()
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
@@ -322,6 +310,7 @@ end
 local function platform3NextQuestion()
     if (score == 3) then
         UnlockLevel2()
+        Win()
     else
         platform3BridgeImage.isVisible = false
         RestartLevel1()
@@ -531,7 +520,7 @@ function RestartLevel1()
     ShowPlatforms()
     HideBridge()
     ShowAnswers()
-    
+    AddListeners()
 end
 
 function RemoveListenersLevel1()
@@ -641,6 +630,10 @@ function scene:create( event )
     platform3BridgeImage.y = 500
     platform3BridgeImage.isVisible = false
 
+    WinText = display.newText("Congratulations", 200, 400, "Images/vinet.otf", 70)
+    WinText:setFillColor(1, 1, 0)
+    WinText.isVisible = false
+
     ---------
 
     --showScore = display.newText ("Score: " .. score)
@@ -675,6 +668,8 @@ function scene:create( event )
     sceneGroup:insert( wrongAnswerDisplay2 )
     sceneGroup:insert( character )
     sceneGroup:insert( backButton )
+    sceneGroup:insert( WinText )
+
 
 
 end -- function scene:create( event )   
@@ -705,7 +700,6 @@ function scene:show( event )
     elseif ( phase == "did" ) then      
         score = 0 
         RestartLevel1()
-        AddListeners()
         audio.play(bkgMusic, {channel=1, loops=-1})
     end
 
