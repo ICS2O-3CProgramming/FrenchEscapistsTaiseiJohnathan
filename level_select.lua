@@ -47,6 +47,19 @@ local level3Button
 local level4Button
 local level5Button
 
+local level11Button
+local level12Button
+local level13Button
+local level14Button
+local level15Button
+
+local level6Button
+local level7Button
+local level8Button
+local level9Button
+local level10Button
+
+
 local path2
 local file, errorString
 local path
@@ -112,6 +125,57 @@ local function Level5Transition( )
     composer.gotoScene( "level5", {effect = "crossFade", time = 700})
 end  
 
+local function Level6Transition( )
+    composer.gotoScene( "level6", {effect = "crossFade", time = 700})
+    audio.stop()
+end  
+
+-- Creating Transition to Level2 Screen
+local function Level7Transition( )
+    composer.gotoScene( "level7", {effect = "crossFade", time = 700})
+end  
+
+-- Creating Transition to Level3 Screen
+local function Level8Transition( )
+    composer.gotoScene( "level8", {effect = "crossFade", time = 700})
+end  
+
+-- Creating Transition to Level4 Screen
+local function Level9Transition( )
+    composer.gotoScene( "level9", {effect = "crossFade", time = 700})
+end  
+
+-- Creating Transition to Level5 Screen
+local function Level10Transition( )
+    composer.gotoScene( "level10", {effect = "crossFade", time = 700})
+end  
+
+local function Level11Transition( )
+    composer.gotoScene( "level11", {effect = "crossFade", time = 700})
+    audio.stop()
+end  
+
+-- Creating Transition to Level2 Screen
+local function Level12Transition( )
+    composer.gotoScene( "level12", {effect = "crossFade", time = 700})
+end  
+
+-- Creating Transition to Level3 Screen
+local function Level13Transition( )
+    composer.gotoScene( "level13", {effect = "crossFade", time = 700})
+end  
+
+-- Creating Transition to Level4 Screen
+local function Level14Transition( )
+    composer.gotoScene( "level14", {effect = "crossFade", time = 700})
+end  
+
+-- Creating Transition to Level5 Screen
+local function Level15Transition( )
+    composer.gotoScene( "level15", {effect = "crossFade", time = 700})
+end  
+
+
 local function LevelUnlock()
 
     if (SaveState == 1) then
@@ -120,30 +184,241 @@ local function LevelUnlock()
         level3Button.isVisible = false
         level4Button.isVisible = false
         level5Button.isVisible = false
+        level6Button.isVisible = false
+        level7Button.isVisible = false
+        level8Button.isVisible = false
+        level9Button.isVisible = false
+        level10Button.isVisible = false
+        level11Button.isVisible = false
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
     elseif (SaveState == 2) then
         level1Button.isVisible = true
         level2Button.isVisible = true
         level3Button.isVisible = false
         level4Button.isVisible = false
         level5Button.isVisible = false
+        level6Button.isVisible = false
+        level7Button.isVisible = false
+        level8Button.isVisible = false
+        level9Button.isVisible = false
+        level10Button.isVisible = false
+        level11Button.isVisible = false
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
     elseif (SaveState == 3) then
         level1Button.isVisible = true
         level2Button.isVisible = true
         level3Button.isVisible = true
         level4Button.isVisible = false
         level5Button.isVisible = false
+        level6Button.isVisible = false
+        level7Button.isVisible = false
+        level8Button.isVisible = false
+        level9Button.isVisible = false
+        level10Button.isVisible = false
+        level11Button.isVisible = false
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
     elseif (SaveState == 4) then
         level1Button.isVisible = true
         level2Button.isVisible = true
         level3Button.isVisible = true
         level4Button.isVisible = true
         level5Button.isVisible = false
+        level6Button.isVisible = false
+        level7Button.isVisible = false
+        level8Button.isVisible = false
+        level9Button.isVisible = false
+        level10Button.isVisible = false
+        level11Button.isVisible = false
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
     elseif (SaveState == 5) then
         level1Button.isVisible = true
         level2Button.isVisible = true
         level3Button.isVisible = true
         level4Button.isVisible = true
         level5Button.isVisible = true
+        level6Button.isVisible = false
+        level7Button.isVisible = false
+        level8Button.isVisible = false
+        level9Button.isVisible = false
+        level10Button.isVisible = false
+        level11Button.isVisible = false
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
+    elseif (SaveState == 6) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+        level6Button.isVisible = true
+        level7Button.isVisible = false
+        level8Button.isVisible = false
+        level9Button.isVisible = false
+        level10Button.isVisible = false
+        level11Button.isVisible = false
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
+    elseif (SaveState == 7) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+        level6Button.isVisible = true
+        level7Button.isVisible = true
+        level8Button.isVisible = false
+        level9Button.isVisible = false
+        level10Button.isVisible = false
+        level11Button.isVisible = false
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
+    elseif (SaveState == 8) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+        level6Button.isVisible = true
+        level7Button.isVisible = true
+        level8Button.isVisible = true
+        level9Button.isVisible = false
+        level10Button.isVisible = false
+        level11Button.isVisible = false
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
+    elseif (SaveState == 9) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+        level6Button.isVisible = true
+        level7Button.isVisible = true
+        level8Button.isVisible = true
+        level9Button.isVisible = true
+        level10Button.isVisible = false
+        level11Button.isVisible = false
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
+    elseif (SaveState == 10) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+        level6Button.isVisible = true
+        level7Button.isVisible = true
+        level8Button.isVisible = true
+        level9Button.isVisible = true
+        level10Button.isVisible = true
+        level11Button.isVisible = false
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
+    elseif (SaveState == 11) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+        level6Button.isVisible = true
+        level7Button.isVisible = true
+        level8Button.isVisible = true
+        level9Button.isVisible = true
+        level10Button.isVisible = true
+        level11Button.isVisible = true
+        level12Button.isVisible = false
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
+    elseif (SaveState == 12) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+        level6Button.isVisible = true
+        level7Button.isVisible = true
+        level8Button.isVisible = true
+        level9Button.isVisible = true
+        level10Button.isVisible = true
+        level11Button.isVisible = true
+        level12Button.isVisible = true
+        level13Button.isVisible = false
+        level14Button.isVisible = false
+        level15Button.isVisible = false
+    elseif (SaveState == 13) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+        level6Button.isVisible = true
+        level7Button.isVisible = true
+        level8Button.isVisible = true
+        level9Button.isVisible = true
+        level10Button.isVisible = true
+        level11Button.isVisible = true
+        level12Button.isVisible = true
+        level13Button.isVisible = true
+        level14Button.isVisible = false
+        level15Button.isVisible = false
+    elseif (SaveState == 14) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+        level6Button.isVisible = true
+        level7Button.isVisible = true
+        level8Button.isVisible = true
+        level9Button.isVisible = true
+        level10Button.isVisible = true
+        level11Button.isVisible = true
+        level12Button.isVisible = true
+        level13Button.isVisible = true
+        level14Button.isVisible = true
+        level15Button.isVisible = false
+    elseif (SaveState == 15) then
+        level1Button.isVisible = true
+        level2Button.isVisible = true
+        level3Button.isVisible = true
+        level4Button.isVisible = true
+        level5Button.isVisible = true
+        level6Button.isVisible = true
+        level7Button.isVisible = true
+        level8Button.isVisible = true
+        level9Button.isVisible = true
+        level10Button.isVisible = true
+        level11Button.isVisible = true
+        level12Button.isVisible = true
+        level13Button.isVisible = true
+        level14Button.isVisible = true
+        level15Button.isVisible = true
+
     end
 end
 
@@ -298,6 +573,186 @@ function scene:create( event )
 
     -----------------------------------------------------------------------------------------
 
+        -- Creating level Button
+    level6Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level6Button.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = Level6Transition
+        } ) 
+
+
+    -----------------------------------------------------------------------------------------
+
+        -- Creating level Button
+    level7Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level7Button.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = Level7Transition
+        } ) 
+
+
+    -----------------------------------------------------------------------------------------
+
+        -- Creating level Button
+    level8Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level8Button.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = Level8Transition
+        } ) 
+
+
+    -----------------------------------------------------------------------------------------
+
+        -- Creating level Button
+    level9Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level9Button.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = Level9Transition
+        } ) 
+
+
+    -----------------------------------------------------------------------------------------
+
+        -- Creating level Button
+    level10Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level10Button.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = Level10Transition
+        } ) 
+
+
+    -----------------------------------------------------------------------------------------
+
+        -- Creating level Button
+    level11Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level11Button.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = Level11Transition
+        } ) 
+
+
+    -----------------------------------------------------------------------------------------
+
+        -- Creating level Button
+    level12Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level12Button.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = Level12Transition
+        } ) 
+
+
+    -----------------------------------------------------------------------------------------
+
+        -- Creating level Button
+    level13Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level13Button.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = Level13Transition
+        } ) 
+
+
+    -----------------------------------------------------------------------------------------
+
+        -- Creating level Button
+    level14Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level14Button.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = Level14Transition
+        } ) 
+
+
+    -----------------------------------------------------------------------------------------
+
+        -- Creating level Button
+    level15Button = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 671,
+            y = 319,
+            width = 100,
+            height = 100,
+            -- Insert the images here
+            defaultFile = "Images/Level15Button.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = Level15Transition
+        } ) 
+
+
+    -----------------------------------------------------------------------------------------
+
     
 
     -- Associating display objects with this scene 
@@ -308,6 +763,16 @@ function scene:create( event )
 	sceneGroup:insert( level3Button )
 	sceneGroup:insert( level4Button )
 	sceneGroup:insert( level5Button )
+    sceneGroup:insert( level6Button )
+    sceneGroup:insert( level7Button )
+    sceneGroup:insert( level8Button )
+    sceneGroup:insert( level9Button )
+    sceneGroup:insert( level10Button )
+    sceneGroup:insert( level11Button )
+    sceneGroup:insert( level12Button )
+    sceneGroup:insert( level13Button )
+    sceneGroup:insert( level14Button )
+    sceneGroup:insert( level15Button )
     sceneGroup:insert( ResetButton )
 
 
