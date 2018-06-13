@@ -82,6 +82,8 @@ local rightAnswerPosition
 
 local path
 local file, errorString
+
+local backButton
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
@@ -561,7 +563,23 @@ function scene:create( event )
     bkg_image.width = display.contentWidth
     bkg_image.height = display.contentHeight
 
-    
+        -- Creating Back Button
+    backButton = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 100,
+            y = 50,
+            width = 150,
+            height = 75,
+
+            -- Insert the images here
+            defaultFile = "Images/BackButtonUnpressed.png",
+            overFile = "Images/BackButtonPressed.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = LevelSelect
+        } ) 
+
 
     displayQuestion = display.newText("", 400, 840, "Images/vinet.otf", 70)
     displayQuestion:setFillColor(216/255, 119/255, 0/255)
@@ -656,6 +674,7 @@ function scene:create( event )
     sceneGroup:insert( wrongAnswerDisplay1 )
     sceneGroup:insert( wrongAnswerDisplay2 )
     sceneGroup:insert( character )
+    sceneGroup:insert( backButton )
 
 
 end -- function scene:create( event )   
@@ -723,6 +742,7 @@ function scene:hide( event )
         --RemoveRuntimeListeners()
         --display.remove(character)
         RemoveListenersLevel1()
+        audio.stop()
 
     end
 
