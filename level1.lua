@@ -662,8 +662,8 @@ function scene:create( event )
 
     bkgMusic = audio.loadStream("Audio/Dungeon Quest.mp3")
     platformBreakSound = audio.loadSound("Audio/Stone Break.mp3")
-    bridgeWalkSound = audio.loadSound("Bridge Walk.mp3")
-    characterJumpSound = audio.loadSound("Jump.mp3")
+    bridgeWalkSound = audio.loadSound("Audio/Bridge Walk.mp3")
+    characterJumpSound = audio.loadSound("Audio/Jump.mp3")
 
 ----------------------------------------------------------------------------------------
     -- Associating display objects with this scene 
