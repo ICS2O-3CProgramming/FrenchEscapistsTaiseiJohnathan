@@ -644,7 +644,7 @@ function scene:create( event )
     platform3BridgeImage.y = 500
     platform3BridgeImage.isVisible = false
 
-    WinText = display.newText("Congratulations", 400, 300, "Images/vinet.otf", 70)
+    WinText = display.newText("Congratulations", 400, 200, "Images/vinet.otf", 70)
     WinText:setFillColor(1, 1, 0)
     WinText.isVisible = false
 
