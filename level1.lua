@@ -33,22 +33,6 @@ local scene = composer.newScene( sceneName )
 
 local bkg_image
 
---[[
-local character
-
-local function ReplaceCharacter()
-    character = display.newImageRect("Images/Guard.png")
-    character.width = 315
-    character.height = 395
-    character.x = 500
-    character.y = 500
-    character.myName = "Guard"
-
-    -- add back runtime listeners
-    -- AddRuntimeListeners()
-end
-]]--
-
 local choice1
 local choice2
 local choice3
@@ -407,7 +391,7 @@ end
 
 local function TouchPlatform3(touch)
     if (touch.phase == "ended") then
-    audio.play(characterJumpSound, {channel=1})
+        audio.play(characterJumpSound, {channel=1})
         if (rightAnswerPosition == 3) then
             --correct
             platform3Bridge()
@@ -435,7 +419,7 @@ end
 
 local function TouchPlatform2(touch)
     if (touch.phase == "ended") then
-    audio.play(characterJumpSound, {channel=1})
+        audio.play(characterJumpSound, {channel=1})
         if (rightAnswerPosition == 2) then
             --correct
             platform2Bridge()
@@ -463,7 +447,7 @@ end
 
 local function TouchPlatform1(touch)
     if (touch.phase == "ended") then
-    audio.play(characterJumpSound, {channel=1})
+        audio.play(characterJumpSound, {channel=1})
         if (rightAnswerPosition == 1) then
             --correct
             platform1Bridge()
