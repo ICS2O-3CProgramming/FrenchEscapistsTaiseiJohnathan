@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- level5.lua
+-- Level14.lua
 -- Created by: Johnathan Taisei
 -- Date: May 16 2018
 -----------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level5"
+sceneName = "level14"
 
 -----------------------------------------------------------------------------------------
 
@@ -92,9 +92,9 @@ local function LevelSelect()
     composer.gotoScene( "level_select", {effect = "crossFade", time = 1000})
 end
 
-local function UnlockLevel6()
+local function UnlockLevel15()
     print ("***savestate = " .. SaveState)
-    if (SaveState == 5) then
+    if (SaveState == 14) then
         SaveState = SaveState + 1
                 -- Open the file handle
         file, errorString = io.open( path, "w" )
@@ -104,7 +104,7 @@ local function UnlockLevel6()
             print( "File error: " .. errorString )
         else
             -- Read data from file
-            local contents = file:write( 6 )
+            local contents = file:write( 15 )
             -- Close the file handle
             io.close( file )
         end
@@ -275,32 +275,32 @@ end
 local function platform1NextQuestion()
     if (score == 3) then
         Win()
-        timer.performWithDelay(1200, UnlockLevel6)
+        timer.performWithDelay(1200, UnlockLevel15)
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform1BridgeImage.isVisible = false
-        timer.performWithDelay(1200, RestartLevel5)
+        timer.performWithDelay(1200, RestartLevel14)
     end
 end
 
 local function platform2NextQuestion()
     if (score == 3) then
         Win()
-        timer.performWithDelay(1200, UnlockLevel6)
+        timer.performWithDelay(1200, UnlockLevel15)
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform2BridgeImage.isVisible = false
-        timer.performWithDelay(1200, RestartLevel5)
+        timer.performWithDelay(1200, RestartLevel14)
     end
 end
 
 local function platform3NextQuestion()
     if (score == 3) then
         Win()
-        timer.performWithDelay(1200, UnlockLevel6)
+        timer.performWithDelay(1200, UnlockLevel15)
     else
         platform3BridgeImage.isVisible = false
-        RestartLevel5()
+        RestartLevel14()
     end
 end
 
@@ -393,17 +393,17 @@ local function TouchPlatform3(touch)
             platform3Bridge()
             score = score + 1
             HideAnswers()
-            RemoveListenersLevel5()
+            RemoveListenersLevel14()
         elseif (rightAnswerPosition == 2) then
             HideAnswers()
-            RemoveListenersLevel5()
+            RemoveListenersLevel14()
             platform3Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 1) then
             HideAnswers()
-            RemoveListenersLevel5()
+            RemoveListenersLevel14()
             platform3Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
@@ -421,17 +421,17 @@ local function TouchPlatform2(touch)
             platform2Bridge()
             score = score + 1
             HideAnswers()
-            RemoveListenersLevel5()
+            RemoveListenersLevel14()
         elseif (rightAnswerPosition == 1) then
             HideAnswers()
-            RemoveListenersLevel5()
+            RemoveListenersLevel14()
             platform2Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 3) then
             HideAnswers()
-            RemoveListenersLevel5()
+            RemoveListenersLevel14()
             platform2Break()           
             score = 0
             timer.performWithDelay (1200, HideCharacter)
@@ -449,17 +449,17 @@ local function TouchPlatform1(touch)
             platform1Bridge()
             score = score + 1
             HideAnswers()
-            RemoveListenersLevel5()
+            RemoveListenersLevel14()
         elseif (rightAnswerPosition == 2) then
             HideAnswers()
-            RemoveListenersLevel5()
+            RemoveListenersLevel14()
             platform1Break()            
             score = 0
             timer.performWithDelay (1200, HideCharacter)
             timer.performWithDelay (1500, LoseScreen)
         elseif (rightAnswerPosition == 3) then
             HideAnswers()
-            RemoveListenersLevel5()
+            RemoveListenersLevel14()
             platform1Break()          
             score = 0
             timer.performWithDelay (1200, HideCharacter)
@@ -500,7 +500,7 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
-function RestartLevel5()
+function RestartLevel14()
     print ("***score = " .. score)
     ReplaceCharacter()
     RandomChoices()
@@ -517,7 +517,7 @@ function RestartLevel5()
     HideWin()
 end
 
-function RemoveListenersLevel5()
+function RemoveListenersLevel14()
     platform1:removeEventListener("touch", TouchPlatform1)
     platform2:removeEventListener("touch", TouchPlatform2)
     platform3:removeEventListener("touch", TouchPlatform3)
@@ -695,7 +695,7 @@ function scene:show( event )
     -- Example: start timers, begin animation, play audio, etc.
     elseif ( phase == "did" ) then      
         score = 0 
-        RestartLevel5()
+        RestartLevel14()
         audio.play(bkgMusic, {channel=1, loops=-1})
 
     end
@@ -732,7 +732,7 @@ function scene:hide( event )
         --RemoveArrowEventListeners()
         --RemoveRuntimeListeners()
         --display.remove(character)
-        RemoveListenersLevel5()
+        RemoveListenersLevel14()
 
     end
 
