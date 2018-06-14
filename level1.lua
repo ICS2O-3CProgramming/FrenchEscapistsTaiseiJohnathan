@@ -129,6 +129,10 @@ local function UnlockLevel2()
     LevelSelect()
 end
 
+local function HideWin()
+    WinText.isVisible = false
+end
+
 local function Win()
     WinText.isVisible = true
 end
@@ -287,8 +291,8 @@ end
 
 local function platform1NextQuestion()
     if (score == 3) then
-        UnlockLevel2()
         Win()
+        timer.performWithDelay(1200, UnlockLevel2)
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform1BridgeImage.isVisible = false
@@ -299,7 +303,7 @@ end
 local function platform2NextQuestion()
     if (score == 3) then
         Win()
-        UnlockLevel2()
+        timer.performWithDelay(1200, UnlockLevel2)
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform2BridgeImage.isVisible = false
@@ -309,8 +313,8 @@ end
 
 local function platform3NextQuestion()
     if (score == 3) then
-        UnlockLevel2()
         Win()
+        timer.performWithDelay(1200, UnlockLevel2)
     else
         platform3BridgeImage.isVisible = false
         RestartLevel1()
@@ -530,6 +534,7 @@ function RestartLevel1()
     HideBridge()
     ShowAnswers()
     AddListeners()
+    HideWin()
 end
 
 function RemoveListenersLevel1()
@@ -639,7 +644,7 @@ function scene:create( event )
     platform3BridgeImage.y = 500
     platform3BridgeImage.isVisible = false
 
-    WinText = display.newText("Congratulations", 200, 400, "Images/vinet.otf", 70)
+    WinText = display.newText("Congratulations", 400, 200, "Images/vinet.otf", 70)
     WinText:setFillColor(1, 1, 0)
     WinText.isVisible = false
 
