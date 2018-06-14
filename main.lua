@@ -50,5 +50,5 @@ local composer = require( "composer" )
 
 
 -- Go to the intro screen
-composer.gotoScene( "spalsh_screen" )
+composer.gotoScene( "splash_screen" )
 
