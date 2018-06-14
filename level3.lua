@@ -66,22 +66,19 @@ local rightAnswerPosition
 
 local path
 local file, errorString
+
+local backButton
+local WinText
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
 
 local bkgMusic
 local playbkgMusic
-local fallSound
-local playfallSound
 local platformBreakSound
 local playplatformBreakSound
-local climbSound
-local playclimbSound
-local bridgeDrawSound
-local playbridgeDrawSound
-local characterLandSound
-local playcharacterLandSound
+local bridgeWalkSound
+local playbridgeWalkSound
 local characterJumpSound
 local playcharacterJumpSound
 
@@ -116,23 +113,13 @@ local function UnlockLevel4()
     LevelSelect()
 end
 
---[[
-local function UnlockLevel4()
-        -- Open the file handle
-    file, errorString = io.open( path, "w" )
- 
-    if not file then
-        -- Error occurred; output the cause
-        print( "File error: " .. errorString )
-    else
-        -- Read data from file
-        local contents = file:write( 4 )
-        -- Close the file handle
-        io.close( file )
-    end
-    LevelSelect()
+local function HideWin()
+    WinText.isVisible = false
 end
-]]--
+
+local function Win()
+    WinText.isVisible = true
+end
 
 local function LoseScreen()
     composer.gotoScene( "lose", {effect = "crossFade", time = 500})
@@ -288,7 +275,8 @@ end
 
 local function platform1NextQuestion()
     if (score == 3) then
-        UnlockLevel4()
+        Win()
+        timer.performWithDelay(1200, UnlockLevel4)
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform1BridgeImage.isVisible = false
@@ -298,7 +286,8 @@ end
 
 local function platform2NextQuestion()
     if (score == 3) then
-        UnlockLevel4()
+        Win()
+        timer.performWithDelay(1200, UnlockLevel4)
     else
         transition.moveTo ( character, { x=400, y=320, time=1000})
         platform2BridgeImage.isVisible = false
@@ -308,7 +297,8 @@ end
 
 local function platform3NextQuestion()
     if (score == 3) then
-        UnlockLevel4()
+        Win()
+        timer.performWithDelay(1200, UnlockLevel4)
     else
         platform3BridgeImage.isVisible = false
         RestartLevel3()
@@ -316,18 +306,21 @@ local function platform3NextQuestion()
 end
 
 local function platform1Fade()
+    audio.play(platformBreakSound, {channel=1})
     transition.scaleBy(platform1Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform1Broken, { time=800 })
     transition.fadeOut(platform1, { time=400 })
 end
 
 local function platform2Fade()
+    audio.play(platformBreakSound, {channel=1})
     transition.scaleBy(platform2Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform2Broken, { time=800 })
     transition.fadeOut(platform2, { time=400 })
 end
 
 local function platform3Fade()
+    audio.play(platformBreakSound, {channel=1})
     transition.scaleBy(platform3Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform3Broken, { time=800 })
     transition.fadeOut(platform3, { time=400 })
@@ -395,6 +388,7 @@ end
 
 local function TouchPlatform3(touch)
     if (touch.phase == "ended") then
+        audio.play(characterJumpSound, {channel=1})
         if (rightAnswerPosition == 3) then
             --correct
             platform3Bridge()
@@ -422,6 +416,7 @@ end
 
 local function TouchPlatform2(touch)
     if (touch.phase == "ended") then
+        audio.play(characterJumpSound, {channel=1})
         if (rightAnswerPosition == 2) then
             --correct
             platform2Bridge()
@@ -449,6 +444,7 @@ end
 
 local function TouchPlatform1(touch)
     if (touch.phase == "ended") then
+        audio.play(characterJumpSound, {channel=1})
         if (rightAnswerPosition == 1) then
             --correct
             platform1Bridge()
@@ -518,6 +514,8 @@ function RestartLevel3()
     ShowPlatforms()
     HideBridge()
     ShowAnswers()
+    AddListeners()
+    HideWin()
     
 end
 
@@ -552,6 +550,22 @@ function scene:create( event )
     bkg_image.width = display.contentWidth
     bkg_image.height = display.contentHeight
 
+        -- Creating Back Button
+    backButton = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = 100,
+            y = 50,
+            width = 150,
+            height = 75,
+
+            -- Insert the images here
+            defaultFile = "Images/BackButtonUnpressed.png",
+            overFile = "Images/BackButtonPressed.png",
+
+            -- When the button is released, call the level transition function
+            onRelease = LevelSelect
+        } ) 
     
 
     displayQuestion = display.newText("", 400, 840, "Images/vinet.otf", 70)
@@ -614,6 +628,10 @@ function scene:create( event )
     platform3BridgeImage.y = 500
     platform3BridgeImage.isVisible = false
 
+    WinText = display.newText("Congratulations", 400, 200, "Images/vinet.otf", 70)
+    WinText:setFillColor(1, 1, 0)
+    WinText.isVisible = false
+
     ---------
 
     --showScore = display.newText ("Score: " .. score)
@@ -624,7 +642,10 @@ function scene:create( event )
 
     character = display.newImageRect("Images/Guard.png", 150, 150)
     
-
+    bkgMusic = audio.loadStream("Audio/Dungeon Quest.mp3")
+    platformBreakSound = audio.loadSound("Audio/Stone Break.mp3")
+    bridgeWalkSound = audio.loadSound("Audio/Bridge Walk.mp3")
+    characterJumpSound = audio.loadSound("Audio/Jump.mp3")
     
 
 ----------------------------------------------------------------------------------------
@@ -645,6 +666,8 @@ function scene:create( event )
     sceneGroup:insert( wrongAnswerDisplay1 )
     sceneGroup:insert( wrongAnswerDisplay2 )
     sceneGroup:insert( character )
+    sceneGroup:insert( backButton )
+    sceneGroup:insert( WinText )
 
 
 end -- function scene:create( event )   
@@ -676,6 +699,7 @@ function scene:show( event )
         score = 0 
         RestartLevel3()
         AddListeners()
+        audio.play(bkgMusic, {channel=1, loops=-1})
 
     end
 
@@ -712,6 +736,7 @@ function scene:hide( event )
         --RemoveRuntimeListeners()
         --display.remove(character)
         RemoveListenersLevel3()
+        audio.stop()
 
     end
 

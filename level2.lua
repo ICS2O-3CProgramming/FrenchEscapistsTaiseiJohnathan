@@ -75,16 +75,10 @@ local WinText
 
 local bkgMusic
 local playbkgMusic
-local fallSound
-local playfallSound
 local platformBreakSound
 local playplatformBreakSound
-local climbSound
-local playclimbSound
-local bridgeDrawSound
-local playbridgeDrawSound
-local characterLandSound
-local playcharacterLandSound
+local bridgeWalkSound
+local playbridgeWalkSound
 local characterJumpSound
 local playcharacterJumpSound
 
@@ -631,6 +625,10 @@ function scene:create( event )
     platform3BridgeImage.x = 400
     platform3BridgeImage.y = 500
     platform3BridgeImage.isVisible = false
+
+    WinText = display.newText("Congratulations", 400, 200, "Images/vinet.otf", 70)
+    WinText:setFillColor(1, 1, 0)
+    WinText.isVisible = false
 
     ---------
 
