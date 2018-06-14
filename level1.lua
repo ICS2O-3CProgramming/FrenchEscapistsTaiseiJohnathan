@@ -743,13 +743,7 @@ function scene:hide( event )
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
-        --RemoveCollisionListeners()
-        --RemovePhysicsBodies()
 
-        --physics.stop()
-        --RemoveArrowEventListeners()
-        --RemoveRuntimeListeners()
-        --display.remove(character)
         RemoveListenersLevel1()
         
 

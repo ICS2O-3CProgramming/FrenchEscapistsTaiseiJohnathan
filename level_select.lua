@@ -102,26 +102,31 @@ end
 -- Creating Transition to Level1 Screen
 local function Level1Transition( )
     composer.gotoScene( "level1", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 -- Creating Transition to Level2 Screen
 local function Level2Transition( )
     composer.gotoScene( "level2", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 -- Creating Transition to Level3 Screen
 local function Level3Transition( )
     composer.gotoScene( "level3", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 -- Creating Transition to Level4 Screen
 local function Level4Transition( )
     composer.gotoScene( "level4", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 -- Creating Transition to Level5 Screen
 local function Level5Transition( )
     composer.gotoScene( "level5", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 local function Level6Transition( )
@@ -132,21 +137,25 @@ end
 -- Creating Transition to Level2 Screen
 local function Level7Transition( )
     composer.gotoScene( "level7", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 -- Creating Transition to Level3 Screen
 local function Level8Transition( )
     composer.gotoScene( "level8", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 -- Creating Transition to Level4 Screen
 local function Level9Transition( )
     composer.gotoScene( "level9", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 -- Creating Transition to Level5 Screen
 local function Level10Transition( )
     composer.gotoScene( "level10", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 local function Level11Transition( )
@@ -157,21 +166,25 @@ end
 -- Creating Transition to Level2 Screen
 local function Level12Transition( )
     composer.gotoScene( "level12", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 -- Creating Transition to Level3 Screen
 local function Level13Transition( )
     composer.gotoScene( "level13", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 -- Creating Transition to Level4 Screen
 local function Level14Transition( )
     composer.gotoScene( "level14", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 -- Creating Transition to Level5 Screen
 local function Level15Transition( )
     composer.gotoScene( "level15", {effect = "crossFade", time = 700})
+    audio.stop()
 end  
 
 
@@ -859,6 +872,7 @@ function scene:hide( event )
         -- Called when the scene is on screen (but is about to go off screen).
         -- Insert code here to "pause" the scene.
         -- Example: stop timers, stop animation, stop audio, etc.
+
 
     -----------------------------------------------------------------------------------------
 
