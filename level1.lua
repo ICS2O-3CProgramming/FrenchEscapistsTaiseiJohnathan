@@ -69,6 +69,7 @@ local file, errorString
 
 local backButton
 local WinText
+local VerbText
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
@@ -632,6 +633,9 @@ function scene:create( event )
     WinText:setFillColor(1, 1, 0)
     WinText.isVisible = false
 
+    VerbText = display.newText("Avoir", 650, 200, "Images/vinet.otf", 40)
+    VerbText:setFillColor(1, 1, 1)
+
     ---------
 
     --showScore = display.newText ("Score: " .. score)
@@ -667,6 +671,7 @@ function scene:create( event )
     sceneGroup:insert( character )
     sceneGroup:insert( backButton )
     sceneGroup:insert( WinText )
+    sceneGroup:insert( VerbText )
 
 
 

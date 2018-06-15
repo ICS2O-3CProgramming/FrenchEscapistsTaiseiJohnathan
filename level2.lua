@@ -69,6 +69,7 @@ local file, errorString
 
 local backButton
 local WinText
+local VerbText
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
@@ -218,45 +219,45 @@ end
 
 local function SetChoices()
     if (choice1 == 1) then
-        rightAnswer = "suis"
+        rightAnswer = "joue"
     elseif (choice1 == 2) then
-        rightAnswer = "es"
+        rightAnswer = "joues"
     elseif (choice1 == 3) then
-        rightAnswer = "est"
+        rightAnswer = "joue(il)"
     elseif (choice1 == 4) then
-        rightAnswer = "sommes"
+        rightAnswer = "jouons"
     elseif (choice1 == 5) then
-        rightAnswer = "êtes"
+        rightAnswer = "jouez"
     elseif (choice1 == 6) then
-        rightAnswer = "sont"
+        rightAnswer = "jouent"
     end
 
     if (choice2 == 1) then
-        wrongAnswer1 = "suis"
+        wrongAnswer1 = "joue"
     elseif (choice2 == 2) then
-        wrongAnswer1 = "es"
+        wrongAnswer1 = "joues"
     elseif (choice2 == 3) then
-        wrongAnswer1 = "est"
+        wrongAnswer1 = "joue(il)"
     elseif (choice2 == 4) then
-        wrongAnswer1 = "sommes"
+        wrongAnswer1 = "jouons"
     elseif (choice2 == 5) then
-        wrongAnswer1 = "êtes"
+        wrongAnswer1 = "jouez"
     elseif (choice2 == 6) then
-        wrongAnswer1 = "sont"
+        wrongAnswer1 = "jouent"
     end
 
     if (choice3 == 1) then
-        wrongAnswer2 = "suis"
+        wrongAnswer2 = "joue"
     elseif (choice3 == 2) then
-        wrongAnswer2 = "es"
+        wrongAnswer2 = "joues"
     elseif (choice3 == 3) then
-        wrongAnswer2 = "est"
+        wrongAnswer2 = "joue(il)"
     elseif (choice3 == 4) then
-        wrongAnswer2 = "sommes"
+        wrongAnswer2 = "jouons"
     elseif (choice3 == 5) then
-        wrongAnswer2 = "êtes"
+        wrongAnswer2 = "jouez"
     elseif (choice3 == 6) then
-        wrongAnswer2 = "sont"
+        wrongAnswer2 = "jouent"
     end
 end
 
@@ -630,6 +631,9 @@ function scene:create( event )
     WinText:setFillColor(1, 1, 0)
     WinText.isVisible = false
 
+    VerbText = display.newText("Jouer", 650, 200, "Images/vinet.otf", 40)
+    VerbText:setFillColor(1, 1, 1)
+
     ---------
 
     --showScore = display.newText ("Score: " .. score)
@@ -666,6 +670,7 @@ function scene:create( event )
     sceneGroup:insert( character )
     sceneGroup:insert( backButton )
     sceneGroup:insert( WinText )
+    sceneGroup:insert( VerbText )
 
 
 end -- function scene:create( event )   
