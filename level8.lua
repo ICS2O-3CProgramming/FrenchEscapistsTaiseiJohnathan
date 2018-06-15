@@ -69,6 +69,7 @@ local file, errorString
 
 local backButton
 local WinText
+local VerbText
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
@@ -217,45 +218,45 @@ end
 
 local function SetChoices()
     if (choice1 == 1) then
-        rightAnswer = "bois"
+        rightAnswer = "grandis"
     elseif (choice1 == 2) then
-        rightAnswer = "bois"
+        rightAnswer = "grandis(tu)"
     elseif (choice1 == 3) then
-        rightAnswer = "boit"
+        rightAnswer = "grandit"
     elseif (choice1 == 4) then
-        rightAnswer = "buvons"
+        rightAnswer = "grandissons"
     elseif (choice1 == 5) then
-        rightAnswer = "buvez"
+        rightAnswer = "grandissez"
     elseif (choice1 == 6) then
-        rightAnswer = "boivent"
+        rightAnswer = "grandissent"
     end
 
     if (choice2 == 1) then
-        wrongAnswer1 = "bois"
+        wrongAnswer1 = "grandis"
     elseif (choice2 == 2) then
-        wrongAnswer1 = "bois"
+        wrongAnswer1 = "grandis(tu)"
     elseif (choice2 == 3) then
-        wrongAnswer1 = "boit"
+        wrongAnswer1 = "grandit"
     elseif (choice2 == 4) then
-        wrongAnswer1 = "buvons"
+        wrongAnswer1 = "grandissons"
     elseif (choice2 == 5) then
-        wrongAnswer1 = "buvez"
+        wrongAnswer1 = "grandissez"
     elseif (choice2 == 6) then
-        wrongAnswer1 = "boivent"
+        wrongAnswer1 = "grandissent"
     end
 
     if (choice3 == 1) then
-        wrongAnswer2 = "bois"
+        wrongAnswer2 = "grandis"
     elseif (choice3 == 2) then
-        wrongAnswer2 = "bois"
+        wrongAnswer2 = "grandis(tu)"
     elseif (choice3 == 3) then
-        wrongAnswer2 = "boit"
+        wrongAnswer2 = "grandit"
     elseif (choice3 == 4) then
-        wrongAnswer2 = "buvons"
+        wrongAnswer2 = "grandissons"
     elseif (choice3 == 5) then
-        wrongAnswer2 = "buvez"
+        wrongAnswer2 = "grandissez"
     elseif (choice3 == 6) then
-        wrongAnswer2 = "boivent"
+        wrongAnswer2 = "grandissent"
     end
 end
 
@@ -630,6 +631,9 @@ function scene:create( event )
     WinText:setFillColor(1, 1, 0)
     WinText.isVisible = false
 
+    VerbText = display.newText("Grandir", 650, 200, "Images/vinet.otf", 40)
+    VerbText:setFillColor(1, 1, 1)
+
     ---------
 
     --showScore = display.newText ("Score: " .. score)
@@ -666,6 +670,7 @@ function scene:create( event )
     sceneGroup:insert( character )
     sceneGroup:insert( backButton )
     sceneGroup:insert( WinText )
+    sceneGroup:insert( VerbText )
 
 
 end -- function scene:create( event )   

@@ -69,6 +69,7 @@ local file, errorString
 
 local backButton
 local WinText
+local VerbText
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
@@ -218,45 +219,45 @@ end
 
 local function SetChoices()
     if (choice1 == 1) then
-        rightAnswer = "vais"
+        rightAnswer = "danse"
     elseif (choice1 == 2) then
-        rightAnswer = "vas"
+        rightAnswer = "danses"
     elseif (choice1 == 3) then
-        rightAnswer = "va"
+        rightAnswer = "danse(il)"
     elseif (choice1 == 4) then
-        rightAnswer = "allons"
+        rightAnswer = "dansons"
     elseif (choice1 == 5) then
-        rightAnswer = "allez"
+        rightAnswer = "dansez"
     elseif (choice1 == 6) then
-        rightAnswer = "vont"
+        rightAnswer = "dansent"
     end
 
     if (choice2 == 1) then
-        wrongAnswer1 = "vais"
+        wrongAnswer1 = "danse"
     elseif (choice2 == 2) then
-        wrongAnswer1 = "vas"
+        wrongAnswer1 = "danses"
     elseif (choice2 == 3) then
-        wrongAnswer1 = "va"
+        wrongAnswer1 = "danse(il)"
     elseif (choice2 == 4) then
-        wrongAnswer1 = "allons"
+        wrongAnswer1 = "dansons"
     elseif (choice2 == 5) then
-        wrongAnswer1 = "allez"
+        wrongAnswer1 = "dansez"
     elseif (choice2 == 6) then
-        wrongAnswer1 = "vont"
+        wrongAnswer1 = "dansent"
     end
 
     if (choice3 == 1) then
-        wrongAnswer2 = "vais"
+        wrongAnswer2 = "danse"
     elseif (choice3 == 2) then
-        wrongAnswer2 = "vas"
+        wrongAnswer2 = "danses"
     elseif (choice3 == 3) then
-        wrongAnswer2 = "va"
+        wrongAnswer2 = "danse(il)"
     elseif (choice3 == 4) then
-        wrongAnswer2 = "allons"
+        wrongAnswer2 = "dansons"
     elseif (choice3 == 5) then
-        wrongAnswer2 = "allez"
+        wrongAnswer2 = "dansez"
     elseif (choice3 == 6) then
-        wrongAnswer2 = "vont"
+        wrongAnswer2 = "dansent"
     end
 end
 
@@ -632,6 +633,9 @@ function scene:create( event )
     WinText:setFillColor(1, 1, 0)
     WinText.isVisible = false
 
+    VerbText = display.newText("Danser", 650, 200, "Images/vinet.otf", 40)
+    VerbText:setFillColor(1, 1, 1)
+
     ---------
 
     --showScore = display.newText ("Score: " .. score)
@@ -668,6 +672,7 @@ function scene:create( event )
     sceneGroup:insert( character )
     sceneGroup:insert( backButton )
     sceneGroup:insert( WinText )
+    sceneGroup:insert( VerbText )
 
 
 end -- function scene:create( event )   
