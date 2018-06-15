@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------
---
+-- descendre – to descend
 -- Level14.lua
 -- Created by: Johnathan Taisei
 -- Date: May 16 2018

@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------
---
+-- attendre – to wait for
 -- Level12.lua
 -- Created by: Johnathan Taisei
 -- Date: May 16 2018
