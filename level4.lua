@@ -306,21 +306,21 @@ local function platform3NextQuestion()
 end
 
 local function platform1Fade()
-    audio.play(platformBreakSound, {channel=1})
+    audio.play(platformBreakSound, {channel=2})
     transition.scaleBy(platform1Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform1Broken, { time=800 })
     transition.fadeOut(platform1, { time=400 })
 end
 
 local function platform2Fade()
-    audio.play(platformBreakSound, {channel=1})
+    audio.play(platformBreakSound, {channel=2})
     transition.scaleBy(platform2Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform2Broken, { time=800 })
     transition.fadeOut(platform2, { time=400 })
 end
 
 local function platform3Fade()
-    audio.play(platformBreakSound, {channel=1})
+    audio.play(platformBreakSound, {channel=2})
     transition.scaleBy(platform3Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform3Broken, { time=800 })
     transition.fadeOut(platform3, { time=400 })
@@ -388,7 +388,7 @@ end
 
 local function TouchPlatform3(touch)
     if (touch.phase == "ended") then
-        audio.play(characterJumpSound, {channel=1})
+        audio.play(characterJumpSound, {channel=2})
         if (rightAnswerPosition == 3) then
             --correct
             platform3Bridge()
@@ -416,7 +416,7 @@ end
 
 local function TouchPlatform2(touch)
     if (touch.phase == "ended") then
-        audio.play(characterJumpSound, {channel=1})
+        audio.play(characterJumpSound, {channel=2})
         if (rightAnswerPosition == 2) then
             --correct
             platform2Bridge()
@@ -444,7 +444,7 @@ end
 
 local function TouchPlatform1(touch)
     if (touch.phase == "ended") then
-        audio.play(characterJumpSound, {channel=1})
+        audio.play(characterJumpSound, {channel=2})
         if (rightAnswerPosition == 1) then
             --correct
             platform1Bridge()
@@ -694,6 +694,7 @@ function scene:show( event )
     -- Called when the scene is still off screen (but is about to come on screen).   
     if ( phase == "will" ) then
         audio.setVolume( userVolume/10, { channel=1 } )
+        audio.setVolume( userVolume/10, { channel=2 } )
        
     -----------------------------------------------------------------------------------------
 
@@ -727,7 +728,7 @@ function scene:hide( event )
         -- Called when the scene is on screen (but is about to go off screen).
         -- Insert code here to "pause" the scene.
         -- Example: stop timers, stop animation, stop audio, etc.
-
+        audio.stop()
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then
@@ -740,7 +741,6 @@ function scene:hide( event )
         --RemoveRuntimeListeners()
         --display.remove(character)
         RemoveListenersLevel4()
-        audio.stop()
 
     end
 

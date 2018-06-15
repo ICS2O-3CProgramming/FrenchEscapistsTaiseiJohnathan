@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------------------
 -- danser – to dance
--- level3.lua
+-- level1.lua
 -- Created by: Johnathan Taisei
--- Date: May 16 2018
+-- Date: May 14 2018
 -----------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------
@@ -95,9 +95,10 @@ local function LevelSelect()
 end
 
 local function UnlockLevel4()
+    print ("***savestate = " .. SaveState)
     if (SaveState == 3) then
         SaveState = SaveState + 1
-        -- Open the file handle
+                -- Open the file handle
         file, errorString = io.open( path, "w" )
  
         if not file then
@@ -109,7 +110,6 @@ local function UnlockLevel4()
             -- Close the file handle
             io.close( file )
         end
-
     end
     LevelSelect()
 end
@@ -307,21 +307,21 @@ local function platform3NextQuestion()
 end
 
 local function platform1Fade()
-    audio.play(platformBreakSound, {channel=1})
+    audio.play(platformBreakSound, {channel=2  })
     transition.scaleBy(platform1Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform1Broken, { time=800 })
     transition.fadeOut(platform1, { time=400 })
 end
 
 local function platform2Fade()
-    audio.play(platformBreakSound, {channel=1})
+    audio.play(platformBreakSound, {channel=2})
     transition.scaleBy(platform2Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform2Broken, { time=800 })
     transition.fadeOut(platform2, { time=400 })
 end
 
 local function platform3Fade()
-    audio.play(platformBreakSound, {channel=1})
+    audio.play(platformBreakSound, {channel=2}) 
     transition.scaleBy(platform3Broken, { xScale=1.2, yScale=1.2, time=800 })
     transition.fadeOut(platform3Broken, { time=800 })
     transition.fadeOut(platform3, { time=400 })
@@ -329,18 +329,21 @@ end
 
 local function platform1BridgeExtend()
     platform1BridgeImage.isVisible = true
+    audio.play(bridgeWalkSound, {channel=2})
     transition.moveTo( character, { x=200, y=320, time=1000 } )
     timer.performWithDelay(1200, platform1NextQuestion)
 end
 
 local function platform2BridgeExtend()
     platform2BridgeImage.isVisible = true
+    audio.play(bridgeWalkSound, {channel=2})
     transition.moveTo( character, { x=600, y=320, time=1000 } )
     timer.performWithDelay(1200, platform2NextQuestion)
 end
 
 local function platform3BridgeExtend()
     platform3BridgeImage.isVisible = true
+    audio.play(bridgeWalkSound, {channel=2})
     transition.moveTo( character, { x=400, y=320, time=1000 } )
     timer.performWithDelay(1200, platform3NextQuestion)
 end
@@ -389,7 +392,7 @@ end
 
 local function TouchPlatform3(touch)
     if (touch.phase == "ended") then
-        audio.play(characterJumpSound, {channel=1})
+        audio.play(characterJumpSound, {channel=2})
         if (rightAnswerPosition == 3) then
             --correct
             platform3Bridge()
@@ -417,7 +420,7 @@ end
 
 local function TouchPlatform2(touch)
     if (touch.phase == "ended") then
-        audio.play(characterJumpSound, {channel=1})
+        audio.play(characterJumpSound, {channel=2})
         if (rightAnswerPosition == 2) then
             --correct
             platform2Bridge()
@@ -445,7 +448,7 @@ end
 
 local function TouchPlatform1(touch)
     if (touch.phase == "ended") then
-        audio.play(characterJumpSound, {channel=1})
+        audio.play(characterJumpSound, {channel=2})
         if (rightAnswerPosition == 1) then
             --correct
             platform1Bridge()
@@ -517,7 +520,6 @@ function RestartLevel3()
     ShowAnswers()
     AddListeners()
     HideWin()
-    
 end
 
 function RemoveListenersLevel3()
@@ -525,7 +527,6 @@ function RemoveListenersLevel3()
     platform2:removeEventListener("touch", TouchPlatform2)
     platform3:removeEventListener("touch", TouchPlatform3)
 end
-
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
@@ -539,7 +540,6 @@ function scene:create( event )
 
     -- Path for the file to read
     path = system.pathForFile( "savestate.txt", system.DocumentsDirectory )
-
  
     file = nil
 
@@ -567,7 +567,7 @@ function scene:create( event )
             -- When the button is released, call the level transition function
             onRelease = LevelSelect
         } ) 
-    
+
 
     displayQuestion = display.newText("", 400, 840, "Images/vinet.otf", 70)
     displayQuestion:setFillColor(216/255, 119/255, 0/255)
@@ -645,12 +645,11 @@ function scene:create( event )
     basePlatform.y = 920
 
     character = display.newImageRect("Images/Guard.png", 150, 150)
-    
+
     bkgMusic = audio.loadStream("Audio/Dungeon Quest.mp3")
     platformBreakSound = audio.loadSound("Audio/Stone Break.mp3")
     bridgeWalkSound = audio.loadSound("Audio/Bridge Walk.mp3")
     characterJumpSound = audio.loadSound("Audio/Jump.mp3")
-    
 
 ----------------------------------------------------------------------------------------
     -- Associating display objects with this scene 
@@ -675,6 +674,7 @@ function scene:create( event )
     sceneGroup:insert( VerbText )
 
 
+
 end -- function scene:create( event )   
 
 -----------------------------------------------------------------------------------------
@@ -694,6 +694,7 @@ function scene:show( event )
     -- Called when the scene is still off screen (but is about to come on screen).   
     if ( phase == "will" ) then
         audio.setVolume( userVolume/10, { channel=1 } )
+        audio.setVolume( userVolume/10, { channel=2 } )
        
     -----------------------------------------------------------------------------------------
 
@@ -703,9 +704,7 @@ function scene:show( event )
     elseif ( phase == "did" ) then      
         score = 0 
         RestartLevel3()
-        AddListeners()
         audio.play(bkgMusic, {channel=1, loops=-1})
-
     end
 
 end -- function scene:show( event )
@@ -728,20 +727,15 @@ function scene:hide( event )
         -- Called when the scene is on screen (but is about to go off screen).
         -- Insert code here to "pause" the scene.
         -- Example: stop timers, stop animation, stop audio, etc.
+        audio.stop()
 
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
-        --RemoveCollisionListeners()
-        --RemovePhysicsBodies()
 
-        --physics.stop()
-        --RemoveArrowEventListeners()
-        --RemoveRuntimeListeners()
-        --display.remove(character)
         RemoveListenersLevel3()
-        audio.stop()
+        
 
     end
 
