@@ -55,7 +55,7 @@ local function RiseText(  )
 end
 
 local function AudioQueue1()
-    audio.play(inpact, {channel = 1})
+    audio.play(inpact, {channel = 2})
 end
 
 local function AudioQueue2()
@@ -156,7 +156,8 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).
     if ( phase == "will" ) then
-        audio.setVolume( userVolume/10, { channel=1 } )  
+        audio.setVolume( userVolume/10, { channel=1 } ) 
+        audio.setVolume( userVolume/10, { channel=2 } ) 
        
     -----------------------------------------------------------------------------------------
 

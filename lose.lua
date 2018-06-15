@@ -32,13 +32,14 @@ local scene = composer.newScene( sceneName )
 -----------------------------------------------------------------------------------------
 local bkg
 local backButton
-
-
+local splashSound
+local drum
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
 
 local function ReturnToMainMenu( )
+    audio.play(drum,{channel=2})
     composer.gotoScene( "level_select", {effect = "crossFade", time = 1000}) 
 end
 
@@ -84,6 +85,8 @@ backButton = widget.newButton(
         } ) 
  
 
+splashSound = audio.loadSound("Audio/Splash.mp3")
+drum = audio.loadSound("Audio/Drum.mp3")
 sceneGroup:insert( backButton )
 end -- function scene:create( event )   
 
@@ -103,7 +106,7 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).   
     if ( phase == "will" ) then
-       
+       audio.play(splashSound, {channel=1})
     -----------------------------------------------------------------------------------------
 
     -- Called when the scene is now on screen.
@@ -132,6 +135,7 @@ function scene:hide( event )
 
     if ( phase == "will" ) then
         audio.setVolume( userVolume/10, { channel=1 } )
+        audio.setVolume( userVolume/10, { channel=2 } )
         -- Called when the scene is on screen (but is about to go off screen).
         -- Insert code here to "pause" the scene.
         -- Example: stop timers, stop animation, stop audio, etc.
