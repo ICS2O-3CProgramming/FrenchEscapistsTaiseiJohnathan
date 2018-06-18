@@ -219,44 +219,62 @@ end
 local function SetChoices()
     if (choice1 == 1) then
         rightAnswer = "grossis"
+        rightAnswerDisplay.size = 70
     elseif (choice1 == 2) then
         rightAnswer = "grossis(tu)"
+        rightAnswerDisplay.size = 50
     elseif (choice1 == 3) then
         rightAnswer = "grossit"
+        rightAnswerDisplay.size = 70
     elseif (choice1 == 4) then
         rightAnswer = "grossissons"
+        rightAnswerDisplay.size = 50
     elseif (choice1 == 5) then
         rightAnswer = "grossissez"
+        rightAnswerDisplay.size = 50
     elseif (choice1 == 6) then
         rightAnswer = "grossissent"
+        rightAnswerDisplay.size = 50
     end
 
     if (choice2 == 1) then
         wrongAnswer1 = "grossis"
+        wrongAnswerDisplay1.size = 70
     elseif (choice2 == 2) then
         wrongAnswer1 = "grossis(tu)"
+        wrongAnswerDisplay1.size = 50
     elseif (choice2 == 3) then
         wrongAnswer1 = "grossit"
+        wrongAnswerDisplay1.size = 70
     elseif (choice2 == 4) then
         wrongAnswer1 = "grossissons"
+        wrongAnswerDisplay1.size = 50
     elseif (choice2 == 5) then
         wrongAnswer1 = "grossissez"
+        wrongAnswerDisplay1.size = 50
     elseif (choice2 == 6) then
         wrongAnswer1 = "grossissent"
+        wrongAnswerDisplay1.size = 50
     end
 
     if (choice3 == 1) then
         wrongAnswer2 = "grossis"
+        wrongAnswerDisplay2.size = 70
     elseif (choice3 == 2) then
         wrongAnswer2 = "grossis(tu)"
+        wrongAnswerDisplay2.size = 50
     elseif (choice3 == 3) then
         wrongAnswer2 = "grossit"
+        wrongAnswerDisplay2.size = 70
     elseif (choice3 == 4) then
         wrongAnswer2 = "grossissons"
+        wrongAnswerDisplay2.size = 50
     elseif (choice3 == 5) then
         wrongAnswer2 = "grossissez"
+        wrongAnswerDisplay2.size = 50
     elseif (choice3 == 6) then
         wrongAnswer2 = "grossissent"
+        wrongAnswerDisplay2.size = 50
     end
 end
 
