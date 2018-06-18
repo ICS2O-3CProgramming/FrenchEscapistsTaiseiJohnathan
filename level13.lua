@@ -631,7 +631,7 @@ function scene:create( event )
     WinText:setFillColor(1, 1, 0)
     WinText.isVisible = false
 
-    VerbText = display.newText("Avoir", 650, 200, "Images/vinet.otf", 40)
+    VerbText = display.newText("Défendre", 650, 200, "Images/vinet.otf", 40)
     VerbText:setFillColor(1, 1, 1)
 
     ---------
