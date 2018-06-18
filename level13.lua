@@ -219,44 +219,62 @@ end
 local function SetChoices()
     if (choice1 == 1) then
         rightAnswer = "défends"
+        rightAnswerDisplay.size = 70
     elseif (choice1 == 2) then
         rightAnswer = "défends(tu)"
+        rightAnswerDisplay.size = 50
     elseif (choice1 == 3) then
         rightAnswer = "défend"
+        rightAnswerDisplay.size = 70
     elseif (choice1 == 4) then
         rightAnswer = "défendons"
+        rightAnswerDisplay.size = 50
     elseif (choice1 == 5) then
         rightAnswer = "défendez"
+        rightAnswerDisplay.size = 50
     elseif (choice1 == 6) then
         rightAnswer = "défendent"
+        rightAnswerDisplay.size = 50
     end
 
     if (choice2 == 1) then
         wrongAnswer1 = "défends"
+        wrongAnswerDisplay1.size = 70
     elseif (choice2 == 2) then
         wrongAnswer1 = "défends(tu)"
+        wrongAnswerDisplay1.size = 50
     elseif (choice2 == 3) then
         wrongAnswer1 = "défend"
+        wrongAnswerDisplay1.size = 70
     elseif (choice2 == 4) then
         wrongAnswer1 = "défendons"
+        wrongAnswerDisplay1.size = 50
     elseif (choice2 == 5) then
         wrongAnswer1 = "défendez"
+        wrongAnswerDisplay1.size = 50
     elseif (choice2 == 6) then
         wrongAnswer1 = "défendent"
+        wrongAnswerDisplay1.size = 50
     end
 
     if (choice3 == 1) then
         wrongAnswer2 = "défends"
+        wrongAnswerDisplay2.size = 70
     elseif (choice3 == 2) then
         wrongAnswer2 = "défends(tu)"
+        wrongAnswerDisplay2.size = 50
     elseif (choice3 == 3) then
         wrongAnswer2 = "défend"
+        wrongAnswerDisplay2.size = 70
     elseif (choice3 == 4) then
         wrongAnswer2 = "défendons"
+        wrongAnswerDisplay2.size = 50
     elseif (choice3 == 5) then
         wrongAnswer2 = "défendez"
+        wrongAnswerDisplay2.size = 50
     elseif (choice3 == 6) then
         wrongAnswer2 = "défendent"
+        wrongAnswerDisplay2.size = 50
     end
 end
 
