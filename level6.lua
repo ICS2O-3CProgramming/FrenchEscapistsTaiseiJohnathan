@@ -224,7 +224,7 @@ local function SetChoices()
     elseif (choice1 == 3) then
         rightAnswer = "finit"
     elseif (choice1 == 4) then
-        rightAnswer = "finssons"
+        rightAnswer = "finissons"
     elseif (choice1 == 5) then
         rightAnswer = "finissez"
     elseif (choice1 == 6) then
@@ -238,7 +238,7 @@ local function SetChoices()
     elseif (choice2 == 3) then
         wrongAnswer1 = "finit"
     elseif (choice2 == 4) then
-        wrongAnswer1 = "finssons"
+        wrongAnswer1 = "finissons"
     elseif (choice2 == 5) then
         wrongAnswer1 = "finissez"
     elseif (choice2 == 6) then
@@ -252,7 +252,7 @@ local function SetChoices()
     elseif (choice3 == 3) then
         wrongAnswer2 = "finit"
     elseif (choice3 == 4) then
-        wrongAnswer2 = "finssons"
+        wrongAnswer2 = "finissons"
     elseif (choice3 == 5) then
         wrongAnswer2 = "finissez"
     elseif (choice3 == 6) then
