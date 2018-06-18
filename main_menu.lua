@@ -43,7 +43,6 @@ local playButton
 local creditsButton
 local controlsButton
 local optionsButton
-local achievementButton
 local Torch1
 local Torch2
 local TorchFire1
@@ -89,14 +88,6 @@ end
 local function CreditsTransition( )   
     audio.play(transitionSound)    
     composer.gotoScene( "credits", {effect = "crossFade", time = 700})
-end 
-
------------------------------------------------------------------------------------------
-
--- Creating Transition Function to Credits Page
-local function AchievementTransition( )
-    audio.play(transitionSound)
-    composer.gotoScene( "credits_screen", {effect = "crossFade", time = 700})
 end 
 
 -----------------------------------------------------------------------------------------
@@ -226,24 +217,6 @@ function scene:create( event )
 
     -----------------------------------------------------------------------------------------
 
-    -- Creating Achievements Button
-    achieventButton = widget.newButton( 
-        {
-            -- Set its position on the screen relative to the screen size
-            x = display.contentCenterX,
-            y = display.contentHeight*9/10,
-            width = 200,
-            height = 100,
-            -- Insert the images here
-            defaultFile = "Images/AchievementButtonUnpressed.png",
-            overFile = "Images/AchievementButtonPressed.png",
-
-            -- When the button is released, call the Achievements transition function
-            --onRelease = AchievementTransition
-        } ) 
-
-    -----------------------------------------------------------------------------------------
-
     Torch1 = display.newImageRect("Images/Torch.png", 75, 150)
     Torch1.x = 200
     Torch1.y = 650
@@ -277,7 +250,6 @@ function scene:create( event )
     sceneGroup:insert( creditsButton )
     sceneGroup:insert( controlsButton )
     sceneGroup:insert( optionsButton )
-    sceneGroup:insert( achieventButton )
     sceneGroup:insert( Torch1 )
     sceneGroup:insert( Torch2 )
     sceneGroup:insert( TorchFire1 )
