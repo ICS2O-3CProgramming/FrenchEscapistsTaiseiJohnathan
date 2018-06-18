@@ -76,8 +76,8 @@ function scene:create( event )
  	backButton = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = display.contentCenterX/4,
-            y = display.contentHeight*4/5,
+            x = display.contentCenterX*2/6,
+            y = display.contentHeight*6/7,
             width = 200,
             height = 100,
             -- Insert the images here
