@@ -150,7 +150,7 @@ function scene:create( event )
         {   
             -- Set its position on the screen relative to the screen size
             x = display.contentCenterX,
-            y = display.contentHeight*5/10,
+            y = display.contentHeight*8/15,
             width = 200,
             height = 100,
             -- Insert the images here
@@ -168,7 +168,7 @@ function scene:create( event )
         {
             -- Set its position on the screen relative to the screen size
             x = display.contentCenterX,
-            y = display.contentHeight*6/10,
+            y = display.contentHeight*10/15,
             width = 200,
             height = 100,
             -- Insert the images here
@@ -186,7 +186,7 @@ function scene:create( event )
         {
             -- Set its position on the screen relative to the screen size
             x = display.contentCenterX,
-            y = display.contentHeight*7/10,
+            y = display.contentHeight*12/15,
             width = 200,
             height = 100,
             -- Insert the images here
@@ -204,7 +204,7 @@ function scene:create( event )
         {
             -- Set its position on the screen relative to the screen size
             x = display.contentCenterX,
-            y = display.contentHeight*8/10,
+            y = display.contentHeight*14/15,
             width = 200,
             height = 100,
             -- Insert the images here
