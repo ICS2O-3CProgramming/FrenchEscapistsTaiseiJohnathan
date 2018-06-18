@@ -226,7 +226,7 @@ local function SetChoices()
     elseif (choice1 == 4) then
         rightAnswer = "choisissons"
     elseif (choice1 == 5) then
-        rightAnswer = "choisissons"
+        rightAnswer = "choisissez"
     elseif (choice1 == 6) then
         rightAnswer = "choisissent"
     end
@@ -240,7 +240,7 @@ local function SetChoices()
     elseif (choice2 == 4) then
         wrongAnswer1 = "choisissons"
     elseif (choice2 == 5) then
-        wrongAnswer1 = "choisissons"
+        wrongAnswer1 = "choisissez"
     elseif (choice2 == 6) then
         wrongAnswer1 = "choisissent"
     end
@@ -254,7 +254,7 @@ local function SetChoices()
     elseif (choice3 == 4) then
         wrongAnswer2 = "choisissons"
     elseif (choice3 == 5) then
-        wrongAnswer2 = "choisissons"
+        wrongAnswer2 = "choisissez"
     elseif (choice3 == 6) then
         wrongAnswer2 = "choisissent"
     end
