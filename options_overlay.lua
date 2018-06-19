@@ -270,6 +270,8 @@ function scene:hide( event )
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then
+        audio.setVolume( userVolume/10, { channel=1 } )
+        audio.setVolume( userVolume/10, { channel=2 } )
         -- Called immediately after scene goes off screen.
     end
 

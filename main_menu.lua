@@ -275,7 +275,8 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).   
     if ( phase == "will" ) then
-       audio.setVolume(0.6, {channel=1})
+        audio.setVolume( userVolume/10, { channel=1 } )
+        audio.setVolume( userVolume/10, { channel=2 } )
        
     -----------------------------------------------------------------------------------------
 
